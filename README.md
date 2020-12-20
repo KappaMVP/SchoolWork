@@ -1,7 +1,7 @@
 # photogram
 
 ## After git pull
-you need to install node_moudle
+you need to install node_modules
 ```
 npm install
 ```
