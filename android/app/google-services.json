@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "825342839005",
+    "project_id": "photogram-b7d96",
+    "storage_bucket": "photogram-b7d96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825342839005:android:79cb9f81a24c5470cb3334",
+        "android_client_info": {
+          "package_name": "com.photogram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825342839005-2vrh1hfsb5tdgoarvf1plloq5r3fhvl9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.photogram",
+            "certificate_hash": "8306bf1b619b431b882774eaa0ee766df93facfb"
+          }
+        },
+        {
+          "client_id": "825342839005-q9067ups46kk07tvnvh7j2ejcntu0rl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPhPb0vQ1QbZ-vpoAAK1ip8SYweHV0C5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825342839005-q9067ups46kk07tvnvh7j2ejcntu0rl9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
