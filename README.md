@@ -25,6 +25,6 @@ npm install
 
 [react-native-vector-icons directory](https://oblador.github.io/react-native-vector-icons/)
 
-```JavaScript
-
-```
+- 只要 import Icon.js
+  `<Icon lib={他的標題} name={他的名稱} size={你要的大小} color="顏色">`
+  (顏色選填)

@@ -1,13 +1,13 @@
-//跟這
+//內文頁面
 import React from 'react';
 import {View, Text} from 'react-native';
 
-function ChatPage() {
+function ContentPage() {
   return (
     <View>
-      <Text>ChatPage</Text>
+      <Text>ContentPage</Text>
     </View>
   );
 }
 
-export default ChatPage;
+export default ContentPage;

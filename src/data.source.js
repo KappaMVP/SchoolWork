@@ -1,6 +1,12 @@
 export const routerKey = {
   HomePage: 'HomePage',
   ProfilePage: 'ProfilePage',
+  ActivityPage: 'ActivityPage',
+  NotifyPage: 'NotifyPage',
+  PostPage: 'PostPage',
+  ContentPage: 'ContentPage',
+  SearchPage: 'SearchPage',
+  ChatPage: 'ChatPage',
 };
 
 export const indexPage = {
@@ -25,6 +31,39 @@ export const indexPage = {
       seleted: {
         lib: 'Ionicons',
         name: 'person',
+      },
+    },
+    ActivityPageIcon: {
+      key: routerKey.ActivityPage,
+      normal: {
+        lib: 'FontAwesome',
+        name: 'calendar-o',
+      },
+      seleted: {
+        lib: 'FontAwesome',
+        name: 'calendar-plus-o',
+      },
+    },
+    NotifyPageIcon: {
+      key: routerKey.NotifyPage,
+      normal: {
+        lib: 'Fontisto',
+        name: 'bell',
+      },
+      seleted: {
+        lib: 'Fontisto',
+        name: 'bell-alt',
+      },
+    },
+    PostPageIcon: {
+      key: routerKey.PostPage,
+      normal: {
+        lib: 'SimpleLineIcons',
+        name: 'camera',
+      },
+      seleted: {
+        lib: 'SimpleLineIcons',
+        name: 'camera',
       },
     },
     iconSize: 30,

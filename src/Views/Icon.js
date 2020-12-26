@@ -16,36 +16,36 @@ import Zocial from 'react-native-vector-icons/Zocial';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 function Icon(props) {
-  const {lib, name, size} = props;
+  const {lib, ...items} = props;
   switch (lib) {
     case 'Ionicons':
-      return <Ionicons name={name} size={size} />;
+      return <Ionicons {...items} />;
     case 'AntDesign':
-      return <AntDesign name={name} size={size} />;
+      return <AntDesign {...items} />;
     case 'Entypo':
-      return <Entypo name={name} size={size} />;
+      return <Entypo {...items} />;
     case 'EvilIcons':
-      return <EvilIcons name={name} size={size} />;
+      return <EvilIcons {...items} />;
     case 'FontAwesome':
-      return <FontAwesome name={name} size={size} />;
+      return <FontAwesome {...items} />;
     case 'FontAwesome 5':
-      return <FontAwesome_5 name={name} size={size} />;
+      return <FontAwesome_5 {...items} />;
     case 'Fontisto':
-      return <Fontisto name={name} size={size} />;
+      return <Fontisto {...items} />;
     case 'Foundation':
-      return <Foundation name={name} size={size} />;
+      return <Foundation {...items} />;
     case 'MaterialIcons':
-      return <MaterialIcons name={name} size={size} />;
+      return <MaterialIcons {...items} />;
     case 'Feather':
-      return <Feather name={name} size={size} />;
+      return <Feather {...items} />;
     case 'MaterialCommunityIcons':
-      return <MaterialCommunityIcons name={name} size={size} />;
+      return <MaterialCommunityIcons {...items} />;
     case 'Octicons':
-      return <Octicons name={name} size={size} />;
+      return <Octicons {...items} />;
     case 'Zocial':
-      return <Zocial name={name} size={size} />;
+      return <Zocial {...items} />;
     case 'SimpleLineIcons':
-      return <SimpleLineIcons name={name} size={size} />;
+      return <SimpleLineIcons {...items} />;
     default:
       break;
   }
