@@ -6,37 +6,48 @@ import ProfilePage from './Pages/ProfilePage';
 import NotifyPage from './Pages/NotifyPage';
 import PageStyle from './Styles/PageStyle';
 import {Router, Scene, Stack, Tabs} from 'react-native-router-flux';
-import Icon from './Views/Icon';
+import {indexPage} from './data.source';
+import TabViewIcon from './utils/iconUtils';
 
-function index() {
-  return (
-    <View style={PageStyle.page}>
-      <Router style={PageStyle.page}>
-        <Scene key="root" hideNavBar>
-          <Tabs
-            key="tabBar"
-            showLabel={true}
-            tabBarPosition="bottom"
-            activeTintColor="#12afed"
-            headerLayoutPreset={'center'}>
-            <Scene key="HomePage" component={HomePage} title="主頁" />
-            <Scene key="ActivityPage" component={HomePage} title="活動" />
-            <Scene key="PostPage" component={HomePage} title="發布" />
-            <Scene key="NotifyPage" component={HomePage} title="通知" />
-            <Stack
-              key="ProfilePage"
-              title="個人"
-              icon={() => (
-                <Icon lib="Ionicons" name="person-outline" size={30} />
-              )}>
-              <Scene key="ProfilePage" component={ProfilePage} />
-              <Scene key="ProfilePage" component={ProfilePage} />
-            </Stack>
-          </Tabs>
-        </Scene>
-      </Router>
-    </View>
-  );
+class index extends React.Component {
+  render() {
+    const {HomePageIcon, ProfilePageIcon} = indexPage.tabIcons;
+    return (
+      <View style={PageStyle.page}>
+        <Router>
+          <Scene key="root" hideNavBar>
+            <Tabs
+              key="tabBar"
+              showLabel={true}
+              headerMode={'float'}
+              tabBarPosition="bottom"
+              activeTintColor="#12afed"
+              headerLayoutPreset={'center'}>
+              <Stack
+                key="HomePage"
+                icon={(e) => (
+                  <TabViewIcon source={HomePageIcon} focused={e.focused} />
+                )}>
+                <Scene key="HomePage" component={HomePage} />
+                <Scene key="ProfilePage" component={ProfilePage} />
+              </Stack>
+              <Scene key="ActivityPage" component={HomePage} />
+              <Scene key="PostPage" component={HomePage} hideTabBar />
+              <Scene key="NotifyPage" component={NotifyPage} />
+              <Stack
+                key="ProfilePage"
+                icon={(e) => (
+                  <TabViewIcon source={ProfilePageIcon} focused={e.focused} />
+                )}>
+                <Scene key="ProfilePage" component={ProfilePage} />
+                <Scene key="PostPage" component={ProfilePage} />
+              </Stack>
+            </Tabs>
+          </Scene>
+        </Router>
+      </View>
+    );
+  }
 }
 
 export default index;

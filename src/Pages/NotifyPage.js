@@ -5,7 +5,7 @@ import {Actions} from 'react-native-router-flux';
 import {View, TouchableOpacity, Text} from 'react-native';
 
 function test() {
-  Actions.callback({key: 'ProfilePage', type: 'push'});
+  Actions.push('ProfilePage');
 }
 
 function NotifyPage() {
