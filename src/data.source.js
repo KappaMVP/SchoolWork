@@ -1,18 +1,21 @@
 export const routerKey = {
-  HomePage: 'HomePage',
-  ProfilePage: 'ProfilePage',
   ActivityPage: 'ActivityPage',
+  ChatPage: 'ChatPage',
+  ContentPage: 'ContentPage',
+  HomePage: 'HomePage',
+  LoginPage: 'LoginPage',
   NotifyPage: 'NotifyPage',
   PostPage: 'PostPage',
-  ContentPage: 'ContentPage',
+  ProfilePage: 'ProfilePage',
+  ProfileSettingPage: 'ProfileSettingPage',
   SearchPage: 'SearchPage',
-  ChatPage: 'ChatPage',
+  SettingPage: 'SettingPage',
+  SwitchIdentityPage: 'SwitchIdentityPage',
 };
 
 export const indexPage = {
   tabIcons: {
     HomePageIcon: {
-      key: routerKey.HomePage,
       normal: {
         lib: 'Ionicons',
         name: 'home-outline',
@@ -23,7 +26,6 @@ export const indexPage = {
       },
     },
     ProfilePageIcon: {
-      key: routerKey.ProfilePage,
       normal: {
         lib: 'Ionicons',
         name: 'person-outline',
@@ -34,7 +36,6 @@ export const indexPage = {
       },
     },
     ActivityPageIcon: {
-      key: routerKey.ActivityPage,
       normal: {
         lib: 'FontAwesome',
         name: 'calendar-o',
@@ -45,7 +46,6 @@ export const indexPage = {
       },
     },
     NotifyPageIcon: {
-      key: routerKey.NotifyPage,
       normal: {
         lib: 'Fontisto',
         name: 'bell',
@@ -56,7 +56,6 @@ export const indexPage = {
       },
     },
     PostPageIcon: {
-      key: routerKey.PostPage,
       normal: {
         lib: 'SimpleLineIcons',
         name: 'camera',
@@ -67,5 +66,12 @@ export const indexPage = {
       },
     },
     iconSize: 30,
+  },
+  tabConfig: {
+    key: 'tabBar',
+    showLabel: false,
+    headerMode: 'float',
+    tabBarPosition: 'bottom',
+    headerLayoutPreset: 'center',
   },
 };
