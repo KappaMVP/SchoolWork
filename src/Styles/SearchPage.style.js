@@ -6,6 +6,6 @@ export default StyleSheet.create({
   page: {
     height: '100%',
     width: Dimensions.get('window').width,
-    paddingTop: isIphoneX() ? getStatusBarHeight() : 0,
+    marginTop: isIphoneX() ? getStatusBarHeight() + 10 : 5,
   },
 });

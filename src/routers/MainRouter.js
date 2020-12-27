@@ -3,6 +3,9 @@ import React from 'react';
 import TabViewIcon from '../helper/iconUtils';
 import {mainRouter, routerKey} from '../data.source';
 import {Router, Scene, Stack, Tabs} from 'react-native-router-flux';
+import {navPop} from '../helper/routerAction';
+import {iconData} from '../data.source';
+import HeaderBtn from '../Views/HeaderBtn';
 //pages
 import HomePage from '../Pages/HomePage';
 import ChatPage from '../Pages/ChatPage';
@@ -16,10 +19,6 @@ import ActivityPage from '../Pages/ActivityPage';
 import FanFollowPage from '../Pages/FanFollowPage';
 import ProfileSettingPage from '../Pages/ProfileSettingPage';
 import SwitchIdentityPage from '../Pages/SwitchIdentityPage';
-//test
-import {navPop} from '../helper/routerAction';
-import {iconData} from '../data.source';
-import HeaderBtn from '../Views/HeaderBtn';
 
 function MainRouter() {
   const {
