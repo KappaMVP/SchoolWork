@@ -51,7 +51,10 @@ export const homePageData = {
 };
 
 export const iconData = {
-  search: iconFormat('Ionicons', 'search-outline'),
+  headerSize: 20,
+  search: iconFormat('Feather', 'search'),
+  chat: iconFormat('Feather', 'mail'),
+  back: iconFormat('FontAwesome5', 'chevron-left'),
 };
 
 function iconFormat(lib, name) {

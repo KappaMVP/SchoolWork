@@ -16,6 +16,11 @@ import ActivityPage from '../Pages/ActivityPage';
 import ProfileSettingPage from '../Pages/ProfileSettingPage';
 import SwitchIdentityPage from '../Pages/SwitchIdentityPage';
 
+//test
+import {navPop} from '../helper/routerAction';
+import {iconData} from '../data.source';
+import HeaderBtn from '../Views/HeaderBtn';
+
 function MainRouter() {
   const {
     HomePageIcon,
@@ -31,6 +36,9 @@ function MainRouter() {
   const ConrtentPageScene = (
     <Scene key={routerKey.ContentPage} component={ContentPage} />
   );
+  const backbtn = (
+    <HeaderBtn data={[{btn: iconData.back, onPress: () => navPop()}]} />
+  );
   return (
     <Router>
       <Tabs {...mainRouter.tabConfig}>
@@ -39,7 +47,8 @@ function MainRouter() {
           key={routerKey.HomePage}
           icon={(e) => (
             <TabViewIcon source={HomePageIcon} focused={e.focused} />
-          )}>
+          )}
+          renderBackButton={() => backbtn}>
           <Scene key={routerKey.HomePage} component={HomePage} />
           <Scene key={routerKey.SearchPage} component={SearchPage} />
           <Scene key={routerKey.ChatPage} component={ChatPage} />
@@ -69,7 +78,8 @@ function MainRouter() {
           key={routerKey.NotifyPage}
           icon={(e) => (
             <TabViewIcon source={NotifyPageIcon} focused={e.focused} />
-          )}>
+          )}
+          renderBackButton={() => backbtn}>
           <Scene key={routerKey.NotifyPage} component={NotifyPage} />
           {ProfilePageScene}
           {ConrtentPageScene}
@@ -79,7 +89,8 @@ function MainRouter() {
           key={routerKey.ProfilePage}
           icon={(e) => (
             <TabViewIcon source={ProfilePageIcon} focused={e.focused} />
-          )}>
+          )}
+          renderBackButton={() => backbtn}>
           {ProfilePageScene}
           {ConrtentPageScene}
           <Scene key={routerKey.SettingPage} component={SettingPage} />

@@ -38,7 +38,7 @@ function Icon(props) {
       return <Foundation {...items} />;
     case 'FontAwesome':
       return <FontAwesome {...items} />;
-    case 'FontAwesome 5':
+    case 'FontAwesome5':
       return <FontAwesome_5 {...items} />;
     case 'MaterialIcons':
       return <MaterialIcons {...items} />;

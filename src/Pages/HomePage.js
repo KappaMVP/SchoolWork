@@ -1,11 +1,12 @@
 //主頁
 import React from 'react';
 import {View} from 'react-native';
-import {Actions} from 'react-native-router-flux';
-import {homePageData as pageData} from '../data.source';
+import {homePageData as pageData, iconData} from '../data.source';
 import PostCard from '../Views/PostCard';
 import Carousel from 'react-native-snap-carousel';
 import Styles from '../Styles/HomePageStyle';
+import HeaderBtn from '../Views/HeaderBtn';
+import {navToProfile, navToSearch, navToChat} from '../helper/routerAction';
 
 class HomePage extends React.Component {
   constructor() {
@@ -13,13 +14,24 @@ class HomePage extends React.Component {
   }
 
   componentDidMount() {
+    const data = [
+      {
+        btn: iconData.search,
+        onPress: () => navToSearch(),
+      },
+      {
+        btn: iconData.chat,
+        onPress: () => navToChat(),
+      },
+    ];
     this.props.navigation.setParams({
       title: pageData.title,
+      right: () => <HeaderBtn data={data} />,
     });
   }
 
   render() {
-    const data = [
+    const fakedata = [
       {
         name: 'post1',
         content: '55688',
@@ -57,7 +69,7 @@ class HomePage extends React.Component {
           ref={(c) => {
             this._carousel = c;
           }}
-          data={data}
+          data={fakedata}
           renderItem={(props) => <PostCard {...props} />}
           sliderWidth={Styles.slide.width}
           itemWidth={Styles.slide.width}
