@@ -1,0 +1,16 @@
+dependencies
+    "@react-native-firebase/app": "^10.3.0",
+    "jetifier": "^1.6.6",
+    "react": "16.13.1",
+    "react-native": "0.63.4",
+    "react-native-gesture-handler": "^1.9.0",
+    "react-native-image-picker": "^3.1.2",
+    "react-native-iphone-x-helper": "^1.3.1",
+    "react-native-reanimated": "^1.13.2",
+    "react-native-router-flux": "^4.2.0",
+    "react-native-screens": "^2.16.1",
+    "react-native-snap-carousel": "^3.9.1",
+    "react-native-tab-view": "^2.15.2",
+    "react-native-vector-icons": "^7.1.0",
+    "react-redux": "^7.2.2",
+    "toggle-switch-react-native": "^2.3.0"

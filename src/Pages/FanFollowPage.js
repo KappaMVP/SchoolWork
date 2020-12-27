@@ -1,26 +1,26 @@
-//希望可以做到這
+//追粉頁
 import React from 'react';
 import {View, Text} from 'react-native';
-import {activityPageData as pageData} from '../data.source';
+import {fanFollowPageData as pageData} from '../data.source';
 
-class ActivityPage extends React.Component {
+class FanFollowPage extends React.Component {
   constructor() {
     super();
   }
 
   componentDidMount() {
     this.props.navigation.setParams({
-      title: pageData.title,
+      title: pageData.fanTitle, //這邊要用狀態改
     });
   }
 
   render() {
     return (
       <View>
-        <Text> ActivityPage </Text>
+        <Text> FanFollowPage </Text>
       </View>
     );
   }
 }
 
-export default ActivityPage;
+export default FanFollowPage;

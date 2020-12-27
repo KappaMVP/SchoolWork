@@ -13,9 +13,9 @@ import SettingPage from '../Pages/SettingPage';
 import ContentPage from '../Pages/ContentPage';
 import ProfilePage from '../Pages/ProfilePage';
 import ActivityPage from '../Pages/ActivityPage';
+import FanFollowPage from '../Pages/FanFollowPage';
 import ProfileSettingPage from '../Pages/ProfileSettingPage';
 import SwitchIdentityPage from '../Pages/SwitchIdentityPage';
-
 //test
 import {navPop} from '../helper/routerAction';
 import {iconData} from '../data.source';
@@ -30,30 +30,28 @@ function MainRouter() {
     PostPageIcon,
   } = mainRouter.tabIcons;
 
-  const ProfilePageScene = (
-    <Scene key={routerKey.ProfilePage} component={ProfilePage} />
-  );
-  const ConrtentPageScene = (
-    <Scene key={routerKey.ContentPage} component={ContentPage} />
-  );
-  const backbtn = (
-    <HeaderBtn data={[{btn: iconData.back, onPress: () => navPop()}]} />
-  );
+  const ProfileSceneBundle = [
+    <Scene key={routerKey.ProfilePage} component={ProfilePage} />,
+    <Scene key={routerKey.FanandFollowPage} component={FanFollowPage} />,
+    <Scene key={routerKey.ContentPage} component={ContentPage} />,
+  ];
   return (
     <Router>
-      <Tabs {...mainRouter.tabConfig}>
+      <Tabs
+        {...mainRouter.tabConfig}
+        renderBackButton={() => (
+          <HeaderBtn data={[{btn: iconData.back, onPress: () => navPop()}]} />
+        )}>
         {/*HomePage*/}
         <Stack
           key={routerKey.HomePage}
           icon={(e) => (
             <TabViewIcon source={HomePageIcon} focused={e.focused} />
-          )}
-          renderBackButton={() => backbtn}>
+          )}>
           <Scene key={routerKey.HomePage} component={HomePage} />
-          <Scene key={routerKey.SearchPage} component={SearchPage} />
+          <Scene key={routerKey.SearchPage} component={SearchPage} hideNavBar />
           <Scene key={routerKey.ChatPage} component={ChatPage} />
-          {ProfilePageScene}
-          {ConrtentPageScene}
+          {ProfileSceneBundle}
         </Stack>
         {/*ActivityPage*/}
         <Scene
@@ -78,22 +76,19 @@ function MainRouter() {
           key={routerKey.NotifyPage}
           icon={(e) => (
             <TabViewIcon source={NotifyPageIcon} focused={e.focused} />
-          )}
-          renderBackButton={() => backbtn}>
+          )}>
           <Scene key={routerKey.NotifyPage} component={NotifyPage} />
-          {ProfilePageScene}
-          {ConrtentPageScene}
+          {ProfileSceneBundle}
         </Stack>
         {/*ProfilePage*/}
         <Stack
           key={routerKey.ProfilePage}
           icon={(e) => (
             <TabViewIcon source={ProfilePageIcon} focused={e.focused} />
-          )}
-          renderBackButton={() => backbtn}>
-          {ProfilePageScene}
-          {ConrtentPageScene}
+          )}>
+          {ProfileSceneBundle}
           <Scene key={routerKey.SettingPage} component={SettingPage} />
+          <Scene key={routerKey.SearchPage} component={SearchPage} hideNavBar />
           <Scene
             key={routerKey.ProfileSettingPage}
             component={ProfileSettingPage}
