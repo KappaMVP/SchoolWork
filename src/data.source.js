@@ -16,54 +16,24 @@ export const routerKey = {
 export const mainRouter = {
   tabIcons: {
     HomePageIcon: {
-      normal: {
-        lib: 'Ionicons',
-        name: 'home-outline',
-      },
-      seleted: {
-        lib: 'Ionicons',
-        name: 'home-sharp',
-      },
+      normal: iconFormat('Ionicons', 'home-outline'),
+      seleted: iconFormat('Ionicons', 'home-sharp'),
     },
     ProfilePageIcon: {
-      normal: {
-        lib: 'Ionicons',
-        name: 'person-outline',
-      },
-      seleted: {
-        lib: 'Ionicons',
-        name: 'person',
-      },
+      normal: iconFormat('Ionicons', 'person-outline'),
+      seleted: iconFormat('Ionicons', 'person'),
     },
     ActivityPageIcon: {
-      normal: {
-        lib: 'FontAwesome',
-        name: 'calendar-o',
-      },
-      seleted: {
-        lib: 'FontAwesome',
-        name: 'calendar-plus-o',
-      },
+      normal: iconFormat('FontAwesome', 'calendar-o'),
+      seleted: iconFormat('FontAwesome', 'calendar-plus-o'),
     },
     NotifyPageIcon: {
-      normal: {
-        lib: 'Fontisto',
-        name: 'bell',
-      },
-      seleted: {
-        lib: 'Fontisto',
-        name: 'bell-alt',
-      },
+      normal: iconFormat('Fontisto', 'bell'),
+      seleted: iconFormat('Fontisto', 'bell-alt'),
     },
     PostPageIcon: {
-      normal: {
-        lib: 'SimpleLineIcons',
-        name: 'camera',
-      },
-      seleted: {
-        lib: 'SimpleLineIcons',
-        name: 'camera',
-      },
+      normal: iconFormat('SimpleLineIcons', 'camera'),
+      seleted: iconFormat('SimpleLineIcons', 'camera'),
     },
     iconSize: 30,
   },
@@ -79,3 +49,11 @@ export const mainRouter = {
 export const homePageData = {
   title: '首頁',
 };
+
+export const iconData = {
+  search: iconFormat('Ionicons', 'search-outline'),
+};
+
+function iconFormat(lib, name) {
+  return {lib: lib, name: name};
+}
