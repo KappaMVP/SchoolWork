@@ -75,3 +75,7 @@ export const mainRouter = {
     headerLayoutPreset: 'center',
   },
 };
+
+export const homePageData = {
+  title: '首頁',
+};

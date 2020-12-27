@@ -1,16 +1,71 @@
 //主頁
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import {homePageData as pageData} from '../data.source';
+import PostCard from '../Views/PostCard';
+import Carousel from 'react-native-snap-carousel';
+import Styles from '../Styles/HomePageStyle';
 
-function HomePage() {
-  return (
-    <View>
-      <TouchableOpacity onPress={() => Actions.push('ProfilePage')}>
-        <Text>HomePage</Text>
-      </TouchableOpacity>
-    </View>
-  );
+class HomePage extends React.Component {
+  constructor() {
+    super();
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+      title: pageData.title,
+    });
+  }
+
+  render() {
+    const data = [
+      {
+        name: 'post1',
+        content: '55688',
+        photo:
+          'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wpexplorer.com%2Foptimize-images-wordpress-guide%2F&psig=AOvVaw0ijNuHR8WCkxK9RTdHbGeO&ust=1609132842162000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPj3rY617e0CFQAAAAAdAAAAABAb',
+        time: '2020-12-12 12:12:12',
+        who_like: ['liker1', 'liker2'],
+        label: ['label1', 'label2'],
+        model: ['model1', 'model2'],
+      },
+      {
+        name: 'post2',
+        content: '55688',
+        photo:
+          'https://www.google.com/url?sa=i&url=https%3A%2F%2Fhelpx.adobe.com%2Fstock%2Fhow-to%2Fvisual-reverse-image-search.html&psig=AOvVaw0ijNuHR8WCkxK9RTdHbGeO&ust=1609132842162000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPj3rY617e0CFQAAAAAdAAAAABAJ',
+        time: '2020-12-12 12:12:12',
+        who_like: ['liker1', 'liker2'],
+        label: ['label1', 'label2'],
+        model: ['model1', 'model2'],
+      },
+      {
+        name: 'post2',
+        content: '55688',
+        photo:
+          'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nbcnews.com%2Fnews%2Fworld%2Fstalking-suspect-allegedly-studied-pop-idol-s-pupil-images-online-n1064916&psig=AOvVaw0ijNuHR8WCkxK9RTdHbGeO&ust=1609132842162000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPj3rY617e0CFQAAAAAdAAAAABAh',
+        time: '2020-12-12 12:12:12',
+        who_like: ['liker1', 'liker2'],
+        label: ['label1', 'label2'],
+        model: ['model1', 'model2'],
+      },
+    ];
+    return (
+      <View style={Styles.page}>
+        <Carousel
+          ref={(c) => {
+            this._carousel = c;
+          }}
+          data={data}
+          renderItem={(props) => <PostCard {...props} />}
+          sliderWidth={Styles.slide.width}
+          itemWidth={Styles.slide.width}
+          slideStyle={Styles.slide}
+        />
+      </View>
+    );
+  }
 }
 
 export default HomePage;
