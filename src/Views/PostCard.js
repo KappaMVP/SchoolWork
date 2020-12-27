@@ -1,7 +1,7 @@
 //主頁顯示的簡易貼文
 import React from 'react';
 import {View, Text} from 'react-native';
-import Styles from '../Styles/PostCardStyle';
+import Styles from '../Styles/PostCard.style';
 
 function PostCard(props) {
   const {name, content} = props.item;

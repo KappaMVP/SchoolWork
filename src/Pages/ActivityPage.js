@@ -1,7 +1,8 @@
 //希望可以做到這
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Image} from 'react-native';
 import {activityPageData as pageData} from '../data.source';
+import Styles from '../Styles/WorkInProgress.style';
 
 class ActivityPage extends React.Component {
   constructor() {
@@ -16,8 +17,12 @@ class ActivityPage extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text> ActivityPage </Text>
+      <View style={Styles.container}>
+        <Image
+          source={require('../assets/work_in_progress.gif')}
+          resizeMode={'contain'}
+          style={Styles.image}
+        />
       </View>
     );
   }

@@ -32,7 +32,7 @@ function MainRouter() {
 
   const ProfileSceneBundle = [
     <Scene key={routerKey.ProfilePage} component={ProfilePage} />,
-    <Scene key={routerKey.FanandFollowPage} component={FanFollowPage} />,
+    <Scene key={routerKey.FanFollowPage} component={FanFollowPage} />,
     <Scene key={routerKey.ContentPage} component={ContentPage} />,
   ];
   return (

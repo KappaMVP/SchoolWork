@@ -2,7 +2,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import IconBtn from './Elements/IconBtn';
-import Styles from '../Styles/HeaderBtnStyle';
+import Styles from '../Styles/HeaderBtn.style';
 import {iconData} from '../data.source';
 
 function Header(props) {

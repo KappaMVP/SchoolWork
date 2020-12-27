@@ -3,7 +3,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {navToProfile} from '../helper/routerAction';
 import SearchView from '../Views/SearchView';
-import Styles from '../Styles/SearchPageStyle';
+import Styles from '../Styles/SearchPage.style';
 
 class SearchPage extends React.Component {
   constructor() {

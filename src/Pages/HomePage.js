@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import {homePageData as pageData, iconData} from '../data.source';
 import PostCard from '../Views/PostCard';
 import Carousel from 'react-native-snap-carousel';
-import Styles from '../Styles/HomePageStyle';
+import Styles from '../Styles/HomePage.style';
 import HeaderBtn from '../Views/HeaderBtn';
 import {navToProfile, navToSearch, navToChat} from '../helper/routerAction';
 
