@@ -13,7 +13,7 @@ export const routerKey = {
   SwitchIdentityPage: 'SwitchIdentityPage',
 };
 
-export const indexPage = {
+export const mainRouter = {
   tabIcons: {
     HomePageIcon: {
       normal: {

@@ -1,19 +1,20 @@
 //主路由
 import React from 'react';
+import TabViewIcon from '../helper/iconUtils';
+import {mainRouter, routerKey} from '../data.source';
+import {Router, Scene, Stack, Tabs} from 'react-native-router-flux';
+//pages
 import HomePage from '../Pages/HomePage';
-import ProfilePage from '../Pages/ProfilePage';
-import NotifyPage from '../Pages/NotifyPage';
-import ActivityPage from '../Pages/ActivityPage';
-import PostPage from '../Pages/PostPage';
-import SearchPage from '../Pages/SearchPage';
-import ContentPage from '../Pages/ContentPage';
 import ChatPage from '../Pages/ChatPage';
+import PostPage from '../Pages/PostPage';
+import NotifyPage from '../Pages/NotifyPage';
+import SearchPage from '../Pages/SearchPage';
 import SettingPage from '../Pages/SettingPage';
+import ContentPage from '../Pages/ContentPage';
+import ProfilePage from '../Pages/ProfilePage';
+import ActivityPage from '../Pages/ActivityPage';
 import ProfileSettingPage from '../Pages/ProfileSettingPage';
 import SwitchIdentityPage from '../Pages/SwitchIdentityPage';
-import {Router, Scene, Stack, Tabs} from 'react-native-router-flux';
-import {indexPage, routerKey} from '../data.source';
-import TabViewIcon from '../utils/iconUtils';
 
 function MainRouter() {
   const {
@@ -22,7 +23,7 @@ function MainRouter() {
     ActivityPageIcon,
     NotifyPageIcon,
     PostPageIcon,
-  } = indexPage.tabIcons;
+  } = mainRouter.tabIcons;
 
   const ProfilePageScene = (
     <Scene key={routerKey.ProfilePage} component={ProfilePage} />
@@ -32,7 +33,7 @@ function MainRouter() {
   );
   return (
     <Router>
-      <Tabs {...indexPage.tabConfig}>
+      <Tabs {...mainRouter.tabConfig}>
         {/*HomePage*/}
         <Stack
           key={routerKey.HomePage}
