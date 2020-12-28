@@ -81,23 +81,23 @@ export const settingPageData = {
   options: [
     {
       name: '切換暗黑模式／明亮模式',
-      icon: iconFormat(), //你填
+      icon: iconFormat('Entypo', 'light-bulb'), //你填
     },
     {
       name: '編輯個人檔案',
-      icon: iconFormat(), //你填
+      icon: iconFormat('Fontisto', 'person'), //你填
     },
     {
       name: '切換身份別',
-      icon: iconFormat(), //你填
+      icon: iconFormat('Ionicons', 'people'), //你填
     },
     {
       name: '關於',
-      icon: iconFormat(), //你填
+      icon: iconFormat('Ionicons', 'information-circle-outline'), //你填
     },
     {
       name: '登出',
-      icon: iconFormat(), //你填
+      icon: iconFormat('FontAwesome5', 'door-open'), //你填
     },
   ],
 };
