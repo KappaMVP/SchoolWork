@@ -21,6 +21,11 @@ npm install
 
 ## Git
 
+`git pull` 拉下來，每次都做
+`git add [filename]` 新增檔案到暫存區
+`git commit` 加到 tree 裡面
+`git push` 加到主分支
+
 ## 找 icon
 
 [react-native-vector-icons directory](https://oblador.github.io/react-native-vector-icons/)

@@ -13,8 +13,8 @@ LogBox.ignoreLogs(['']);
 function index() {
   return (
     <View style={Styles.page}>
-      <LoginRouter />
-      {/* <MainRouter /> */}
+      {/* <LoginRouter /> */}
+      <MainRouter />
     </View>
   );
 }
