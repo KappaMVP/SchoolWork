@@ -36,7 +36,7 @@ class HomePage extends React.Component {
         name: 'post1',
         content: '55688',
         photo:
-          'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.wpexplorer.com%2Foptimize-images-wordpress-guide%2F&psig=AOvVaw0ijNuHR8WCkxK9RTdHbGeO&ust=1609132842162000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPj3rY617e0CFQAAAAAdAAAAABAb',
+          'https://www.pandasecurity.com/en/mediacenter/src/uploads/2013/11/pandasecurity-facebook-photo-privacy.jpg',
         time: '2020-12-12 12:12:12',
         who_like: ['liker1', 'liker2'],
         label: ['label1', 'label2'],

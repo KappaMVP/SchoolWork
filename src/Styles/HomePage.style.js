@@ -7,7 +7,7 @@ export default StyleSheet.create({
     width: Dimensions.get('window').width,
   },
   slide: {
-    backgroundColor: 'red',
+    backgroundColor: 'black',
     padding: 15,
     width: Dimensions.get('window').width,
   },
