@@ -46,6 +46,10 @@ export function navToFanFollow(props) {
   Actions.push(routerKey.FanFollowPage, {...props});
 }
 
+export function navToHomePage(props) {
+  Actions.push(routerKey.HomePage, {...props});
+}
+
 export function navPop() {
   Actions.pop();
 }
