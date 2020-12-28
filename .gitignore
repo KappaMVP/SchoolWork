@@ -59,6 +59,5 @@ buck-out/
 /ios/Pods/
 
 # fix problem
-package-lock.json
 ios/
 android/
