@@ -2,7 +2,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import {profilePageData as pageData} from '../data.source';
-import Styles from '../Styles/profilePage.style';
+import Styles from '../Styles/ProfilePage.style';
 import ScrollableTabView, {
   DefaultTabBar,
 } from 'react-native-scrollable-tab-view';
