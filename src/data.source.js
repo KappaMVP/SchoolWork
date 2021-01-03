@@ -70,6 +70,8 @@ export const fanFollowPageData = {
 
 export const profilePageData = {
   title: '個人頁面（這邊可以討論是否改那個人的名稱）',
+  fan: '粉絲',
+  follow: '追蹤中',
 };
 
 export const profileSettingPageData = {
@@ -81,33 +83,43 @@ export const settingPageData = {
   options: [
     {
       name: '切換暗黑模式／明亮模式',
-      icon: iconFormat('Entypo', 'light-bulb'), //你填
+      icon: iconFormat('Entypo', 'light-bulb'),
     },
     {
       name: '編輯個人檔案',
-      icon: iconFormat('Fontisto', 'person'), //你填
+      icon: iconFormat('Fontisto', 'person'),
     },
     {
       name: '切換身份別',
-      icon: iconFormat('Ionicons', 'people'), //你填
+      icon: iconFormat('Ionicons', 'people'),
     },
     {
       name: '關於',
-      icon: iconFormat('Ionicons', 'information-circle-outline'), //你填
+      icon: iconFormat('Ionicons', 'information-circle-outline'),
     },
     {
       name: '登出',
-      icon: iconFormat('FontAwesome5', 'door-open'), //你填
+      icon: iconFormat('FontAwesome5', 'door-open'),
     },
   ],
 };
 
 export const postPageData = {
   title: '上傳新作品',
+  infoTitle: {
+    content: '內文',
+    label: '標籤',
+    loacte: '地點',
+    model: '人物',
+  },
 };
 
 export const switchIdentityPageData = {
   title: '切換身份',
+};
+
+export const searchPageData = {
+  tabTitles: ['用戶', '標籤', '地點'],
 };
 
 export const iconData = {
