@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@react-native-community/viewpager": "^4.2.2",
-    "@react-native-firebase/app": "^10.3.0",
+    "@react-native-firebase/app": "^10.4.0",
+    "@react-native-firebase/auth": "^10.4.0",
     "jetifier": "^1.6.6",
     "react": "16.13.1",
     "react-native": "0.63.4",
