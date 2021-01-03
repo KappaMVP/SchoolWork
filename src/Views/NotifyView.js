@@ -1,33 +1,79 @@
 //通知的橫列
 import React from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 
 export default function NotifyView(props) {
   return (
-    <View style={Styles.content}>
-      <Image source={{uri: props.fake.userPhoto}} />
-      <View>
-        <Text style={Styles.name}>{props.fake.userName}</Text>
+    // <TouchableOpacity style={NVStyles.zone}>
+    //   <View style={NVStyles.content}>
+    //     <Image style={NVStyles.userImage} />
+    //     <Text style={NVStyles.name}>{props.fake.userName}</Text>
+    //     <Text style={NVStyles.status}>{props.fake.status}</Text>
+    //   </View>
+    //   <View>
+    //     <Text style={NVStyles.status}>{props.fake.time}</Text>
+    //   </View>
+    // </TouchableOpacity>
+    <TouchableOpacity style={NVStyles.content}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View>
+          <Image style={NVStyles.userImage} />
+        </View>
+        <View>
+          <View>
+            <View style={NVStyles.littleCon}>
+              <Text style={NVStyles.name}>{props.fake.userName}</Text>
+              <Text style={NVStyles.status}>{props.fake.status}</Text>
+            </View>
+            <View style={NVStyles.time}>
+              <Text>{props.fake.time}</Text>
+            </View>
+          </View>
+          <View>
+            <Image style={NVStyles.userImage} />
+          </View>
+        </View>
       </View>
-      <Text>{props.fake.status}</Text>
-    </View>
+    </TouchableOpacity>
   );
 }
 
-const Styles = StyleSheet.create({
+const NVStyles = StyleSheet.create({
+  zone: {
+    borderBottomWidth: 2,
+  },
   content: {
-    flexDirection: 'row', // 每個 TodoItem 區塊透過水平方向排列
-    justifyContent: 'space-between', // 區塊貼齊左右兩邊
-    alignItems: 'center', // 垂直置中
-    marginVertical: 10, // 區塊上下垂直外距大小
-    padding: 10, // 區塊四周內距大小
+    padding: 5, // 區塊四周內距大小
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+  },
+  littleCon: {
+    width: 280,
+    flexDirection: 'row',
+  },
+  userImage: {
+    margin: 10,
+    flexDirection: 'row',
+    width: 40,
+    height: 40,
+    backgroundColor: 'gray',
   },
   name: {
     fontSize: 20, // 標題文字大小
-    fontWeight: 'bold', // 標題文字粗細
+    fontWeight: 'bold',
+    textAlign: 'left',
   },
-  subTitle: {
-    fontSize: 14, // 子標題文字大小
-    color: 'gray', // 子標題文字顏色
+  status: {
+    fontSize: 18, // 子標題文字大小
+    color: 'black', // 子標題文字顏色
+    textAlign: 'left',
+  },
+  time: {
+    paddingLeft: 1,
   },
 });
