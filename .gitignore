@@ -61,3 +61,4 @@ buck-out/
 # fix problem
 ios/
 android/
+./package-lock,json
