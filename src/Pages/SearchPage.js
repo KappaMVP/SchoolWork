@@ -17,12 +17,18 @@ class SearchPage extends React.Component {
     super(props);
     this.state = {
       text: '',
+      localtionData: [],
     };
   }
+  fakedata = ['123456', '123456', '789'];
 
   handleChangeText = (value) => {
     this.setState({
       text: value,
+      localtionData:
+        value !== ''
+          ? this.fakedata.filter((data) => data.includes(value))
+          : [],
     });
   };
 
@@ -31,33 +37,43 @@ class SearchPage extends React.Component {
   };
 
   render() {
-    const {text} = this.state;
+    const {localtionData, text} = this.state;
+    console.log(localtionData);
 
     return (
       <View style={Styles.page}>
-        <Text>
-          <HeaderBtn data={[{btn: iconData.back, onPress: () => navPop()}]} />
-        </Text>
-        <TextInput
-          keyboardType="default"
-          placeholder="搜尋"
-          value={text}
-          onChangeText={this.handleChangeText}
-        />
+        <View style={{flexDirection: 'row'}}>
+          <View style={Styles.arrow}>
+            <HeaderBtn data={[{btn: iconData.back, onPress: () => navPop()}]} />
+          </View>
+          <TextInput
+            style={{
+              height: 40,
+              width: 380,
+              borderColor: 'gray',
+            }}
+            keyboardType="default"
+            placeholder="搜尋"
+            value={text}
+            onChangeText={this.handleChangeText}
+          />
+        </View>
         <View style={Styles.main}>
           <ScrollableTabView
             tabBarPosition="top"
             locked={false}
             tabBarUnderlineStyle="gray"
             renderTabBar={() => <DefaultTabBar />}>
-            <Text key="localtion" style={Styles.textStyles} tabLabel="地點">
-              {text}
-            </Text>
+            <View key="localtion" style={Styles.textStyles} tabLabel="地點">
+              {localtionData.map((data) => (
+                <Text>{data}</Text>
+              ))}
+            </View>
             <Text key="people" style={Styles.textStyles} tabLabel="使用者">
-              {text}
+              {localtionData}
             </Text>
             <Text key="label" style={Styles.textStyles} tabLabel="標籤">
-              {text}
+              {localtionData}
             </Text>
           </ScrollableTabView>
         </View>

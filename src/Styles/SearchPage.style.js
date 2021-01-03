@@ -22,4 +22,7 @@ export default StyleSheet.create({
     width: Dimensions.get('window').width,
     marginTop: isIphoneX() ? getStatusBarHeight() + 10 : 5,
   },
+  arrow: {
+    marginTop: 10,
+  },
 });
