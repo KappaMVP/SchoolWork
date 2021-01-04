@@ -24,5 +24,23 @@ export default StyleSheet.create({
   },
   arrow: {
     marginTop: 10,
+    marginLeft: 5,
+  },
+  search: {
+    height: 40,
+    borderRadius: 10,
+    marginTop: 3,
+    marginLeft: 10,
+    marginBottom: 10,
+    width: 320,
+    paddingRight: 0,
+    borderWidth: 0,
+    borderColor: 'black',
+    backgroundColor: '#F0F0F0',
+  },
+  delet: {
+    fontSize: 25,
+    marginTop: 0,
+    marginLeft: 15,
   },
 });

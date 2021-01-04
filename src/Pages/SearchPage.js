@@ -1,6 +1,6 @@
 //搜尋
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {navToProfile} from '../helper/routerAction';
 import SearchView from '../Views/SearchView';
 import Styles from '../Styles/SearchPage.style';
@@ -32,6 +32,13 @@ class SearchPage extends React.Component {
     });
   };
 
+  deleteText = () => {
+    this.setState({
+      text: '',
+      localtionData: [],
+    });
+  };
+
   handleSubmit = () => {
     console.log(this.state);
   };
@@ -47,16 +54,15 @@ class SearchPage extends React.Component {
             <HeaderBtn data={[{btn: iconData.back, onPress: () => navPop()}]} />
           </View>
           <TextInput
-            style={{
-              height: 40,
-              width: 380,
-              borderColor: 'gray',
-            }}
+            style={Styles.search}
             keyboardType="default"
             placeholder="搜尋"
             value={text}
             onChangeText={this.handleChangeText}
           />
+          <TouchableOpacity onPress={this.deleteText}>
+            <Text style={Styles.delet}>✘</Text>
+          </TouchableOpacity>
         </View>
         <View style={Styles.main}>
           <ScrollableTabView
@@ -69,12 +75,16 @@ class SearchPage extends React.Component {
                 <Text>{data}</Text>
               ))}
             </View>
-            <Text key="people" style={Styles.textStyles} tabLabel="使用者">
-              {localtionData}
-            </Text>
-            <Text key="label" style={Styles.textStyles} tabLabel="標籤">
-              {localtionData}
-            </Text>
+            <View key="people" style={Styles.textStyles} tabLabel="使用者">
+              {localtionData.map((data) => (
+                <Text>{data}</Text>
+              ))}
+            </View>
+            <View key="label" style={Styles.textStyles} tabLabel="標籤">
+              {localtionData.map((data) => (
+                <Text>{data}</Text>
+              ))}
+            </View>
           </ScrollableTabView>
         </View>
       </View>
