@@ -5,12 +5,19 @@ import {TouchableOpacity, Text, View} from 'react-native';
 
 function Iconbtn(props) {
   const {onPress, styles, text, textStyle, ...items} = props;
+  console.log('--------------');
+  console.log(props);
+  console.log('--------------');
   return (
     <TouchableOpacity onPress={onPress} style={styles}>
-      {items ? <View /> : <Icon {...items} />}
+      {isEmpty(items) ? <View /> : <Icon {...items} />}
       {text === undefined ? <View /> : <Text style={textStyle}>{text}</Text>}
     </TouchableOpacity>
   );
+}
+
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
 }
 
 export default Iconbtn;
