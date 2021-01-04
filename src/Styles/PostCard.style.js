@@ -4,50 +4,65 @@ import {StyleSheet} from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    padding: 15,
-    backgroundColor: 'floralwhite',
+    // borderWidth: 3,
+    maxHeight: '90%',
+    borderRadius: 10,
+    elevation: 5,
+    padding: 20,
+    margin: 25,
+    backgroundColor: '#f8f9fa',
   },
+
   cardImage: {
-    flex: 0.8,
-    borderWidth: 1,
+    height: '65%',
+    width: '100%',
+    marginTop: 13,
+    marginBottom: 10,
+    // borderWidth: 3,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
   image: {
+    borderRadius: 5,
     height: '100%',
     width: '100%',
   },
-  cardLike: {
-    borderWidth: 1,
-    flexDirection: 'row',
+
+  cardContent: {
+    width: 200,
+    // borderWidth: 1,
+    backgroundColor: 'black',
   },
-  textLike: {},
+
   cardName: {
-    borderWidth: 1,
+    height: '15%',
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    // borderWidth: 1,
     justifyContent: 'flex-start',
   },
-  textName: {},
-  cardContent: {
-    borderWidth: 1,
+  textName: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    textAlignVertical: 'center',
   },
-  textContent: {},
 
   cardLabel: {
+    height: '10%',
+    paddingVertical: 2,
+    paddingHorizontal: 15,
     flexDirection: 'row',
-    borderWidth: 1,
+    // borderWidth: 1,
   },
   textLabel: {
     color: 'gray',
   },
-  cardModel: {
-    flexDirection: 'row',
-    borderWidth: 1,
-  },
-  textModel: {
-    color: 'gray',
-  },
+
   cardTime: {
-    borderWidth: 1,
+    height: '10%',
+    alignSelf: 'flex-end',
+    paddingHorizontal: 15,
+    // borderWidth: 1,
   },
   textTime: {
     color: 'black',
