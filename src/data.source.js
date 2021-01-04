@@ -122,6 +122,21 @@ export const searchPageData = {
   tabTitles: ['用戶', '標籤', '地點'],
 };
 
+export const loginPageData = {
+  title: '登入',
+  iconSize: 30,
+  emailIcon: iconFormat('Ionicons', 'mail'),
+  passwordIcon: iconFormat('Ionicons', 'lock-closed'),
+  loginBtn: {
+    text: '登入',
+    color: '#0052cc',
+  },
+  registerBtn: {
+    text: '註冊',
+    color: '#666666',
+  },
+};
+
 export const iconData = {
   headerSize: 20,
   search: iconFormat('Feather', 'search'),

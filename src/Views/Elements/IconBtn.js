@@ -1,13 +1,14 @@
 //有icon的按鈕
 import React from 'react';
 import Icon from './Icon';
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity, Text, View} from 'react-native';
 
 function Iconbtn(props) {
-  const {onPress, styles, ...items} = props;
+  const {onPress, styles, text, textStyle, ...items} = props;
   return (
     <TouchableOpacity onPress={onPress} style={styles}>
-      <Icon {...items} />
+      {items ? <View /> : <Icon {...items} />}
+      {text === undefined ? <View /> : <Text style={textStyle}>{text}</Text>}
     </TouchableOpacity>
   );
 }

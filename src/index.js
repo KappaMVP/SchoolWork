@@ -36,7 +36,7 @@ function index() {
   console.log(user);
   console.log('--------------');
   return (
-    <View style={Styles.page}>{user ? <LoginRouter /> : <MainRouter />}</View>
+    <View style={Styles.page}>{!user ? <MainRouter /> : <LoginRouter />}</View>
   );
 }
 export default index;
