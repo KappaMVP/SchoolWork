@@ -30,6 +30,8 @@ export default StyleSheet.create({
     width: '85%',
     height: 40,
     fontSize: 20,
+    paddingTop: 0,
+    paddingBottom: 0,
   },
   icon: {
     marginHorizontal: 5,

@@ -1,12 +1,31 @@
 //登入
 import React from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import auth from '@react-native-firebase/auth';
+import {View, Text, TextInput} from 'react-native';
 import Styles from '../Styles/LoginPage.style';
 import Icon from '../Views/Elements/Icon';
 import {loginPageData as pageData} from '../data.source';
 import Iconbtn from '../Views/Elements/IconBtn';
 
+import auth from '@react-native-firebase/auth';
+import {Button} from 'react-native';
+import {LoginManager, AccessToken} from 'react-native-fbsdk';
+async function facebookLogin() {
+  const result = await LoginManager.logInWithPermissions([
+    'public_profile',
+    'email',
+  ]);
+  if (result.isCancelled) {
+    throw 'User cancelled the login process';
+  }
+  const data = await AccessToken.getCurrentAccessToken();
+  if (!data) {
+    throw 'Something went wrong obtaining access token';
+  }
+  const facebookCredential = auth.FacebookAuthProvider.credential(
+    data.accessToken,
+  );
+  return auth().signInWithCredential(facebookCredential);
+}
 class LoginPage extends React.Component {
   constructor() {
     super();
@@ -15,18 +34,6 @@ class LoginPage extends React.Component {
       password: '',
     };
   }
-
-  //sign in
-  // auth()
-  //   .signInWithEmailAndPassword('lours288300@gmail.com', 'aa890521')
-  //   .then(() => {
-  //     console.log('User account created & signed in!');
-  //   });
-
-  //sign out
-  // auth()
-  //   .signOut()
-  //   .then(() => console.log('User signed out!'));
 
   onChangeEmail = (email) => {
     this.setState({
@@ -96,6 +103,10 @@ class LoginPage extends React.Component {
           />
         </View>
         <View style={Styles.divider} />
+        <Button
+          title="Facebook Sign-In"
+          onPress={() => facebookLogin().then((res) => console.log(res))}
+        />
       </View>
     );
   }
