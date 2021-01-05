@@ -14,7 +14,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "825342839005-2vrh1hfsb5tdgoarvf1plloq5r3fhvl9.apps.googleusercontent.com",
+          "client_id": "825342839005-ljnmi8380edffopue1r95iqg1hctb71r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.photogram",
@@ -37,6 +37,13 @@
             {
               "client_id": "825342839005-q9067ups46kk07tvnvh7j2ejcntu0rl9.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "825342839005-dgllbb0brhhd5svno3vhie235vej5he3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.photogram"
+              }
             }
           ]
         }

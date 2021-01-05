@@ -5,27 +5,11 @@ import Styles from '../Styles/LoginPage.style';
 import Icon from '../Views/Elements/Icon';
 import {loginPageData as pageData} from '../data.source';
 import Iconbtn from '../Views/Elements/IconBtn';
-
-import auth from '@react-native-firebase/auth';
+import {GoogleSigninButton} from '@react-native-community/google-signin';
+import {facebookLogin, googleLogin} from '../helper/SocialAuthActions';
+//tmp
 import {Button} from 'react-native';
-import {LoginManager, AccessToken} from 'react-native-fbsdk';
-async function facebookLogin() {
-  const result = await LoginManager.logInWithPermissions([
-    'public_profile',
-    'email',
-  ]);
-  if (result.isCancelled) {
-    throw 'User cancelled the login process';
-  }
-  const data = await AccessToken.getCurrentAccessToken();
-  if (!data) {
-    throw 'Something went wrong obtaining access token';
-  }
-  const facebookCredential = auth.FacebookAuthProvider.credential(
-    data.accessToken,
-  );
-  return auth().signInWithCredential(facebookCredential);
-}
+
 class LoginPage extends React.Component {
   constructor() {
     super();
@@ -106,6 +90,17 @@ class LoginPage extends React.Component {
         <Button
           title="Facebook Sign-In"
           onPress={() => facebookLogin().then((res) => console.log(res))}
+        />
+        <GoogleSigninButton
+          style={{width: 192, height: 48}}
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Light}
+          onPress={() =>
+            googleLogin()
+              .then((res) => console.log(res))
+              .catch((e) => console.log(e))
+          }
+          disabled={this.state.isSigninInProgress}
         />
       </View>
     );
