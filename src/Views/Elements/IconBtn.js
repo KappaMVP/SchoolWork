@@ -5,9 +5,6 @@ import {TouchableOpacity, Text, View} from 'react-native';
 
 function Iconbtn(props) {
   const {onPress, styles, text, textStyle, ...items} = props;
-  console.log('--------------');
-  console.log(props);
-  console.log('--------------');
   return (
     <TouchableOpacity onPress={onPress} style={styles}>
       {isEmpty(items) ? <View /> : <Icon {...items} />}
