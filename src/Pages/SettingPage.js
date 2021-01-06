@@ -1,9 +1,9 @@
 //設定
-import ToggleSwitch from 'toggle-switch-react-native'; //你一定會用到的 但不一定是這頁
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {settingPageData as pageData} from '../data.source';
 import Icon from '../Views/Elements/Icon';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 class SettingPage extends React.Component {
   constructor() {
@@ -15,21 +15,19 @@ class SettingPage extends React.Component {
       title: pageData.title,
     });
   }
+  onPress(id) {}
 
   render() {
     return (
       <View style={{height: '100%'}}>
-        <Text> Settinge </Text>
-        {pageData.options.map((e) => {
-          const {icon} = e;
-          console.log(icon);
-          <Icon {...icon} size={20} />;
-        })}
-        <Icon {...pageData.options[0].icon} size={20} />
-        <Icon {...pageData.options[1].icon} size={20} />
-        <Icon {...pageData.options[2].icon} size={20} />
-        <Icon {...pageData.options[3].icon} size={20} />
-        <Icon {...pageData.options[4].icon} size={20} />
+        {pageData.options.map((e) => (
+          <View>
+            <TouchableOpacity style={{flexDirection: 'row'}}>
+              <Icon {...e.icon} size={40} />
+              <Text style={{fontSize: 20}}>{e.name}</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
       </View>
     );
   }
