@@ -129,20 +129,20 @@ export const loginPageData = {
   passwordIcon: iconFormat('Ionicons', 'lock-closed'),
   loginBtn: {
     text: '登入',
-    color: '#0052cc',
+    color: '#006284',
   },
   registerBtn: {
     text: '註冊',
-    color: '#666666',
+    color: '#888888',
   },
   facebookBtn: {
     text: 'Sign in with Facebook',
     color: 'white',
-    size: 25,
+    size: 35,
     ...iconFormat('MaterialCommunityIcons', 'facebook'),
   },
   googleBtn: {
-    text: 'Sign in with google',
+    text: 'Sign in with Google',
     lib: 'assets',
     source: require('./assets/btn_google_light_normal_ios.png'),
   },

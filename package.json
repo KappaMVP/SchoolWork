@@ -10,7 +10,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@fontsource/roboto": "^4.1.0",
     "@react-native-community/google-signin": "^5.0.0",
     "@react-native-community/viewpager": "^4.2.2",
     "@react-native-firebase/app": "^10.4.0",
@@ -30,7 +29,6 @@
     "react-native-searchable-dropdown": "^1.1.2",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-vector-icons": "^7.1.0",
-    "react-redux": "^7.2.2",
     "toggle-switch-react-native": "^2.3.0"
   },
   "devDependencies": {

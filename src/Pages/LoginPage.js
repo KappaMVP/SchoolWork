@@ -52,10 +52,10 @@ class LoginPage extends React.Component {
               </View>
               <TextInput
                 style={Styles.inputBox}
-                onChangeText={(email) => this.onChangeEmail(email)}
+                onChangeText={(text) => this.onChangeEmail(text)}
                 value={email}
                 keyboardType="email-address"
-                placeholder="  帳號"
+                placeholder="帳號"
               />
             </View>
             <View style={Styles.inputView}>
@@ -64,10 +64,10 @@ class LoginPage extends React.Component {
               </View>
               <TextInput
                 style={Styles.inputBox}
-                onChangeText={(password) => this.onChangePassword(password)}
+                onChangeText={(text) => this.onChangePassword(text)}
                 value={password}
                 secureTextEntry
-                placeholder="  密碼"
+                placeholder="密碼"
               />
             </View>
           </View>
@@ -103,9 +103,10 @@ class LoginPage extends React.Component {
               .then((res) => console.log('google login'))
               .catch((e) => Alert.alert(e))
           }
-          styles={[Styles.signInWithBtn, Styles.facebookBtn]}
-          textStyle={[Styles.signInWithBtnText, Styles.facebookText]}
+          styles={[Styles.signInWithBtn, Styles.googleBtn]}
+          textStyle={[Styles.signInWithBtnText, Styles.googleText]}
           {...googleBtn}
+          imgStyle={Styles.googleIcon}
         />
       </View>
     );
