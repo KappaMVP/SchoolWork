@@ -21,7 +21,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		925100D0EC3FFE898BBE8883 /* libPods-photogram-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C98184A170377E031440A0 /* libPods-photogram-tvOS.a */; };
 		A50F17BF25A445DE004662E1 /* photogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F17BE25A445DE004662E1 /* photogram.swift */; };
-		A5942D5E259478410061BCEE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5942D5D259478410061BCEE /* GoogleService-Info.plist */; };
+		A549208A25A563B100ECF98A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A549208925A563B100ECF98A /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +64,7 @@
 		8A20A6687800127FD8DD886C /* Pods-photogram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-photogram.debug.xcconfig"; path = "Target Support Files/Pods-photogram/Pods-photogram.debug.xcconfig"; sourceTree = "<group>"; };
 		A50F17BD25A445DD004662E1 /* photogram-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "photogram-Bridging-Header.h"; sourceTree = "<group>"; };
 		A50F17BE25A445DE004662E1 /* photogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photogram.swift; sourceTree = "<group>"; };
-		A5942D5D259478410061BCEE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A549208925A563B100ECF98A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A59A59552596316700FDFEE2 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		A59A59572596316700FDFEE2 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		A59A59582596316700FDFEE2 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
@@ -208,8 +208,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				A549208925A563B100ECF98A /* GoogleService-Info.plist */,
 				A50F17BE25A445DE004662E1 /* photogram.swift */,
-				A5942D5D259478410061BCEE /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* photogram */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* photogramTests */,
@@ -398,7 +398,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				A5942D5E259478410061BCEE /* GoogleService-Info.plist in Resources */,
+				A549208A25A563B100ECF98A /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
