@@ -1,5 +1,6 @@
 //LoginPage的css
 import {StyleSheet, Dimensions} from 'react-native';
+// import '@fontsource/roboto';
 
 const centerVH = {justifyContent: 'center', alignItems: 'center'};
 
@@ -58,6 +59,22 @@ export default StyleSheet.create({
   actionText: {
     fontSize: 20,
     fontWeight: '600',
+    color: 'white',
+  },
+  signInWithBtn: {
+    width: 192,
+    height: 48,
+    flexDirection: 'row',
+    ...centerVH,
+  },
+  signInWithBtnText: {
+    fontWeight: '700',
+    fontFamily: 'Roboto',
+  },
+  facebookBtn: {
+    backgroundColor: '#1877F2',
+  },
+  facebookText: {
     color: 'white',
   },
 });

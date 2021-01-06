@@ -1,14 +1,12 @@
 //登入
 import React from 'react';
-import {View, Text, TextInput} from 'react-native';
+import {View, Text, TextInput, Alert, TouchableOpacity} from 'react-native';
 import Styles from '../Styles/LoginPage.style';
 import Icon from '../Views/Elements/Icon';
 import {loginPageData as pageData} from '../data.source';
 import Iconbtn from '../Views/Elements/IconBtn';
 import {GoogleSigninButton} from '@react-native-community/google-signin';
 import {facebookLogin, googleLogin} from '../helper/SocialAuthActions';
-//tmp
-import {Button} from 'react-native';
 
 class LoginPage extends React.Component {
   constructor() {
@@ -40,6 +38,8 @@ class LoginPage extends React.Component {
       passwordIcon,
       loginBtn,
       registerBtn,
+      facebookBtn,
+      googleBtn,
     } = pageData;
     return (
       <View style={Styles.page}>
@@ -87,20 +87,25 @@ class LoginPage extends React.Component {
           />
         </View>
         <View style={Styles.divider} />
-        <Button
-          title="Facebook Sign-In"
-          onPress={() => facebookLogin().then((res) => console.log(res))}
+        <Iconbtn
+          onPress={() =>
+            facebookLogin()
+              .then((res) => console.log('facebook login'))
+              .catch((e) => Alert.alert(e))
+          }
+          styles={[Styles.signInWithBtn, Styles.facebookBtn]}
+          textStyle={[Styles.signInWithBtnText, Styles.facebookText]}
+          {...facebookBtn}
         />
-        <GoogleSigninButton
-          style={{width: 192, height: 48}}
-          size={GoogleSigninButton.Size.Wide}
-          color={GoogleSigninButton.Color.Light}
+        <Iconbtn
           onPress={() =>
             googleLogin()
-              .then((res) => console.log(res))
-              .catch((e) => console.log(e))
+              .then((res) => console.log('google login'))
+              .catch((e) => Alert.alert(e))
           }
-          disabled={this.state.isSigninInProgress}
+          styles={[Styles.signInWithBtn, Styles.facebookBtn]}
+          textStyle={[Styles.signInWithBtnText, Styles.facebookText]}
+          {...googleBtn}
         />
       </View>
     );

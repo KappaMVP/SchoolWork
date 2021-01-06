@@ -135,6 +135,17 @@ export const loginPageData = {
     text: '註冊',
     color: '#666666',
   },
+  facebookBtn: {
+    text: 'Sign in with Facebook',
+    color: 'white',
+    size: 25,
+    ...iconFormat('MaterialCommunityIcons', 'facebook'),
+  },
+  googleBtn: {
+    text: 'Sign in with google',
+    lib: 'assets',
+    source: require('./assets/btn_google_light_normal_ios.png'),
+  },
 };
 
 export const iconData = {
