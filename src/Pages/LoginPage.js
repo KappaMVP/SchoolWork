@@ -32,12 +32,16 @@ class LoginPage extends React.Component {
 
   handleLoginPress = async () => {
     const {email, password} = this.state;
-    const {error} = pageData.loginAsEmail;
+    const {error, notFound} = pageData.loginAsEmail;
     const result = await logInByEmail(email, password);
     if (result === 'ok') {
       return;
     } else if (result === 'auth/user-not-found') {
-      //nav to 註冊？
+      const {message, cancel, rgister} = notFound;
+      Alert.alert(error[result], message, [
+        {...rgister, onPress: () => navToRegisterPage()},
+        {...cancel},
+      ]);
     } else {
       Alert.alert(error[result]);
     }
@@ -103,21 +107,13 @@ class LoginPage extends React.Component {
         </View>
         <View style={Styles.divider} />
         <Iconbtn
-          onPress={() =>
-            facebookLogin()
-              .then((res) => console.log('facebook login'))
-              .catch((e) => Alert.alert(e))
-          }
+          onPress={() => facebookLogin().catch((e) => Alert.alert(e))}
           styles={[Styles.signInWithBtn, Styles.facebookBtn]}
           textStyle={[Styles.signInWithBtnText, Styles.facebookText]}
           {...facebookBtn}
         />
         <Iconbtn
-          onPress={() =>
-            googleLogin()
-              .then((res) => console.log('google login'))
-              .catch((e) => Alert.alert(e))
-          }
+          onPress={() => googleLogin().catch((e) => Alert.alert(e))}
           styles={[Styles.signInWithBtn, Styles.googleBtn]}
           textStyle={[Styles.signInWithBtnText, Styles.googleText]}
           {...googleBtn}
