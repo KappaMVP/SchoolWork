@@ -32,18 +32,27 @@ class LoginPage extends React.Component {
 
   handleLoginPress = async () => {
     const {email, password} = this.state;
-    const {error, notFound} = pageData.loginAsEmail;
-    const result = await logInByEmail(email, password);
-    if (result === 'ok') {
+    //檢查是否有輸入
+    if (email === '') {
+      Alert.alert('請輸入帳號');
       return;
-    } else if (result === 'auth/user-not-found') {
-      const {message, cancel, rgister} = notFound;
-      Alert.alert(error[result], message, [
-        {...rgister, onPress: () => navToRegisterPage({email: email})},
-        {...cancel},
-      ]);
+    } else if (password === '') {
+      Alert.alert('請輸入密碼');
+      return;
     } else {
-      Alert.alert(error[result]);
+      const {error, notFound} = pageData.loginAsEmail;
+      const result = await logInByEmail(email, password);
+      if (result === 'ok') {
+        return;
+      } else if (result === 'auth/user-not-found') {
+        const {message, cancel, rgister} = notFound;
+        Alert.alert(error[result], message, [
+          {...rgister, onPress: () => navToRegisterPage({email: email})},
+          {...cancel},
+        ]);
+      } else {
+        Alert.alert(error[result]);
+      }
     }
   };
 
@@ -63,6 +72,7 @@ class LoginPage extends React.Component {
     return (
       <View style={Styles.page}>
         <Text style={Styles.title}>{title}</Text>
+        {/* 輸入框 */}
         <View>
           <View style={Styles.inputContainer}>
             <IconInput
@@ -91,6 +101,7 @@ class LoginPage extends React.Component {
             />
           </View>
         </View>
+        {/* 登入．註冊 按鈕 */}
         <View style={Styles.loginContainer}>
           <Iconbtn
             onPress={() => this.handleLoginPress()}
@@ -106,6 +117,7 @@ class LoginPage extends React.Component {
           />
         </View>
         <View style={Styles.divider} />
+        {/* 第三方登入 */}
         <Iconbtn
           onPress={() => facebookLogin().catch((e) => Alert.alert(e))}
           styles={[Styles.signInWithBtn, Styles.facebookBtn]}
