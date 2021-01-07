@@ -15,11 +15,7 @@ class ProfileSettingPage extends React.Component {
   }
 
   render() {
-    return (
-      <View>
-        <Text> ProfileSettingPage </Text>
-      </View>
-    );
+    return <View></View>;
   }
 }
 

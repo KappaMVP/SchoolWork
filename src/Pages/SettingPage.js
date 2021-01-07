@@ -1,9 +1,10 @@
 //設定
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {settingPageData as pageData} from '../data.source';
 import Icon from '../Views/Elements/Icon';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {navToProfileSetting, navToSwitchIdentity} from '../helper/routerAction';
+import {logOut} from '../helper/firebaseActions';
 
 class SettingPage extends React.Component {
   constructor() {
@@ -15,16 +16,28 @@ class SettingPage extends React.Component {
       title: pageData.title,
     });
   }
-  onPress(id) {}
+  onPress(id) {
+    if (id === 1) {
+    } else if (id === 2) {
+      navToProfileSetting();
+    } else if (id === 3) {
+      navToSwitchIdentity();
+    } else if (id === 4) {
+    } else if (id === 5) {
+      logOut();
+    }
+  }
 
   render() {
     return (
       <View style={{height: '100%'}}>
-        {pageData.options.map((e) => (
+        {pageData.options.map((data) => (
           <View>
-            <TouchableOpacity style={{flexDirection: 'row'}}>
-              <Icon {...e.icon} size={40} />
-              <Text style={{fontSize: 20}}>{e.name}</Text>
+            <TouchableOpacity
+              style={{flexDirection: 'row'}}
+              onPress={() => this.onPress(data.id)}>
+              <Icon {...data.icon} size={40} />
+              <Text style={{fontSize: 20}}>{data.name}</Text>
             </TouchableOpacity>
           </View>
         ))}
