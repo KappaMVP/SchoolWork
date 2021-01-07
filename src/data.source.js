@@ -76,7 +76,7 @@ export const profilePageData = {
 };
 
 export const profileSettingPageData = {
-  title: '修改個人資料',
+  title: '編輯個人資料',
 };
 
 export const settingPageData = {
