@@ -128,8 +128,15 @@ export const searchPageData = {
   tabTitles: ['用戶', '標籤', '地點'],
 };
 
+// 註冊跟登入通用資訊
+const emailText = '電子郵件地址';
+const passwordText = '密碼';
+
 export const registerPageData = {
-  title: '註冊',
+  title: '成為 Photogram 的一份子',
+  emailText: emailText,
+  passwordText: passwordText,
+  checkPasswordText: '再次輸入' + passwordText,
 };
 
 export const loginPageData = {
@@ -137,6 +144,8 @@ export const loginPageData = {
   iconSize: 30,
   emailIcon: iconFormat('Ionicons', 'mail'),
   passwordIcon: iconFormat('Ionicons', 'lock-closed'),
+  emailText: emailText,
+  passwordText: passwordText,
   loginBtn: {
     text: '登入',
     color: '#006284',

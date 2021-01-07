@@ -63,6 +63,8 @@ class LoginPage extends React.Component {
       iconSize,
       emailIcon,
       passwordIcon,
+      emailText,
+      passwordText,
       loginBtn,
       registerBtn,
       facebookBtn,
@@ -82,7 +84,7 @@ class LoginPage extends React.Component {
               inputData={{
                 style: Styles.inputBox,
                 value: email,
-                placeholder: '帳號',
+                placeholder: emailText,
                 keyboardType: 'email-address',
                 onChangeText: (text) => this.onChangeEmail(text),
               }}
@@ -94,7 +96,7 @@ class LoginPage extends React.Component {
               inputData={{
                 style: Styles.inputBox,
                 value: password,
-                placeholder: '密碼',
+                placeholder: passwordText,
                 secureTextEntry: true,
                 onChangeText: (text) => this.onChangePassword(text),
               }}

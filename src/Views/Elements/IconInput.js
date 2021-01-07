@@ -12,7 +12,7 @@ function IconInput(props) {
   ///    value        -> input的value
   ///    placeholder  -> input的預設顯示文字
   ///    onChangeText -> input的callback
-  ///    anyProps     -> input的非必要其他選項(like secureTextEntry)
+  ///    anyProps     -> input的選填(like secureTextEntry)
 
   const {containerStyle, iconStyle, iconData, inputData} = props;
   return (
