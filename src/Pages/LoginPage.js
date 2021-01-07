@@ -1,12 +1,12 @@
 //登入
 import React from 'react';
-import {View, Text, TextInput, Alert, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, Alert} from 'react-native';
 import Styles from '../Styles/LoginPage.style';
-import Icon from '../Views/Elements/Icon';
 import {loginPageData as pageData} from '../data.source';
 import Iconbtn from '../Views/Elements/IconBtn';
-import {GoogleSigninButton} from '@react-native-community/google-signin';
-import {facebookLogin, googleLogin} from '../helper/SocialAuthActions';
+import IconInput from '../Views/Elements/IconInput';
+import {facebookLogin, googleLogin} from '../helper/socialAuth';
+import {navToRegisterPage} from '../helper/routerAction';
 
 class LoginPage extends React.Component {
   constructor() {
@@ -46,30 +46,30 @@ class LoginPage extends React.Component {
         <Text style={Styles.title}>{title}</Text>
         <View>
           <View style={Styles.inputContainer}>
-            <View style={Styles.inputView}>
-              <View style={Styles.icon}>
-                <Icon {...emailIcon} size={iconSize} />
-              </View>
-              <TextInput
-                style={Styles.inputBox}
-                onChangeText={(text) => this.onChangeEmail(text)}
-                value={email}
-                keyboardType="email-address"
-                placeholder="帳號"
-              />
-            </View>
-            <View style={Styles.inputView}>
-              <View style={Styles.icon}>
-                <Icon {...passwordIcon} size={iconSize} />
-              </View>
-              <TextInput
-                style={Styles.inputBox}
-                onChangeText={(text) => this.onChangePassword(text)}
-                value={password}
-                secureTextEntry
-                placeholder="密碼"
-              />
-            </View>
+            <IconInput
+              containerStyle={Styles.inputView}
+              iconStyle={Styles.icon}
+              iconData={{...emailIcon, size: iconSize}}
+              inputData={{
+                style: Styles.inputBox,
+                value: email,
+                placeholder: '帳號',
+                keyboardType: 'email-address',
+                onChangeText: (text) => this.onChangeEmail(text),
+              }}
+            />
+            <IconInput
+              containerStyle={Styles.inputView}
+              iconStyle={Styles.icon}
+              iconData={{...passwordIcon, size: iconSize}}
+              inputData={{
+                style: Styles.inputBox,
+                value: password,
+                placeholder: '密碼',
+                secureTextEntry: true,
+                onChangeText: (text) => this.onChangePassword(text),
+              }}
+            />
           </View>
         </View>
         <View style={Styles.loginContainer}>
@@ -80,7 +80,7 @@ class LoginPage extends React.Component {
             text={loginBtn.text}
           />
           <Iconbtn
-            onPress={() => console.log('註冊')}
+            onPress={() => navToRegisterPage()}
             styles={[Styles.actionButton, {backgroundColor: registerBtn.color}]}
             textStyle={Styles.actionText}
             text={registerBtn.text}

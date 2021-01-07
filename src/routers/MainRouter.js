@@ -46,6 +46,9 @@ function MainRouter() {
           key={routerKey.HomePage}
           icon={(e) => (
             <TabViewIcon source={HomePageIcon} focused={e.focused} />
+          )}
+          renderBackButton={() => (
+            <HeaderBtn data={[{btn: iconData.back, onPress: () => navPop()}]} />
           )}>
           <Scene key={routerKey.HomePage} component={HomePage} />
           <Scene key={routerKey.SearchPage} component={SearchPage} hideNavBar />

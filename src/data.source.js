@@ -9,6 +9,7 @@ export const routerKey = {
   PostPage: 'PostPage',
   ProfilePage: 'ProfilePage',
   ProfileSettingPage: 'ProfileSettingPage',
+  RegisterPage: 'RegisterPage',
   SearchPage: 'SearchPage',
   SettingPage: 'SettingPage',
   SwitchIdentityPage: 'SwitchIdentityPage',
@@ -120,6 +121,10 @@ export const switchIdentityPageData = {
 
 export const searchPageData = {
   tabTitles: ['用戶', '標籤', '地點'],
+};
+
+export const registerPageData = {
+  title: '註冊',
 };
 
 export const loginPageData = {
