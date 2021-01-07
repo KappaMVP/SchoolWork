@@ -1,11 +1,13 @@
 //登入
 import React from 'react';
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import auth from '@react-native-firebase/auth';
+import {View, Text, Alert} from 'react-native';
 import Styles from '../Styles/LoginPage.style';
-import Icon from '../Views/Elements/Icon';
 import {loginPageData as pageData} from '../data.source';
 import Iconbtn from '../Views/Elements/IconBtn';
+import IconInput from '../Views/Elements/IconInput';
+import {facebookLogin, googleLogin} from '../helper/socialAuth';
+import {navToRegisterPage} from '../helper/routerAction';
+import {logInByEmail} from '../helper/firebaseActions';
 
 class LoginPage extends React.Component {
   constructor() {
@@ -15,18 +17,6 @@ class LoginPage extends React.Component {
       password: '',
     };
   }
-
-  //sign in
-  // auth()
-  //   .signInWithEmailAndPassword('lours288300@gmail.com', 'aa890521')
-  //   .then(() => {
-  //     console.log('User account created & signed in!');
-  //   });
-
-  //sign out
-  // auth()
-  //   .signOut()
-  //   .then(() => console.log('User signed out!'));
 
   onChangeEmail = (email) => {
     this.setState({
@@ -40,6 +30,32 @@ class LoginPage extends React.Component {
     });
   };
 
+  handleLoginPress = async () => {
+    const {email, password} = this.state;
+    //檢查是否有輸入
+    if (email === '') {
+      Alert.alert('請輸入帳號');
+      return;
+    } else if (password === '') {
+      Alert.alert('請輸入密碼');
+      return;
+    } else {
+      const {error, notFound} = pageData.loginAsEmail;
+      const result = await logInByEmail(email, password);
+      if (result === 'ok') {
+        return;
+      } else if (result === 'auth/user-not-found') {
+        const {message, cancel, rgister} = notFound;
+        Alert.alert(error[result], message, [
+          {...rgister, onPress: () => navToRegisterPage({email: email})},
+          {...cancel},
+        ]);
+      } else {
+        Alert.alert(error[result]);
+      }
+    }
+  };
+
   render() {
     const {email, password} = this.state;
     const {
@@ -47,55 +63,82 @@ class LoginPage extends React.Component {
       iconSize,
       emailIcon,
       passwordIcon,
+      emailText,
+      passwordText,
       loginBtn,
       registerBtn,
+      facebookBtn,
+      googleBtn,
+      appleBtn,
     } = pageData;
     return (
       <View style={Styles.page}>
         <Text style={Styles.title}>{title}</Text>
+        {/* 輸入框 */}
         <View>
           <View style={Styles.inputContainer}>
-            <View style={Styles.inputView}>
-              <View style={Styles.icon}>
-                <Icon {...emailIcon} size={iconSize} />
-              </View>
-              <TextInput
-                style={Styles.inputBox}
-                onChangeText={(email) => this.onChangeEmail(email)}
-                value={email}
-                keyboardType="email-address"
-                placeholder="  帳號"
-              />
-            </View>
-            <View style={Styles.inputView}>
-              <View style={Styles.icon}>
-                <Icon {...passwordIcon} size={iconSize} />
-              </View>
-              <TextInput
-                style={Styles.inputBox}
-                onChangeText={(password) => this.onChangePassword(password)}
-                value={password}
-                secureTextEntry
-                placeholder="  密碼"
-              />
-            </View>
+            <IconInput
+              containerStyle={Styles.inputView}
+              iconStyle={Styles.icon}
+              iconData={{...emailIcon, size: iconSize}}
+              inputData={{
+                style: Styles.inputBox,
+                value: email,
+                placeholder: emailText,
+                keyboardType: 'email-address',
+                onChangeText: (text) => this.onChangeEmail(text),
+              }}
+            />
+            <IconInput
+              containerStyle={Styles.inputView}
+              iconStyle={Styles.icon}
+              iconData={{...passwordIcon, size: iconSize}}
+              inputData={{
+                style: Styles.inputBox,
+                value: password,
+                placeholder: passwordText,
+                secureTextEntry: true,
+                onChangeText: (text) => this.onChangePassword(text),
+              }}
+            />
           </View>
         </View>
+        {/* 登入．註冊 按鈕 */}
         <View style={Styles.loginContainer}>
           <Iconbtn
-            onPress={() => console.log('登入')}
+            onPress={() => this.handleLoginPress()}
             styles={[Styles.actionButton, {backgroundColor: loginBtn.color}]}
             textStyle={Styles.actionText}
             text={loginBtn.text}
           />
           <Iconbtn
-            onPress={() => console.log('註冊')}
+            onPress={() => navToRegisterPage()}
             styles={[Styles.actionButton, {backgroundColor: registerBtn.color}]}
             textStyle={Styles.actionText}
             text={registerBtn.text}
           />
         </View>
         <View style={Styles.divider} />
+        {/* 第三方登入 */}
+        <Iconbtn
+          onPress={() => facebookLogin().catch((e) => Alert.alert(e))}
+          styles={[Styles.signInWithBtn, Styles.facebookBtn]}
+          textStyle={[Styles.signInWithBtnText, Styles.facebookText]}
+          {...facebookBtn}
+        />
+        <Iconbtn
+          onPress={() => googleLogin().catch((e) => Alert.alert(e))}
+          styles={[Styles.signInWithBtn, Styles.googleBtn]}
+          textStyle={[Styles.signInWithBtnText, Styles.googleText]}
+          {...googleBtn}
+          imgStyle={Styles.googleIcon}
+        />
+        <Iconbtn
+          onPress={() => Alert.alert('功能開發中')}
+          styles={[Styles.signInWithBtn, Styles.appleBtn]}
+          textStyle={[Styles.signInWithBtnText, Styles.appleText]}
+          {...appleBtn}
+        />
       </View>
     );
   }

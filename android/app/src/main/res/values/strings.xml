@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">photogram</string>
+    <string name="facebook_app_id">449164169436635</string>
+    <string name="fb_login_protocol_scheme">fb449164169436635</string>
 </resources>

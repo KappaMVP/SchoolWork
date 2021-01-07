@@ -31,10 +31,14 @@ function index() {
     return subscriber; // unsubscribe on unmount
   }, []);
 
+  // auth()
+  //   .signOut()
+  //   .then(() => console.log('User signed out!'));
+  // console.log('--------------');
+  // console.log(auth().currentUser.uid);
+  // console.log('--------------');
+
   if (initializing) return null;
-  console.log('--------------');
-  console.log(user);
-  console.log('--------------');
   return (
     <View style={Styles.page}>{!user ? <MainRouter /> : <LoginRouter />}</View>
   );

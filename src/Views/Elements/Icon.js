@@ -14,8 +14,19 @@ import FontAwesome_5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Image} from 'react-native';
 
 function Icon(props) {
+  /// 參數說明
+  /// lib      -> 要顯示的icon的library，assets則為自定義圖片
+  /// items 可能包含：
+  /// icon
+  /// name     -> 要顯示的icon的name
+  /// size     -> 要顯示的icon的size
+  /// image
+  /// source   -> 自定義圖片的來源
+  /// imgStyle -> 自定義圖片的樣式
+
   const {lib, ...items} = props;
   switch (lib) {
     case 'Zocial':
@@ -46,8 +57,11 @@ function Icon(props) {
       return <SimpleLineIcons {...items} />;
     case 'MaterialCommunityIcons':
       return <MaterialCommunityIcons {...items} />;
+    case 'assets':
+      const {source, imgStyle} = items;
+      return <Image source={source} style={imgStyle} />;
     default:
-      break;
+      return <AntDesign name={'question'} size={20} />;
   }
 }
 

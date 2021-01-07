@@ -14,6 +14,12 @@
 
 #import <Firebase.h>
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <React/RCTLinkingManager.h>
+
+#import <RNGoogleSignin/RNGoogleSignin.h>
+#import "RNGoogleSignin.h"
+
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
   SKDescriptorMapper *layoutDescriptorMapper = [[SKDescriptorMapper alloc] initWithDefaults];
@@ -60,5 +66,12 @@ static void InitializeFlipper(UIApplication *application) {
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
+
+
+- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
+  return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options] || [RNGoogleSignin application:application openURL:url options:options];
+}
+
+
 
 @end

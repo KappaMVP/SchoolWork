@@ -1,9 +1,10 @@
 //設定
-import ToggleSwitch from 'toggle-switch-react-native'; //你一定會用到的 但不一定是這頁
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {settingPageData as pageData} from '../data.source';
 import Icon from '../Views/Elements/Icon';
+import {navToProfileSetting, navToSwitchIdentity} from '../helper/routerAction';
+import {logOut} from '../helper/firebaseActions';
 
 class SettingPage extends React.Component {
   constructor() {
@@ -15,21 +16,31 @@ class SettingPage extends React.Component {
       title: pageData.title,
     });
   }
+  onPress(id) {
+    if (id === 1) {
+    } else if (id === 2) {
+      navToProfileSetting();
+    } else if (id === 3) {
+      navToSwitchIdentity();
+    } else if (id === 4) {
+    } else if (id === 5) {
+      logOut();
+    }
+  }
 
   render() {
     return (
       <View style={{height: '100%'}}>
-        <Text> Settinge </Text>
-        {pageData.options.map((e) => {
-          const {icon} = e;
-          console.log(icon);
-          <Icon {...icon} size={20} />;
-        })}
-        <Icon {...pageData.options[0].icon} size={20} />
-        <Icon {...pageData.options[1].icon} size={20} />
-        <Icon {...pageData.options[2].icon} size={20} />
-        <Icon {...pageData.options[3].icon} size={20} />
-        <Icon {...pageData.options[4].icon} size={20} />
+        {pageData.options.map((data) => (
+          <View>
+            <TouchableOpacity
+              style={{flexDirection: 'row'}}
+              onPress={() => this.onPress(data.id)}>
+              <Icon {...data.icon} size={40} />
+              <Text style={{fontSize: 20}}>{data.name}</Text>
+            </TouchableOpacity>
+          </View>
+        ))}
       </View>
     );
   }

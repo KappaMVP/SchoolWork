@@ -50,6 +50,10 @@ export function navToHomePage(props) {
   Actions.push(routerKey.HomePage, {...props});
 }
 
+export function navToRegisterPage(props) {
+  Actions.push(routerKey.RegisterPage, {...props});
+}
+
 export function navPop() {
   Actions.pop();
 }

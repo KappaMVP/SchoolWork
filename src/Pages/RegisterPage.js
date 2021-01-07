@@ -1,9 +1,8 @@
-//設定或設定>修改個人資料
 import React from 'react';
 import {View, Text} from 'react-native';
-import {profileSettingPageData as pageData} from '../data.source';
+import {registerPageData as pageData} from '../data.source';
 
-class ProfileSettingPage extends React.Component {
+export default class RegisterPage extends React.Component {
   constructor() {
     super();
   }
@@ -15,8 +14,10 @@ class ProfileSettingPage extends React.Component {
   }
 
   render() {
-    return <View></View>;
+    return (
+      <View>
+        <Text>RegisterPage</Text>
+      </View>
+    );
   }
 }
-
-export default ProfileSettingPage;
