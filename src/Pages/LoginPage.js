@@ -39,7 +39,7 @@ class LoginPage extends React.Component {
     } else if (result === 'auth/user-not-found') {
       const {message, cancel, rgister} = notFound;
       Alert.alert(error[result], message, [
-        {...rgister, onPress: () => navToRegisterPage()},
+        {...rgister, onPress: () => navToRegisterPage({email: email})},
         {...cancel},
       ]);
     } else {
