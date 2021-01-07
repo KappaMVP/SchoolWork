@@ -54,6 +54,7 @@ class LoginPage extends React.Component {
       registerBtn,
       facebookBtn,
       googleBtn,
+      appleBtn,
     } = pageData;
     return (
       <View style={Styles.page}>
@@ -121,6 +122,12 @@ class LoginPage extends React.Component {
           textStyle={[Styles.signInWithBtnText, Styles.googleText]}
           {...googleBtn}
           imgStyle={Styles.googleIcon}
+        />
+        <Iconbtn
+          onPress={() => Alert.alert('功能開發中')}
+          styles={[Styles.signInWithBtn, Styles.appleBtn]}
+          textStyle={[Styles.signInWithBtnText, Styles.appleText]}
+          {...appleBtn}
         />
       </View>
     );

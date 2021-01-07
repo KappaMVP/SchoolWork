@@ -151,6 +151,12 @@ export const loginPageData = {
     lib: 'assets',
     source: require('./assets/btn_google_light_normal_ios.png'),
   },
+  appleBtn: {
+    text: 'Sign in with Apple',
+    color: 'white',
+    size: 20,
+    ...iconFormat('MaterialCommunityIcons', 'apple'),
+  },
   loginAsEmail: {
     error: {
       'auth/email-already-in-use': 'Email已被使用',

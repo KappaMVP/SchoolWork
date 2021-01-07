@@ -69,7 +69,7 @@ export default StyleSheet.create({
     maxHeight: 48,
     flexDirection: 'row',
     marginBottom: 10,
-    borderRadius: 3,
+    borderRadius: 50,
     //ios shadow
     shadowRadius: 3,
     shadowColor: 'black',
@@ -104,10 +104,20 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   googleIcon: {
-    marginLeft: 3,
+    marginLeft: 4,
     flex: 1,
     resizeMode: 'cover',
     maxHeight: 48,
     maxWidth: 48,
+  },
+  appleBtn: {
+    paddingLeft: 20,
+    flex: 1,
+    backgroundColor: 'black',
+  },
+  appleText: {
+    flex: 1,
+    color: 'white',
+    textAlign: 'center',
   },
 });
