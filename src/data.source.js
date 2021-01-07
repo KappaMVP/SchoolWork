@@ -156,13 +156,24 @@ export const loginPageData = {
     lib: 'assets',
     source: require('./assets/btn_google_light_normal_ios.png'),
   },
+  appleBtn: {
+    text: 'Sign in with Apple',
+    color: 'white',
+    size: 20,
+    ...iconFormat('MaterialCommunityIcons', 'apple'),
+  },
   loginAsEmail: {
     error: {
       'auth/email-already-in-use': 'Email已被使用',
       'auth/invalid-email': '無效的Email',
       'auth/user-disabled': '用戶已被禁用',
-      'auth/user-not-found': '找不到用戶',
+      'auth/user-not-found': '找不到帳號',
       'auth/wrong-password': '密碼錯誤',
+    },
+    notFound: {
+      message: '是否要前往註冊？',
+      cancel: {text: '否'},
+      rgister: {text: '前往註冊'},
     },
   },
 };
