@@ -151,6 +151,15 @@ export const loginPageData = {
     lib: 'assets',
     source: require('./assets/btn_google_light_normal_ios.png'),
   },
+  loginAsEmail: {
+    error: {
+      'auth/email-already-in-use': 'Email已被使用',
+      'auth/invalid-email': '無效的Email',
+      'auth/user-disabled': '用戶已被禁用',
+      'auth/user-not-found': '找不到用戶',
+      'auth/wrong-password': '密碼錯誤',
+    },
+  },
 };
 
 export const iconData = {
@@ -160,6 +169,7 @@ export const iconData = {
   back: iconFormat('FontAwesome5', 'chevron-left'),
 };
 
+//utils
 function iconFormat(lib, name) {
   return {lib: lib, name: name};
 }

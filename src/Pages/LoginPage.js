@@ -1,12 +1,13 @@
 //登入
 import React from 'react';
-import {View, Text, TextInput, Alert} from 'react-native';
+import {View, Text, Alert} from 'react-native';
 import Styles from '../Styles/LoginPage.style';
 import {loginPageData as pageData} from '../data.source';
 import Iconbtn from '../Views/Elements/IconBtn';
 import IconInput from '../Views/Elements/IconInput';
 import {facebookLogin, googleLogin} from '../helper/socialAuth';
 import {navToRegisterPage} from '../helper/routerAction';
+import {logInByEmail} from '../helper/firebaseActions';
 
 class LoginPage extends React.Component {
   constructor() {
@@ -27,6 +28,19 @@ class LoginPage extends React.Component {
     this.setState({
       password: password,
     });
+  };
+
+  handleLoginPress = async () => {
+    const {email, password} = this.state;
+    const {error} = pageData.loginAsEmail;
+    const result = await logInByEmail(email, password);
+    if (result === 'ok') {
+      return;
+    } else if (result === 'auth/user-not-found') {
+      //nav to 註冊？
+    } else {
+      Alert.alert(error[result]);
+    }
   };
 
   render() {
@@ -74,7 +88,7 @@ class LoginPage extends React.Component {
         </View>
         <View style={Styles.loginContainer}>
           <Iconbtn
-            onPress={() => console.log('登入')}
+            onPress={() => this.handleLoginPress()}
             styles={[Styles.actionButton, {backgroundColor: loginBtn.color}]}
             textStyle={Styles.actionText}
             text={loginBtn.text}

@@ -1,13 +1,18 @@
 import auth from '@react-native-firebase/auth';
 
-//sign in
-// auth()
-//   .signInWithEmailAndPassword('lours288300@gmail.com', 'aa890521')
-//   .then(() => {
-//     console.log('User account created & signed in!');
-//   });
+//Login
+export async function logInByEmail(email, password) {
+  const result = await auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(() => 'ok')
+    .catch((error) => error.code);
+  return result;
+}
 
-//sign out
-// auth()
-//   .signOut()
-//   .then(() => console.log('User signed out!'));
+export async function logOut() {
+  const result = await auth()
+    .signOut()
+    .then(() => 'ok')
+    .catch((error) => error);
+  return result;
+}
