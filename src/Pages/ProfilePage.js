@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {profilePageData as pageData} from '../data.source';
 import Styles from '../Styles/ProfilePage.style';
@@ -73,24 +74,14 @@ class ProfilePage extends React.Component {
           like: '3',
         },
       ],
-      Profile: [
+      Profiles: [
         {
           id: 1999,
           name: 'Jacky  - photography',
           content: 'Your Instagram Top Nine is ready!',
-          fans: '350粉絲',
-          follow: '480追蹤者',
-          post: '19篇貼文',
-          url:
-            'https://live.staticflickr.com/65535/50025256748_e67b905aa3_b.jpg',
-        },
-        {
-          id: 2000,
-          name: 'Jacky',
-          content: 'Your Instagram Top Nine is ready!',
-          fans: '350',
-          follow: '480',
-          post: '19',
+          fans: 350,
+          follow: 480,
+          post: 19,
           url:
             'https://live.staticflickr.com/65535/50025256748_e67b905aa3_b.jpg',
         },
@@ -104,6 +95,42 @@ class ProfilePage extends React.Component {
     });
   }
 
+  fansLike = (id) => {
+    const newProfile = this.state.Profiles.map((Profile) => {
+      return Profile.id === id
+        ? {...Profile, fans: Profile.fans + 1}
+        : {...Profile};
+    });
+    alert('兩分鐘前有人追蹤了你');
+    this.setState({
+      Profiles: newProfile,
+    });
+  };
+
+  FollowLike = (id) => {
+    const newProfile = this.state.Profiles.map((Profile) => {
+      return Profile.id === id
+        ? {...Profile, Follow: Profile.Follow + 1}
+        : {...Profile};
+    });
+    alert('你在昨天追蹤了三個人');
+    this.setState({
+      Profiles: newProfile,
+    });
+  };
+
+  PostLike = (id) => {
+    const newProfile = this.state.Profiles.map((Profile) => {
+      return Profile.id === id
+        ? {...Profile, Post: Profile.Post + 1}
+        : {...Profile};
+    });
+    alert('12月25日發過一次文');
+    this.setState({
+      Profiles: newProfile,
+    });
+  };
+
   render() {
     const unlikePosts = this.state.Posts.filter((Post) => Post.like === '1');
     const likePosts = this.state.Posts.filter((Post) => Post.like === '2');
@@ -111,25 +138,28 @@ class ProfilePage extends React.Component {
 
     return (
       <View style={Styles.page}>
-        <View style={Styles.List}>
-          <Text style={styles.post}>{this.state.Profile[0].post}</Text>
-          <Text style={styles.fans}>{this.state.Profile[0].fans}</Text>
-          <Text style={styles.follow}>{this.state.Profile[0].follow}</Text>
-        </View>
-
-        <View style={Styles.List}>
+        <View style={styles.content2}>
           <Image
             style={styles.image1}
-            source={{uri: this.state.Profile[0].url}}
+            source={{uri: this.state.Profiles[0].url}}
           />
         </View>
-
-        <View style={{flexDirection: 'column'}}>
-          <Text style={styles.id}>{this.state.Profile[0].id}</Text>
-          <Text style={styles.name}>{this.state.Profile[0].name}</Text>
-          <Text style={styles.Postcontent}>
-            {this.state.Profile[0].content}
-          </Text>
+        <View style={styles.content3}>
+          <TouchableOpacity onPress={() => this.PostLike(id)}>
+            <Text style={styles.post}>{this.state.Profiles[0].post}篇貼文</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.fansLike(id)}>
+            <Text style={styles.fans}>{this.state.Profiles[0].fans}位粉絲</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.FollowLike(id)}>
+            <Text style={styles.follow}>
+              {this.state.Profiles[0].follow}個追蹤者
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.content3}>
+          <Text style={styles.name}>{this.state.Profiles[0].name}</Text>
+          <Text style={styles.Postcontent}>{this.state.Profiles.content}</Text>
         </View>
 
         <ScrollableTabView>
@@ -167,65 +197,42 @@ function PostItem(props) {
 }
 
 const styles = StyleSheet.create({
-  imagenew: {
-    width: 500,
-    height: 275,
-  },
-  new: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'left',
-    paddingVertical: 3, // 文字上下留白
-  },
-  new1: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'left',
-    paddingVertical: 3, // 文字上下留白
-  },
-  new2: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    textAlign: 'right',
-    paddingVertical: 3, // 文字上下留白
-  },
-
-  new3: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#F00',
-  },
-
   List: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   id: {
     fontSize: 14,
     fontWeight: 'bold',
-    paddingVertical: 2, // 文字上下留白
-    marginLeft: 10,
   },
   PostItem: {
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomColor: '#DDD',
     borderBottomWidth: 1,
-    paddingVertical: 10,
+    paddingTop: 10,
   },
   image: {
     width: 410,
     height: 275,
   },
   image1: {
+    flex: 1,
+    alignItems: 'center',
     flexDirection: 'row',
-    width: 100,
-    height: 100,
-    paddingVertical: 50, // 文字上下留白
+    width: 150,
+    height: 150,
   },
-
+  content2: {
+    flex: 0.6,
+    alignItems: 'center',
+  },
+  content3: {
+    flex: 0.3,
+    alignSelf: 'center',
+    flexDirection: 'row',
+  },
   PostContent: {
     marginLeft: 10,
     fontSize: 16,
@@ -239,29 +246,31 @@ const styles = StyleSheet.create({
     color: '#F00',
   },
   name: {
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'left',
-    paddingVertical: 2, // 文字上下留白
     marginLeft: 10,
   },
   follow: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
     marginLeft: 10,
+    alignItems: 'center',
+    paddingVertical: 25, // 文字上下留白
   },
   fans: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     color: 'black',
     marginLeft: 10,
+    paddingVertical: 25, // 文字上下留白
   },
   post: {
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingVertical: 3, // 文字上下留白
+    paddingVertical: 25, // 文字上下留白
     marginLeft: 10,
   },
 });
