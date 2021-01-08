@@ -13,23 +13,32 @@ import TestImage from '../assets/test.jpg';
 import PageStyles from '../Styles/Page.style';
 
 class ProfileSettingPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.props = props;
   }
 
   componentDidMount() {
+    const {isNew} = this.props;
+    const registerFirst = isNew
+      ? {
+          left: <View />, //不讓他返回
+        }
+      : {};
     this.props.navigation.setParams({
       title: pageData.title,
+      hideTabBar: true,
+      ...registerFirst,
     });
   }
   //變更大頭貼
-  HandleChangePhotoStiker() {}
+  handleChangePhotoStiker = () => {};
   //變更姓名
-  HandleChangeUserName() {}
+  handleChangeUserName = () => {};
   //變更用戶名稱
-  HandleChangeUserID() {}
+  handleChangeUserID = () => {};
   //變更個人簡介
-  HandleChangeIntroduction() {}
+  handleChangeIntroduction = () => {};
 
   render() {
     return (
@@ -45,7 +54,7 @@ class ProfileSettingPage extends React.Component {
             <Text style={styles.label}>姓名</Text>
             <TextInput
               value=""
-              onValueChange={this.HandleChangeUserName()}
+              onValueChange={this.handleChangeUserName()}
               style={styles.textInput}
             />
           </View>
@@ -53,7 +62,7 @@ class ProfileSettingPage extends React.Component {
             <Text style={styles.label}>用戶名稱</Text>
             <TextInput
               value=""
-              onValueChange={this.HandleChangeUserID()}
+              onValueChange={this.handleChangeUserID()}
               style={styles.textInput}
             />
           </View>
@@ -61,7 +70,7 @@ class ProfileSettingPage extends React.Component {
             <Text style={styles.label}>個人簡介</Text>
             <TextInput
               value=""
-              onValueChange={this.HandleChangeIntroduction()}
+              onValueChange={this.handleChangeIntroduction()}
               style={styles.textInput}
             />
           </View>

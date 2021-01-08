@@ -54,6 +54,10 @@ function MainRouter() {
           <Scene key={routerKey.SearchPage} component={SearchPage} hideNavBar />
           <Scene key={routerKey.ChatPage} component={ChatPage} />
           {ProfileSceneBundle}
+          <Scene
+            key={routerKey.ProfileSettingPage}
+            component={ProfileSettingPage}
+          />
         </Stack>
         {/*ActivityPage*/}
         <Scene
@@ -89,16 +93,17 @@ function MainRouter() {
             <TabViewIcon source={ProfilePageIcon} focused={e.focused} />
           )}>
           {ProfileSceneBundle}
-          <Scene key={routerKey.SettingPage} component={SettingPage} />
-          <Scene key={routerKey.SearchPage} component={SearchPage} hideNavBar />
-          <Scene
-            key={routerKey.ProfileSettingPage}
-            component={ProfileSettingPage}
-          />
-          <Scene
-            key={routerKey.SwitchIdentityPage}
-            component={SwitchIdentityPage}
-          />
+          <Stack key={routerKey.SettingPage} hideTabBar>
+            <Scene key={routerKey.SettingPage} component={SettingPage} />
+            <Scene
+              key={routerKey.ProfileSettingPage}
+              component={ProfileSettingPage}
+            />
+            <Scene
+              key={routerKey.SwitchIdentityPage}
+              component={SwitchIdentityPage}
+            />
+          </Stack>
         </Stack>
       </Tabs>
     </Router>

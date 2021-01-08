@@ -34,6 +34,10 @@ export function navToProfileSetting(props) {
   Actions.push(routerKey.ProfileSettingPage, {...props});
 }
 
+export function replaceToProfileSetting(props) {
+  Actions.replace(routerKey.ProfileSettingPage, {...props});
+}
+
 export function navToSetting(props) {
   Actions.push(routerKey.SettingPage, {...props});
 }
@@ -48,6 +52,10 @@ export function navToFanFollow(props) {
 
 export function navToHomePage(props) {
   Actions.push(routerKey.HomePage, {...props});
+}
+
+export function raplaceToHomePage(props) {
+  Actions.repalce(routerKey.HomePage, {...props});
 }
 
 export function navToRegisterPage(props) {
