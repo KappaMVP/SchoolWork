@@ -54,10 +54,6 @@ function MainRouter() {
           <Scene key={routerKey.SearchPage} component={SearchPage} hideNavBar />
           <Scene key={routerKey.ChatPage} component={ChatPage} />
           {ProfileSceneBundle}
-          <Scene
-            key={routerKey.ProfileSettingPage}
-            component={ProfileSettingPage}
-          />
         </Stack>
         {/*ActivityPage*/}
         <Scene

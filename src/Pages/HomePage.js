@@ -6,26 +6,14 @@ import PostCard from '../Views/PostCard';
 import Carousel from 'react-native-snap-carousel';
 import Styles from '../Styles/HomePage.style';
 import HeaderBtn from '../Views/HeaderBtn';
-import {
-  navToProfile,
-  navToSearch,
-  navToChat,
-  replaceToProfileSetting,
-} from '../helper/routerAction';
-import {checkExist} from '../helper/firebaseActions';
+import {navToProfile, navToSearch, navToChat} from '../helper/routerAction';
 
 class HomePage extends React.Component {
   constructor() {
     super();
   }
 
-  async componentDidMount() {
-    // 確認用戶資料存在
-    const isExists = await checkExist();
-    // if (!isExists) {
-    //   replaceToProfileSetting({isNew: true});
-    // }
-
+  componentDidMount() {
     const data = [
       {
         btn: iconData.search,
@@ -41,8 +29,6 @@ class HomePage extends React.Component {
       right: () => <HeaderBtn data={data} />,
     });
   }
-
-  getData = async () => {};
 
   render() {
     const fakedata = [
