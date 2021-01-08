@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {profileSettingPageData as pageData} from '../data.source';
-import TestImage from './test.jpg';
+import TestImage from '../assets/test.jpg';
 import PageStyles from '../Styles/Page.style';
 
 class ProfileSettingPage extends React.Component {

@@ -19,7 +19,8 @@ function LoginRouter() {
           key="root"
           renderBackButton={() => (
             <HeaderBtn data={[{btn: iconData.back, onPress: () => navPop()}]} />
-          )}>
+          )}
+          headerLayoutPreset={'center'}>
           <Scene key="LoginPage" component={LoginPage} hideNavBar />
           <Scene key="RegisterPage" component={RegisterPage} />
         </Stack>
