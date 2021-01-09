@@ -36,7 +36,7 @@ export async function registerFirebase(email, password) {
 export async function createDocuments(data) {
   const {custId, name, profile, avatar, identity, priority} = data;
   //identity = {normal: true, model: false, photog: false}
-  //priority = {likes: true,  tags: false,posts: false}
+  //priority = {likes: true,  tags: false, posts: false}
   const uid = getUid();
   const result = [
     await users

@@ -40,7 +40,7 @@ class SettingPage extends React.Component {
     // ];
     // const data = pageData.option.map((data, index) => {
     //   return {data, onPress: funcData[index]};
-    // });
+    // })
     return (
       <View style={{height: '100%'}}>
         {pageData.options.map((data) => (
