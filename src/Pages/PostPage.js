@@ -14,7 +14,7 @@ import {
 import {postPageData as pageData} from '../data.source';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {Actions} from 'react-native-router-flux';
-import SearchableDropdown from './PostPageSU';
+import SearchableDropdown from '../helper/SearchableDropDown';
 
 var persondata = [
   {id: 1, name: '鄭裕翰'},
