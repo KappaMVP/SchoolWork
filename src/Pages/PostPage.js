@@ -14,41 +14,79 @@ import {
 import {postPageData as pageData} from '../data.source';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {Actions} from 'react-native-router-flux';
+import SearchableDropdown from './PostPageSU';
+
+var persondata = [
+  {id: 1, name: '鄭裕翰'},
+  {id: 2, name: '蘇靖雅'},
+  {id: 3, name: '劉聖龍'},
+  {id: 4, name: '張耘翰'},
+  {id: 5, name: '梅亞'},
+  {id: 6, name: '河童'},
+  {id: 7, name: '神諸葛'},
+];
+
+var labeldata = [
+  {id: 1, name: '美食'},
+  {id: 2, name: '景點'},
+  {id: 3, name: '穿搭'},
+  {id: 4, name: '日常'},
+  {id: 5, name: '遊戲'},
+];
+
+var localdata = [
+  {id: 1, name: '高雄科技大學'},
+  {id: 2, name: '期末地獄'},
+  {id: 3, name: '410'},
+  {id: 4, name: 'All Pass宿舍'},
+  {id: 5, name: '神魔三國誌'},
+];
 
 class PostPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      // 初始餐點名稱
-      content: null,
-      // 初始餐點金額
-      label: null,
-      // 初始餐點說明
-      local: null,
-      // 初始餐點圖片路徑
       url: null,
-      //初始
-      lists: [],
+      content: null,
+      person: [],
+      label: [],
+      local: [],
     };
   }
 
-  fackdata = [1, 2, 3, 345];
-
+  //導航列
   componentDidMount() {
     this.props.navigation.setParams({
       title: pageData.title,
       rightTitle: '發佈',
       onRight: () => {
-        Actions.HomePage();
+        this.try();
       },
     });
   }
 
+  try = () => {
+    if (this.state.url !== null && this.state.content !== null) {
+      Actions.HomePage();
+      this.setState({
+        url: null,
+        content: null,
+        person: [],
+        label: [],
+        local: [],
+      });
+    } else if (this.state.url === null || this.state.content === null) {
+      console('123');
+    }
+  };
+
+  //相簿
   handleOpenImageLibrary = () => {
     launchImageLibrary({}, this.handleSelectImage);
   };
 
+  //相簿
   handleSelectImage = (result) => {
     if (!result.didCancel) {
       this.setState({url: result.uri});
@@ -62,52 +100,56 @@ class PostPage extends React.Component {
     });
   };
 
+  // 變更人物
+  PersonOnItemSelect = (person) => {
+    const persondata = this.state.person;
+    persondata.push(person);
+    this.setState({person: persondata});
+  };
+
+  // 變更人物
+  PersonOnRemoveItem = (person, index) => {
+    const persondata = this.state.person.filter(
+      (pperson) => pperson.id !== person.id,
+    );
+    this.setState({person: persondata});
+  };
+
   // 變更標籤
-  handleLabel = (text) => {
-    const {lists} = this.state;
-    let newlists = lists;
-    newlists.push(text);
-    this.setState({
-      label: text,
-      lists: newlists,
-    });
+  LableOnItemSelect = (item) => {
+    const labeldata = this.state.label;
+    labeldata.push(item);
+    this.setState({label: labeldata});
+  };
+
+  // 變更標籤
+  LableOnRemoveItem = (item, index) => {
+    const labeldata = this.state.label.filter((sitem) => sitem.id !== item.id);
+    this.setState({label: labeldata});
   };
 
   // 變更地點
-  handleLocal = (text) => {
-    this.setState({
-      local: text,
-    });
+  LocalOnItemSelect = (local) => {
+    const localdata = this.state.local;
+    localdata.push(local);
+    this.setState({local: localdata});
   };
 
-  handleAdd = (list) => {
-    this.setState({
-      lists: [
-        ...this.state.lists,
-        {
-          ...list,
-        },
-      ],
-    });
+  // 變更地點
+  LocalOnRemoveItem = (local, index) => {
+    const localdata = this.state.local.filter(
+      (slocal) => slocal.id !== local.id,
+    );
+    this.setState({local: localdata});
   };
 
   render() {
-    const {content, label, local, url} = this.state;
-    const LabelButtom = (props) => {
-      const {list} = props;
-      return (
-        <TouchableOpacity>
-          <View>
-            <View>
-              <Text>{list.lists}</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-      );
-    };
+    const {content, url} = this.state;
+
     return (
       <View>
-        <View style={styles.top}>
+        {/* 照片、內文 */}
+        <View style={styles.topview}>
           <TouchableOpacity onPress={this.handleOpenImageLibrary}>
             <View>
               <Image
@@ -121,7 +163,6 @@ class PostPage extends React.Component {
             </View>
           </TouchableOpacity>
           <View>
-            <Text></Text>
             <TextInput
               style={styles.contenttextInput}
               placeholder="加上解說..."
@@ -131,28 +172,96 @@ class PostPage extends React.Component {
             />
           </View>
         </View>
-        <View style={styles.item}>
-          <Text style={styles.title}>人物：</Text>
+
+        {/* 人物 */}
+        <View>
+          <SearchableDropdown
+            multi={true}
+            selectedItems={this.state.person}
+            onItemSelect={this.PersonOnItemSelect}
+            containerStyle={{padding: 8}}
+            onRemoveItem={this.PersonOnRemoveItem}
+            // 下拉式選單的選項
+            itemStyle={styles.itemStyle}
+            itemTextStyle={{color: 'black'}}
+            //下拉式選單的高度
+            itemsContainerStyle={{maxHeight: 88}}
+            items={persondata}
+            chip={true}
+            resetValue={false}
+            textInputProps={{
+              placeholder: '新增人物',
+              underlineColorAndroid: 'transparent',
+              //輸入框
+              style: {
+                padding: 12,
+              },
+            }}
+            listProps={{
+              nestedScrollEnabled: true,
+            }}
+          />
         </View>
 
-        <ScrollView style={styles.label} horizontal={true}>
-          <Text style={styles.title}>標籤：</Text>
-          <View>
-            {/* <TextInput value={label} onChangeText={this.handleLabel} /> */}
-            <TextInput
-              value={label}
-              onChangeText={this.handleLabel}
-              onSubmitEditing={this.handleAdd}
-            />
-            {this.state.lists.map((list, index) => {
-              return <LabelButtom key={index} list={list} />;
-            })}
-          </View>
-        </ScrollView>
+        {/* 標籤 */}
+        <View>
+          <SearchableDropdown
+            multi={true}
+            selectedItems={this.state.label}
+            onItemSelect={this.LableOnItemSelect}
+            containerStyle={{padding: 8}}
+            onRemoveItem={this.LableOnRemoveItem}
+            // 下拉式選單的選項
+            itemStyle={styles.itemStyle}
+            itemTextStyle={{color: 'black'}}
+            //下拉式選單的高度
+            itemsContainerStyle={{maxHeight: 88}}
+            items={labeldata}
+            chip={true}
+            resetValue={false}
+            textInputProps={{
+              placeholder: '新增標籤',
+              underlineColorAndroid: 'transparent',
+              //輸入框
+              style: {
+                padding: 12,
+              },
+            }}
+            listProps={{
+              nestedScrollEnabled: true,
+            }}
+          />
+        </View>
 
-        <View style={styles.item}>
-          <Text style={styles.title}>地點：</Text>
-          <TextInput value={local} onChangeText={this.handleLocal} />
+        {/* 地點 */}
+        <View>
+          <SearchableDropdown
+            multi={false}
+            selectedItems={this.state.local}
+            onItemSelect={this.LocalOnItemSelect}
+            containerStyle={{padding: 8}}
+            onRemoveItem={this.LocalOnRemoveItem}
+            // 下拉式選單的選項
+            itemStyle={styles.itemStyle}
+            itemTextStyle={{color: 'black'}}
+            //下拉式選單的高度
+            itemsContainerStyle={{maxHeight: 88}}
+            items={localdata}
+            defaultIndex={2}
+            chip={true}
+            resetValue={false}
+            textInputProps={{
+              placeholder: '新增地點',
+              underlineColorAndroid: 'transparent',
+              //輸入框
+              style: {
+                padding: 12,
+              },
+            }}
+            listProps={{
+              nestedScrollEnabled: true,
+            }}
+          />
         </View>
       </View>
     );
@@ -160,7 +269,7 @@ class PostPage extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  top: {
+  topview: {
     flexDirection: 'row',
     borderBottomColor: '#DDD',
     borderBottomWidth: 1,
@@ -169,41 +278,20 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
   },
-  label: {
-    height: 40,
-    marginVertical: 5,
-    paddingHorizontal: 10,
-    borderBottomColor: '#DDD',
-    borderBottomWidth: 1,
-  },
-  item: {
-    height: 40,
-    flexDirection: 'row',
-    marginVertical: 5,
-    paddingHorizontal: 10,
-    borderBottomColor: '#DDD',
-    borderBottomWidth: 1,
-  },
-  title: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
   contenttextInput: {
-    height: 130,
+    height: 170,
     width: 250,
     color: '#000',
     paddingHorizontal: 15,
   },
-  // labeltextInput: {
-  //   height: 130,
-  //   width: 250,
-  //   color: '#000',
-  //   paddingHorizontal: 15,
-  // },
-  downtextInput: {
-    height: 130,
-    width: 250,
+  //下拉式選單的選項
+  itemStyle: {
+    padding: 3,
+    marginTop: 2,
+    backgroundColor: '#ddd',
+    borderColor: '#bbb',
+    borderWidth: 1,
+    borderRadius: 5,
   },
 });
 
