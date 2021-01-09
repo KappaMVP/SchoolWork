@@ -58,6 +58,10 @@ export const notifyPageData = {
   title: '通知',
 };
 
+export const contentPageData = {
+  title: '貼文',
+};
+
 export const activityPageData = {
   title: '活動',
 };
@@ -87,6 +91,21 @@ export const profilePageData = {
 
 export const profileSettingPageData = {
   title: '編輯個人資料',
+  changeAvatarText: '更換大頭貼照',
+  inputText: {
+    custId: {
+      text: 'ID',
+      default: '自定義ID',
+    },
+    name: {
+      text: '名稱',
+      default: '請輸入名稱',
+    },
+    introduction: {
+      text: '簡介',
+      default: '介紹你自己～',
+    },
+  },
 };
 
 export const settingPageData = {
