@@ -13,7 +13,7 @@ class SwitchIdentityPage extends React.Component {
       photog: true,
       model: false,
       normal: false,
-      post: false,
+      post: true,
       tags: false,
       keep: false,
     };
@@ -41,17 +41,16 @@ class SwitchIdentityPage extends React.Component {
     this.setState(step1);
   }
   handleChangeToggle(thing) {
-    switch (thing) {
-      case 'post':
-        this.setState({post: !this.state.post});
-        break;
-      case 'tags':
-        this.setState({tags: !this.state.tags});
-        break;
-      case 'keep':
-        this.setState({keep: !this.state.keep});
-        break;
-    }
+    let step1 = {
+      photog: this.state.photog,
+      model: this.state.model,
+      normal: this.state.normal,
+      post: false,
+      tags: false,
+      keep: false,
+    };
+    step1[thing] = true;
+    this.setState(step1);
   }
 
   render() {
