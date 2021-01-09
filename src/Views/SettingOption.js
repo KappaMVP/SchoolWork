@@ -2,22 +2,17 @@
 import React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import Icon from '../Views/Elements/Icon';
+import Styles from '../Styles/SettingOption.style';
 
 export default function SettingOption(props) {
   const {id, icon, name, onPress} = props;
-  const test = {...icon};
-  console.log(icon);
-
-  console.log({...icon});
-  console.log('------');
-
   return (
-    <View>
-      <TouchableOpacity
-        style={{flexDirection: 'row'}}
-        onPress={() => onPress(id)}>
-        <Icon {...icon} size={40} />
-        <Text style={{fontSize: 20}}>{name}</Text>
+    <View style={Styles.View}>
+      <TouchableOpacity style={Styles.item} onPress={() => onPress(id)}>
+        <View style={Styles.iconView}>
+          <Icon {...icon} size={40} />
+        </View>
+        <Text style={Styles.lable}>{name}</Text>
       </TouchableOpacity>
     </View>
   );
