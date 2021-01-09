@@ -70,7 +70,7 @@ class ProfileSettingPage extends React.Component {
         <View style={styles.introductionItem}>
           <Text style={styles.label}>個人簡介</Text>
           <TextInput
-            // placeholder="請輸入個人簡介"
+            placeholder="請輸入個人簡介"
             onValueChange={this.handleChangeIntroduction()}
             style={styles.introduction}
             multiline
