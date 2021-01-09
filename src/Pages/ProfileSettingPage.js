@@ -7,6 +7,8 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  ScrollView,
+  Dimensions,
 } from 'react-native';
 import {profileSettingPageData as pageData} from '../data.source';
 import TestImage from '../assets/test.jpg';
@@ -17,7 +19,6 @@ class ProfileSettingPage extends React.Component {
     super(props);
     this.props = props;
   }
-
   componentDidMount() {
     const {isNew} = this.props;
     const registerFirst = isNew
@@ -42,10 +43,10 @@ class ProfileSettingPage extends React.Component {
 
   render() {
     return (
-      <View style={PageStyles.page}>
+      <ScrollView style={PageStyles.page}>
         <View style={styles.imageView}>
           <Image source={TestImage} style={styles.PhotoStiker} />
-          <TouchableOpacity onPress={() => this.HandleChangePhotoStiker}>
+          <TouchableOpacity onPress={() => this.HandleChangePhotoStiker()}>
             <Text style={styles.ChangePhotoStiker}>更換大頭貼照</Text>
           </TouchableOpacity>
         </View>
@@ -53,7 +54,7 @@ class ProfileSettingPage extends React.Component {
           <View style={styles.item}>
             <Text style={styles.label}>姓名</Text>
             <TextInput
-              value=""
+              // value=""
               onValueChange={this.handleChangeUserName()}
               style={styles.textInput}
             />
@@ -61,21 +62,24 @@ class ProfileSettingPage extends React.Component {
           <View style={styles.item}>
             <Text style={styles.label}>用戶名稱</Text>
             <TextInput
-              value=""
+              // value=""
               onValueChange={this.handleChangeUserID()}
               style={styles.textInput}
             />
           </View>
-          <View style={styles.item}>
-            <Text style={styles.label}>個人簡介</Text>
-            <TextInput
-              value=""
-              onValueChange={this.handleChangeIntroduction()}
-              style={styles.textInput}
-            />
-          </View>
         </View>
-      </View>
+        <Text style={styles.label}>個人簡介</Text>
+        <View style={styles.IntroductionItem}>
+          <TextInput
+            // value=""
+            onValueChange={this.handleChangeIntroduction()}
+            style={styles.Introduction}
+            multiline
+            numberOfLines={10}
+            underlineColorAndroid={true}
+          />
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -110,6 +114,19 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: 'bold',
+  },
+  //個人簡介得style
+  IntroductionItem: {
+    flexDirection: 'row',
+    align: 'top',
+    marginVertical: 5,
+    paddingHorizontal: 10,
+  },
+  Introduction: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#C0C0C0',
+    marginLeft: 15,
   },
 });
 export default ProfileSettingPage;
