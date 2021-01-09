@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {profilePageData as pageData} from '../data.source';
+import {profilePageData as pageData, iconData} from '../data.source';
 import styles from '../Styles/ProfilePage.style';
-import ScrollableTabView, {
-  DefaultTabBar,
-} from 'react-native-scrollable-tab-view';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import PostWall from '../Views/PostWall';
+import HeaderBtn from '../Views/HeaderBtn';
+import {navToSetting} from '../helper/routerAction';
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -117,6 +117,11 @@ class ProfilePage extends React.Component {
   componentDidMount() {
     this.props.navigation.setParams({
       title: pageData.title,
+      right: () => (
+        <HeaderBtn
+          data={[{btn: iconData.seetingIcon, onPress: () => navToSetting()}]}
+        />
+      ),
     });
   }
 

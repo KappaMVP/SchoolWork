@@ -19,13 +19,6 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
   },
-  image1: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'row',
-    width: 150,
-    height: 150,
-  },
   content: {
     flex: 1,
     width: '100%',
@@ -33,9 +26,17 @@ export default StyleSheet.create({
     flexWrap: 'wrap',
     alignContent: 'flex-start',
   },
+  image1: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    width: 150,
+    height: 150,
+    borderRadius: 100,
+  },
   content2: {
     flex: 0.6,
     alignItems: 'center',
+    marginTop: 20,
   },
   content3: {
     flex: 0.3,

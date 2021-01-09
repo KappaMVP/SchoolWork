@@ -5,7 +5,7 @@ import IconBtn from './Elements/IconBtn';
 import Styles from '../Styles/HeaderBtn.style';
 import {iconData} from '../data.source';
 
-function Header(props) {
+function HeaderBtn(props) {
   return (
     <View style={Styles.container}>
       {props.data.map((element, index) => (
@@ -21,4 +21,4 @@ function Header(props) {
   );
 }
 
-export default Header;
+export default HeaderBtn;

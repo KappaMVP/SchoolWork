@@ -247,6 +247,7 @@ export const iconData = {
   emailIcon: iconFormat('Ionicons', 'mail'),
   passwordIcon: iconFormat('Ionicons', 'lock-closed'),
   ckeckPasswordIcon: iconFormat('MaterialCommunityIcons', 'lock-check'),
+  seetingIcon: iconFormat('Octicons', 'settings'),
 };
 
 //utils
