@@ -3,12 +3,10 @@ import React from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   Image,
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Dimensions,
 } from 'react-native';
 import {profileSettingPageData as pageData} from '../data.source';
 import TestImage from '../assets/test.jpg';
