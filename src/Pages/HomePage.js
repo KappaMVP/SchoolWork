@@ -34,7 +34,8 @@ class HomePage extends React.Component {
     const fakedata = [
       {
         postername: 'mei.qq',
-        content: '55688',
+        content:
+          '我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！',
         photo:
           'https://www.pandasecurity.com/en/mediacenter/src/uploads/2013/11/pandasecurity-facebook-photo-privacy.jpg',
         time: '2020-12-12 12:12',
@@ -45,7 +46,8 @@ class HomePage extends React.Component {
       {
         postername: 'post2',
         content: '55688',
-        photo: '',
+        photo:
+          'https://www.pandasecurity.com/en/mediacenter/src/uploads/2013/11/pandasecurity-facebook-photo-privacy.jpg',
         time: '2020-12-12 12:12',
         label: ['label1', 'label2'],
         model: ['model1', 'model2'],
@@ -54,7 +56,8 @@ class HomePage extends React.Component {
       {
         postername: 'post2',
         content: '55688',
-        photo: '',
+        photo:
+          'https://www.pandasecurity.com/en/mediacenter/src/uploads/2013/11/pandasecurity-facebook-photo-privacy.jpg',
         time: '2020-12-12 12:12',
         label: ['label1', 'label2'],
         model: ['model1', 'model2'],
