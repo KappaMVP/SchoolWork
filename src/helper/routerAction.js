@@ -62,6 +62,14 @@ export function navToRegisterPage(props) {
   Actions.push(routerKey.RegisterPage, {...props});
 }
 
+export function navToMyActivityPage(props) {
+  Actions.push(routerKey.MyActivityPage, {...props});
+}
+
+export function navToActivityDetailPage(props) {
+  Actions.push(routerKey.ActivityDetailPage, {...props});
+}
+
 export function navPop() {
   Actions.pop();
 }

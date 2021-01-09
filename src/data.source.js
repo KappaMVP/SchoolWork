@@ -1,10 +1,12 @@
 export const routerKey = {
+  ActivityDetailPage: 'ActivityDetailPage',
   ActivityPage: 'ActivityPage',
   ChatPage: 'ChatPage',
   ContentPage: 'ContentPage',
   FanFollowPage: 'FanFollowPage',
   HomePage: 'HomePage',
   LoginPage: 'LoginPage',
+  MyActivityPage: 'MyActivityPage',
   NotifyPage: 'NotifyPage',
   PostPage: 'PostPage',
   ProfilePage: 'ProfilePage',
@@ -57,6 +59,14 @@ export const notifyPageData = {
 };
 
 export const activityPageData = {
+  title: '活動',
+};
+
+export const myActivityPage = {
+  title: '我的活動',
+};
+
+export const activityDetailPageData = {
   title: '活動',
 };
 

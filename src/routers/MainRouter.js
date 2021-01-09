@@ -17,8 +17,10 @@ import ContentPage from '../Pages/ContentPage';
 import ProfilePage from '../Pages/ProfilePage';
 import ActivityPage from '../Pages/ActivityPage';
 import FanFollowPage from '../Pages/FanFollowPage';
+import MyActivityPage from '../Pages/MyActivityPage';
 import ProfileSettingPage from '../Pages/ProfileSettingPage';
 import SwitchIdentityPage from '../Pages/SwitchIdentityPage';
+import ActivityDetailPage from '../Pages/ActivityDetailPage';
 
 function MainRouter() {
   const {
@@ -34,6 +36,7 @@ function MainRouter() {
     <Scene key={routerKey.FanFollowPage} component={FanFollowPage} />,
     <Scene key={routerKey.ContentPage} component={ContentPage} />,
   ];
+
   return (
     <Router>
       <Tabs
@@ -56,13 +59,18 @@ function MainRouter() {
           {ProfileSceneBundle}
         </Stack>
         {/*ActivityPage*/}
-        <Scene
+        <Stack
           key={routerKey.ActivityPage}
-          component={ActivityPage}
           icon={(e) => (
             <TabViewIcon source={ActivityPageIcon} focused={e.focused} />
-          )}
-        />
+          )}>
+          <Scene key={routerKey.ActivityPage} component={ActivityPage} />
+          <Scene
+            key={routerKey.ActivityDetailPage}
+            component={ActivityDetailPage}
+          />
+          <Scene key={routerKey.MyActivityPage} component={MyActivityPage} />
+        </Stack>
         {/*PostPage*/}
         <Scene
           key={routerKey.PostPage}
