@@ -5,9 +5,9 @@ import {mainRouter} from '../data.source';
 
 function TabViewIcon(props) {
   const {normal, seleted} = props.source;
-  const {iconSize} = mainRouter.tabIcons;
+  const {imgStyle} = mainRouter.tabIcons;
   const mode = props.focused ? seleted : normal;
-  return <Icon lib={mode.lib} name={mode.name} size={iconSize} />;
+  return <Icon lib={mode.lib} source={mode.source} imgStyle={imgStyle} />;
 }
 
 export default TabViewIcon;

@@ -20,26 +20,31 @@ export const routerKey = {
 export const mainRouter = {
   tabIcons: {
     HomePageIcon: {
-      normal: iconFormat('Ionicons', 'home-outline'),
-      seleted: iconFormat('Ionicons', 'home-sharp'),
+      normal: imgFormat(require('./assets/tabs/home-normal.png')),
+      seleted: imgFormat(require('./assets/tabs/home-seleted.png')),
     },
     ProfilePageIcon: {
-      normal: iconFormat('Ionicons', 'person-outline'),
-      seleted: iconFormat('Ionicons', 'person'),
+      normal: imgFormat(require('./assets/tabs/profile-normal.png')),
+      seleted: imgFormat(require('./assets/tabs/profile-seleted.png')),
     },
     ActivityPageIcon: {
-      normal: iconFormat('FontAwesome', 'calendar-o'),
-      seleted: iconFormat('FontAwesome', 'calendar-plus-o'),
+      normal: imgFormat(require('./assets/tabs/activity-normal.png')),
+      seleted: imgFormat(require('./assets/tabs/activity-seleted.png')),
     },
     NotifyPageIcon: {
-      normal: iconFormat('Fontisto', 'bell'),
-      seleted: iconFormat('Fontisto', 'bell-alt'),
+      normal: imgFormat(require('./assets/tabs/notifiy-normal.png')),
+      seleted: imgFormat(require('./assets/tabs/notifiy-seleted.png')),
     },
     PostPageIcon: {
-      normal: iconFormat('SimpleLineIcons', 'camera'),
-      seleted: iconFormat('SimpleLineIcons', 'camera'),
+      normal: imgFormat(require('./assets/tabs/post-normal.png')),
+      seleted: imgFormat(require('./assets/tabs/post-seleted.png')),
     },
-    iconSize: 30,
+    imgStyle: {
+      margin: 20,
+      height: '65%',
+      width: '65%',
+      resizeMode: 'contain',
+    },
   },
   tabConfig: {
     key: 'tabBar',
@@ -253,4 +258,8 @@ export const iconData = {
 //utils
 function iconFormat(lib, name) {
   return {lib: lib, name: name};
+}
+
+function imgFormat(source) {
+  return {lib: 'assets', source: source};
 }
