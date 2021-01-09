@@ -1,10 +1,10 @@
 //設定
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import {settingPageData as pageData} from '../data.source';
-import Icon from '../Views/Elements/Icon';
 import {navToProfileSetting, navToSwitchIdentity} from '../helper/routerAction';
 import {logOut} from '../helper/firebaseActions';
+import SettingOption from '../Views/SettingOption';
 
 class SettingPage extends React.Component {
   constructor() {
@@ -16,6 +16,7 @@ class SettingPage extends React.Component {
       title: pageData.title,
     });
   }
+
   onPress(id) {
     if (id === 1) {
     } else if (id === 2) {
@@ -29,29 +30,15 @@ class SettingPage extends React.Component {
   }
 
   render() {
-    // const funcData = [
-    //   '',
-    //   ,
-    //   '',
-    //   navToProfileSetting(),
-    //   navToSwitchIdentity(),
-    //   '',
-    //   logOut(),
-    // ];
-    // const data = pageData.option.map((data, index) => {
-    //   return {data, onPress: funcData[index]};
-    // })
     return (
       <View style={{height: '100%'}}>
         {pageData.options.map((data) => (
-          <View>
-            <TouchableOpacity
-              style={{flexDirection: 'row'}}
-              onPress={() => this.onPress(data.id)}>
-              <Icon {...data.icon} size={40} />
-              <Text style={{fontSize: 20}}>{data.name}</Text>
-            </TouchableOpacity>
-          </View>
+          <SettingOption
+            id={data.id}
+            icon={data.icon}
+            name={data.name}
+            onPress={this.onPress}
+          />
         ))}
       </View>
     );
