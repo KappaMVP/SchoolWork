@@ -1,8 +1,9 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
 
-const user = 'users';
-const post = 'posts';
+const users = firestore().collection('users');
+const posts = firestore().collection('posts');
 
 //LogIn
 export async function logInByEmail(email, password) {
@@ -32,11 +33,13 @@ export async function registerFirebase(email, password) {
 }
 
 //Create documents for current user
-export async function createDocuments(custId, name, profile, avatar) {
+export async function createDocuments(data) {
+  const {custId, name, profile, avatar, identity, priority} = data;
+  //identity = {normal: true, model: false, photog: false}
+  //priority = {likes: true, posts: false, tags: false}
   const uid = getUid();
   const result = [
-    await firestore()
-      .collection(user)
+    await users
       .doc(uid)
       .set({
         custId: custId, //自定義id
@@ -46,13 +49,12 @@ export async function createDocuments(custId, name, profile, avatar) {
         notify: [],
         following: [],
         follower: [],
-        identity: {model: false, normal: true, photog: false},
-        priority: {likes: true, posts: false, tags: false},
+        identity: identity,
+        priority: priority,
       })
       .then(() => 'ok')
       .catch((e) => e),
-    await firestore()
-      .collection(post)
+    await posts
       .doc(uid)
       .then(() => 'ok')
       .catch((e) => e),
@@ -62,11 +64,21 @@ export async function createDocuments(custId, name, profile, avatar) {
 
 //Get follower
 export async function getFllower() {
-  const result = await firestore()
-    .collection(user)
+  const result = await users
     .doc(getUid())
     .get()
-    .then((data) => data.data.follower)
+    .then((doc) => doc.data.follower)
+    .catch((e) => e);
+
+  return result;
+}
+
+//Get following
+export async function getFollowing() {
+  const result = await users
+    .doc(getUid())
+    .get()
+    .then((doc) => doc.data.following)
     .catch((e) => e);
 
   return result;
@@ -74,14 +86,37 @@ export async function getFllower() {
 
 //Check documant exist
 export async function checkExist() {
-  const result = await firestore()
-    .collection(user)
+  const result = await users
     .doc(getUid())
     .get()
-    .then((data) => data.exists)
+    .then((doc) => doc.exists)
     .catch((e) => e);
 
   return result;
+}
+
+//Get Other Name
+//uidList is uid that wanna get name
+//Note: 之後用where in優化，一次搜尋十個增加效率
+//      但要算出演算法可以先把uidList每十個切成一個List
+//      且結果必須按照uidList的uid排序 by LuLuSaBee
+export async function getUserName(uidList) {
+  const result = Promise.all(
+    uidList.map(
+      async (uid) =>
+        await users
+          .doc(uid)
+          .get()
+          .then((doc) => doc._data.name)
+          .catch((e) => e),
+    ),
+  );
+
+  return result;
+}
+
+export async function upLoadImage(path) {
+  return;
 }
 
 //Get current UID
