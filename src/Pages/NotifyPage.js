@@ -1,6 +1,6 @@
 //通知頁
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View} from 'react-native';
 import NotifyView from '../Views/NotifyView';
 import NPStyles from '../Styles/NotifyPage.style';
 import {notifyPageData as pageData} from '../data.source';
@@ -69,6 +69,8 @@ class NotifyPage extends React.Component {
     };
   }
 
+  countTime = () => {};
+
   componentDidMount() {
     this.props.navigation.setParams({
       title: pageData.title,
@@ -80,37 +82,10 @@ class NotifyPage extends React.Component {
   selectPost = () => {};
 
   render() {
+    const fakes = this.state;
     return (
-      <View style={NPStyles.container}>
-        <ScrollView style={NPStyles.items}>
-          <Text style={NPStyles.title}>本週</Text>
-          {this.state.fakes.map((fake) => (
-            <NotifyView
-              key={fake.id}
-              fake={fake}
-              selectAvatar={this.selectAvatar()}
-              selectPost={this.selectPost()}
-            />
-          ))}
-          <Text style={NPStyles.title}>本月</Text>
-          {this.state.fakes.map((fake) => (
-            <NotifyView
-              key={fake.id}
-              fake={fake}
-              selectAvatar={this.selectAvatar()}
-              selectPost={this.selectPost()}
-            />
-          ))}
-          <Text style={NPStyles.title}>更早之前</Text>
-          {this.state.fakes.map((fake) => (
-            <NotifyView
-              key={fake.id}
-              fake={fake}
-              selectAvatar={this.selectAvatar()}
-              selectPost={this.selectPost()}
-            />
-          ))}
-        </ScrollView>
+      <View>
+        <NotifyView />
       </View>
     );
   }
