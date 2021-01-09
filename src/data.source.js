@@ -1,10 +1,12 @@
 export const routerKey = {
+  ActivityDetailPage: 'ActivityDetailPage',
   ActivityPage: 'ActivityPage',
   ChatPage: 'ChatPage',
   ContentPage: 'ContentPage',
   FanFollowPage: 'FanFollowPage',
   HomePage: 'HomePage',
   LoginPage: 'LoginPage',
+  MyActivityPage: 'MyActivityPage',
   NotifyPage: 'NotifyPage',
   PostPage: 'PostPage',
   ProfilePage: 'ProfilePage',
@@ -57,6 +59,14 @@ export const notifyPageData = {
 };
 
 export const activityPageData = {
+  title: '活動',
+};
+
+export const myActivityPage = {
+  title: '我的活動',
+};
+
+export const activityDetailPageData = {
   title: '活動',
 };
 
@@ -133,17 +143,40 @@ const emailText = '電子郵件地址';
 const passwordText = '密碼';
 
 export const registerPageData = {
-  title: '成為 Photogram 的一份子',
+  title: '加入Photogram',
+  iconSize: 30,
   emailText: emailText,
   passwordText: passwordText,
   checkPasswordText: '再次輸入' + passwordText,
+  checkBoxColor: {
+    true: '#006284',
+    false: '#888888',
+  },
+  policyText: {
+    agree: '同意',
+    privacy: '隱私政策',
+    and: '與',
+    service: '服務條款',
+  },
+  policylink:
+    'https://www.privacypolicies.com/live/1a0fbc77-84c1-4e3f-aaf5-6b4c9ce01386',
+  registerBtn: {
+    able: '#006284',
+    disable: '#dddddd',
+  },
+  registerAction: {
+    error: {
+      'auth/email-already-in-use': '該電子郵件已註冊',
+      'auth/invalid-email': '電子郵件無效',
+      'auth/operation-not-allowed': '操作無效',
+      'auth/weak-password': '密碼強度不足',
+    },
+  },
 };
 
 export const loginPageData = {
   title: '登入',
   iconSize: 30,
-  emailIcon: iconFormat('Ionicons', 'mail'),
-  passwordIcon: iconFormat('Ionicons', 'lock-closed'),
   emailText: emailText,
   passwordText: passwordText,
   loginBtn: {
@@ -192,6 +225,9 @@ export const iconData = {
   search: iconFormat('Feather', 'search'),
   chat: iconFormat('Feather', 'mail'),
   back: iconFormat('FontAwesome5', 'chevron-left'),
+  emailIcon: iconFormat('Ionicons', 'mail'),
+  passwordIcon: iconFormat('Ionicons', 'lock-closed'),
+  ckeckPasswordIcon: iconFormat('MaterialCommunityIcons', 'lock-check'),
 };
 
 //utils

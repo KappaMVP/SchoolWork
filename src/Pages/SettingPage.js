@@ -1,6 +1,6 @@
 //設定
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {settingPageData as pageData} from '../data.source';
 import Icon from '../Views/Elements/Icon';
 import {navToProfileSetting, navToSwitchIdentity} from '../helper/routerAction';
@@ -29,6 +29,18 @@ class SettingPage extends React.Component {
   }
 
   render() {
+    // const funcData = [
+    //   '',
+    //   ,
+    //   '',
+    //   navToProfileSetting(),
+    //   navToSwitchIdentity(),
+    //   '',
+    //   logOut(),
+    // ];
+    // const data = pageData.option.map((data, index) => {
+    //   return {data, onPress: funcData[index]};
+    // })
     return (
       <View style={{height: '100%'}}>
         {pageData.options.map((data) => (

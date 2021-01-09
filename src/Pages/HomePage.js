@@ -6,7 +6,7 @@ import PostCard from '../Views/PostCard';
 import Carousel from 'react-native-snap-carousel';
 import Styles from '../Styles/HomePage.style';
 import HeaderBtn from '../Views/HeaderBtn';
-import {navToProfile, navToSearch, navToChat} from '../helper/routerAction';
+import {navToSearch, navToChat} from '../helper/routerAction';
 
 class HomePage extends React.Component {
   constructor() {
@@ -33,32 +33,29 @@ class HomePage extends React.Component {
   render() {
     const fakedata = [
       {
-        name: 'mei.qq',
+        postername: 'mei.qq',
         content: '55688',
         photo:
           'https://www.pandasecurity.com/en/mediacenter/src/uploads/2013/11/pandasecurity-facebook-photo-privacy.jpg',
         time: '2020-12-12 12:12',
-        who_like: ['kappa_map', 'lulusabee'],
         label: ['Canon2D', '18-55mmf2'],
         model: ['kappa_map'],
         location: ['高雄'],
       },
       {
-        name: 'post2',
+        postername: 'post2',
         content: '55688',
         photo: '',
         time: '2020-12-12 12:12',
-        who_like: ['liker1', 'liker2'],
         label: ['label1', 'label2'],
         model: ['model1', 'model2'],
         location: ['高雄'],
       },
       {
-        name: 'post2',
+        postername: 'post2',
         content: '55688',
         photo: '',
         time: '2020-12-12 12:12',
-        who_like: ['liker1', 'liker2'],
         label: ['label1', 'label2'],
         model: ['model1', 'model2'],
         location: ['高雄'],

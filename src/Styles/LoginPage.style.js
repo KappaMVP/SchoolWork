@@ -67,6 +67,7 @@ export default StyleSheet.create({
     flex: 1,
     width: isAndroid ? '55%' : '60%',
     maxHeight: 48,
+    minHeight: 48,
     flexDirection: 'row',
     marginBottom: 10,
     borderRadius: 50,

@@ -2,7 +2,7 @@
 import React from 'react';
 import {View, Text, Alert} from 'react-native';
 import Styles from '../Styles/LoginPage.style';
-import {loginPageData as pageData} from '../data.source';
+import {loginPageData as pageData, iconData} from '../data.source';
 import Iconbtn from '../Views/Elements/IconBtn';
 import IconInput from '../Views/Elements/IconInput';
 import {facebookLogin, googleLogin} from '../helper/socialAuth';
@@ -61,8 +61,6 @@ class LoginPage extends React.Component {
     const {
       title,
       iconSize,
-      emailIcon,
-      passwordIcon,
       emailText,
       passwordText,
       loginBtn,
@@ -71,37 +69,36 @@ class LoginPage extends React.Component {
       googleBtn,
       appleBtn,
     } = pageData;
+    const {emailIcon, passwordIcon} = iconData;
     return (
       <View style={Styles.page}>
         <Text style={Styles.title}>{title}</Text>
         {/* 輸入框 */}
-        <View>
-          <View style={Styles.inputContainer}>
-            <IconInput
-              containerStyle={Styles.inputView}
-              iconStyle={Styles.icon}
-              iconData={{...emailIcon, size: iconSize}}
-              inputData={{
-                style: Styles.inputBox,
-                value: email,
-                placeholder: emailText,
-                keyboardType: 'email-address',
-                onChangeText: (text) => this.onChangeEmail(text),
-              }}
-            />
-            <IconInput
-              containerStyle={Styles.inputView}
-              iconStyle={Styles.icon}
-              iconData={{...passwordIcon, size: iconSize}}
-              inputData={{
-                style: Styles.inputBox,
-                value: password,
-                placeholder: passwordText,
-                secureTextEntry: true,
-                onChangeText: (text) => this.onChangePassword(text),
-              }}
-            />
-          </View>
+        <View style={Styles.inputContainer}>
+          <IconInput
+            containerStyle={Styles.inputView}
+            iconStyle={Styles.icon}
+            iconData={{...emailIcon, size: iconSize}}
+            inputData={{
+              style: Styles.inputBox,
+              value: email,
+              placeholder: emailText,
+              keyboardType: 'email-address',
+              onChangeText: (text) => this.onChangeEmail(text),
+            }}
+          />
+          <IconInput
+            containerStyle={Styles.inputView}
+            iconStyle={Styles.icon}
+            iconData={{...passwordIcon, size: iconSize}}
+            inputData={{
+              style: Styles.inputBox,
+              value: password,
+              placeholder: passwordText,
+              secureTextEntry: true,
+              onChangeText: (text) => this.onChangePassword(text),
+            }}
+          />
         </View>
         {/* 登入．註冊 按鈕 */}
         <View style={Styles.loginContainer}>
