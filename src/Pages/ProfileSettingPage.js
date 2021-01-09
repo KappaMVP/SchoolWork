@@ -117,8 +117,9 @@ const styles = StyleSheet.create({
   },
   //個人簡介得style
   IntroductionItem: {
+    height: 40,
     flexDirection: 'row',
-    align: 'top',
+    alignItems: 'center',
     marginVertical: 5,
     paddingHorizontal: 10,
   },
