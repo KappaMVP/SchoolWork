@@ -1188,6 +1188,11 @@
   "resolved" "https://registry.npmjs.org/@react-native-firebase/firestore/-/firestore-10.4.1.tgz"
   "version" "10.4.1"
 
+"@react-native-firebase/storage@^10.4.1":
+  "integrity" "sha512-EJm/leacBsNFdMDtglReIvnNNQLl75w4TtOq+DOxPWnMDlBQDVx1DZ2bJjexSQgFZmZG1QBnE6UH9PcriroNxg=="
+  "resolved" "https://registry.npmjs.org/@react-native-firebase/storage/-/storage-10.4.1.tgz"
+  "version" "10.4.1"
+
 "@react-native-windows/cli@0.63.9":
   "integrity" "sha512-VnD/lcCW8twqO522AAy/T/FzB3eAGjMmX1I3upXZHTvJScg9j9km+TLhVWB9v//kerWctVT74EMcZoCpZbrtEQ=="
   "resolved" "https://registry.npmjs.org/@react-native-windows/cli/-/cli-0.63.9.tgz"
