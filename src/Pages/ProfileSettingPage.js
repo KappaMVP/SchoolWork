@@ -106,45 +106,47 @@ class ProfileSettingPage extends React.Component {
     const {changeAvatarText, inputText} = pageData;
 
     return (
-      <View style={Styles.page}>
-        <View style={Styles.imageView}>
-          <Image source={{uri: avatar}} style={Styles.avatar} />
-          <TouchableOpacity onPress={() => this.handleChangeAvatar()}>
-            <Text style={Styles.changeAvatarText}>{changeAvatarText}</Text>
-          </TouchableOpacity>
+      <ScrollView>
+        <View style={Styles.page}>
+          <View style={Styles.imageView}>
+            <Image source={{uri: avatar}} style={Styles.avatar} />
+            <TouchableOpacity onPress={() => this.handleChangeAvatar()}>
+              <Text style={Styles.changeAvatarText}>{changeAvatarText}</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={Styles.inputContainer}>
+            <View style={Styles.item}>
+              <Text style={Styles.label}>{inputText.custId.text}</Text>
+              <TextInput
+                value={custID}
+                placeholder={inputText.custId.default}
+                onChangeText={(text) => this.handleChangeCustID(text)}
+                style={Styles.textInput}
+              />
+            </View>
+            <View style={Styles.item}>
+              <Text style={Styles.label}>{inputText.name.text}</Text>
+              <TextInput
+                value={name}
+                placeholder={inputText.name.default}
+                onChangeText={(text) => this.handleChangeName(text)}
+                style={Styles.textInput}
+              />
+            </View>
+            <View style={Styles.mutiLineItem}>
+              <Text style={Styles.label}>{inputText.introduction.text}</Text>
+              <TextInput
+                value={profile}
+                placeholder={inputText.introduction.default}
+                onChangeText={(text) => this.handleChangeProfile(text)}
+                style={[Styles.profile, Styles.textInput]}
+                multiline
+                numberOfLines={10}
+              />
+            </View>
+          </View>
         </View>
-        <View style={Styles.inputContainer}>
-          <View style={Styles.item}>
-            <Text style={Styles.label}>{inputText.custId.text}</Text>
-            <TextInput
-              value={custID}
-              placeholder={inputText.custId.default}
-              onChangeText={(text) => this.handleChangeCustID(text)}
-              style={Styles.textInput}
-            />
-          </View>
-          <View style={Styles.item}>
-            <Text style={Styles.label}>{inputText.name.text}</Text>
-            <TextInput
-              value={name}
-              placeholder={inputText.name.default}
-              onChangeText={(text) => this.handleChangeName(text)}
-              style={Styles.textInput}
-            />
-          </View>
-          <View style={Styles.mutiLineItem}>
-            <Text style={Styles.label}>{inputText.introduction.text}</Text>
-            <TextInput
-              value={profile}
-              placeholder={inputText.introduction.default}
-              onChangeText={(text) => this.handleChangeProfile(text)}
-              style={[Styles.profile, Styles.textInput]}
-              multiline
-              numberOfLines={10}
-            />
-          </View>
-        </View>
-      </View>
+      </ScrollView>
     );
   }
 }
