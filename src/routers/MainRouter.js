@@ -97,17 +97,15 @@ function MainRouter() {
             <TabViewIcon source={ProfilePageIcon} focused={e.focused} />
           )}>
           {ProfileSceneBundle}
-          <Stack key={routerKey.SettingPage} hideTabBar>
-            <Scene key={routerKey.SettingPage} component={SettingPage} />
-            <Scene
-              key={routerKey.ProfileSettingPage}
-              component={ProfileSettingPage}
-            />
-            <Scene
-              key={routerKey.SwitchIdentityPage}
-              component={SwitchIdentityPage}
-            />
-          </Stack>
+          <Scene key={routerKey.SettingPage} component={SettingPage} />
+          <Scene
+            key={routerKey.ProfileSettingPage}
+            component={ProfileSettingPage}
+          />
+          <Scene
+            key={routerKey.SwitchIdentityPage}
+            component={SwitchIdentityPage}
+          />
         </Stack>
       </Tabs>
     </Router>
