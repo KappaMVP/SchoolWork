@@ -116,7 +116,10 @@ export async function getUserName(uidList) {
 }
 
 export async function upLoadImage(path) {
-  return;
+  const reference = storage().ref('/default/a.png');
+  const task = reference.putFile(path);
+  const result = await task.then(() => 'ok').error((e) => e);
+  return result;
 }
 
 //Get current UID

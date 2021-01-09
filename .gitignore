@@ -60,3 +60,6 @@ buck-out/
 
 # fix problem
 package-lock.json
+
+# ignore my lab
+/src/Area51.js
