@@ -9,6 +9,8 @@ import Styles from './Styles/Page.style';
 import MainRouter from './routers/MainRouter';
 import LoginRouter from './routers/LoginRouter';
 import auth from '@react-native-firebase/auth';
+import {checkExist} from './helper/firebaseActions';
+import {navToProfileSetting} from './helper/routerAction';
 
 //隱藏WARN的log
 import {LogBox} from 'react-native';
@@ -21,8 +23,10 @@ function index() {
   const [user, setUser] = useState();
 
   // Handle user state changes
-  function onAuthStateChanged(user) {
-    setUser(user);
+  async function onAuthStateChanged(user) {
+    let isExists = user ? await checkExist() : false;
+    setUser(user && isExists);
+    if (user && !isExists) navToProfileSetting({isNew: true, setUser: setUser});
     if (initializing) setInitializing(false);
   }
 
@@ -31,16 +35,11 @@ function index() {
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  // auth()
-  //   .signOut()
-  //   .then(() => console.log('User signed out!'));
-  // console.log('--------------');
-  // console.log(auth().currentUser.uid);
-  // console.log('--------------');
-
   if (initializing) return null;
+
   return (
-    <View style={Styles.page}>{!user ? <MainRouter /> : <LoginRouter />}</View>
+    // <View style={Styles.page}>{<Area51 />}</View>
+    <View style={Styles.page}>{user ? <MainRouter /> : <LoginRouter />}</View>
   );
 }
 export default index;

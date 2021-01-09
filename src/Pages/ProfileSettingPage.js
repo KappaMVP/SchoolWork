@@ -1,5 +1,12 @@
 //設定或設定>修改個人資料
 import React from 'react';
+import {profileSettingPageData as pageData} from '../data.source';
+import Styles from '../Styles/ProfileSettingPage.style';
+import {upLoadImage} from '../helper/firebaseActions';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {defaultAvatar} from '../helper/firebaseActions';
+import {navToSwitchIdentity} from '../helper/routerAction';
+import Iconbtn from '../Views/Elements/IconBtn';
 import {
   View,
   Text,
@@ -7,22 +14,34 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from 'react-native';
-import {profileSettingPageData as pageData} from '../data.source';
-import TestImage from '../assets/test.jpg';
-import PageStyles from '../Styles/Page.style';
-import styles from '../Styles/ProfileSettingPage.style';
 
 class ProfileSettingPage extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
+    this.state = {
+      custID: '',
+      name: '',
+      avatar: defaultAvatar,
+      profile: '',
+    };
   }
+
   componentDidMount() {
     const {isNew} = this.props;
     const registerFirst = isNew
       ? {
           left: <View />, //不讓他返回
+          right: (
+            <Iconbtn
+              styles={Styles.nextStep}
+              onPress={this.handleNextStap}
+              text={'下一步'}
+              textStyle={Styles.nextStepText}
+            />
+          ),
         }
       : {};
     this.props.navigation.setParams({
@@ -31,54 +50,101 @@ class ProfileSettingPage extends React.Component {
       ...registerFirst,
     });
   }
+
+  handleNextStap = () => {
+    const {custID} = this.state;
+    if (custID.length === 0) {
+      Alert.alert('ID一定要填！');
+    } else {
+      navToSwitchIdentity({
+        isNew: true,
+        ...this.state,
+        setUser: this.props.setUser,
+      });
+    }
+  };
+
+  handleSelectImage = async (result) => {
+    if (!result.didCancel) {
+      const resultlList = await upLoadImage(result.uri);
+      if (resultlList.status === 'ok') {
+        this.setState({avatar: resultlList.url});
+      } else {
+        Alert.alert('錯誤');
+      }
+    }
+  };
+
   //變更大頭貼
-  handleChangePhotoStiker = () => {};
-  //變更姓名
-  handleChangeUserName = () => {};
-  //變更用戶名稱
-  handleChangeUserID = () => {};
+  handleChangeAvatar = () => {
+    launchImageLibrary({}, this.handleSelectImage);
+  };
+
+  //變更名稱
+  handleChangeName = (text) => {
+    this.setState({
+      name: text,
+    });
+  };
+
+  //變更用戶ID
+  handleChangeCustID = (text) => {
+    this.setState({
+      custID: text,
+    });
+  };
+
   //變更個人簡介
-  handleChangeIntroduction = () => {};
+  handleChangeProfile = (text) => {
+    this.setState({
+      profile: text,
+    });
+  };
 
   render() {
+    const {custID, avatar, name, profile} = this.state;
+    const {changeAvatarText, inputText} = pageData;
+
     return (
-      <ScrollView style={PageStyles.page}>
-        <View style={styles.imageView}>
-          <Image source={TestImage} style={styles.photoStiker} />
-          <TouchableOpacity onPress={() => this.HandleChangePhotoStiker()}>
-            <Text style={styles.changePhotoStiker}>更換大頭貼照</Text>
+      <View style={Styles.page}>
+        <View style={Styles.imageView}>
+          <Image source={{uri: avatar}} style={Styles.avatar} />
+          <TouchableOpacity onPress={() => this.handleChangeAvatar()}>
+            <Text style={Styles.changeAvatarText}>{changeAvatarText}</Text>
           </TouchableOpacity>
         </View>
-        <View>
-          <View style={styles.item}>
-            <Text style={styles.label}>姓名</Text>
+        <View style={Styles.inputContainer}>
+          <View style={Styles.item}>
+            <Text style={Styles.label}>{inputText.custId.text}</Text>
             <TextInput
-              placeholder="請輸入姓名"
-              onValueChange={this.handleChangeUserName()}
-              style={styles.textInput}
+              value={custID}
+              placeholder={inputText.custId.default}
+              onChangeText={(text) => this.handleChangeCustID(text)}
+              style={Styles.textInput}
             />
           </View>
-          <View style={styles.item}>
-            <Text style={styles.label}>用戶名稱</Text>
+          <View style={Styles.item}>
+            <Text style={Styles.label}>{inputText.name.text}</Text>
             <TextInput
-              placeholder="請輸入用戶名稱"
-              onValueChange={this.handleChangeUserID()}
-              style={styles.textInput}
+              value={name}
+              placeholder={inputText.name.default}
+              onChangeText={(text) => this.handleChangeName(text)}
+              style={Styles.textInput}
+            />
+          </View>
+          <View style={Styles.mutiLineItem}>
+            <Text style={Styles.label}>{inputText.introduction.text}</Text>
+            <TextInput
+              value={profile}
+              placeholder={inputText.introduction.default}
+              onChangeText={(text) => this.handleChangeProfile(text)}
+              style={[Styles.profile, Styles.textInput]}
+              multiline
+              numberOfLines={10}
             />
           </View>
         </View>
-        <View style={styles.introductionItem}>
-          <Text style={styles.label}>個人簡介</Text>
-          <TextInput
-            placeholder="請輸入個人簡介"
-            onValueChange={this.handleChangeIntroduction()}
-            style={styles.introduction}
-            multiline
-            numberOfLines={10}
-            underlineColorAndroid={'transparent'}
-          />
-        </View>
-      </ScrollView>
+      </View>
     );
   }
 }

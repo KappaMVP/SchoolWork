@@ -11,8 +11,9 @@ import HeaderBtn from '../Views/HeaderBtn';
 import LoginPage from '../Pages/LoginPage';
 import RegisterPage from '../Pages/RegisterPage';
 import ProfileSettingPage from '../Pages/ProfileSettingPage';
+import SwitchIdentityPage from '../Pages/SwitchIdentityPage';
 
-function LoginRouter() {
+function LoginRouter(props) {
   return (
     <View style={Styles.page}>
       <Router>
@@ -27,6 +28,10 @@ function LoginRouter() {
           <Scene
             key={routerKey.ProfileSettingPage}
             component={ProfileSettingPage}
+          />
+          <Scene
+            key={routerKey.SwitchIdentityPage}
+            component={SwitchIdentityPage}
           />
         </Stack>
       </Router>

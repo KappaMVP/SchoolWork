@@ -4,57 +4,86 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {switchIdentityPageData as pageData} from '../data.source';
 import PageStyles from '../Styles/Page.style';
+import Iconbtn from '../Views/Elements/IconBtn';
 import Styles from '../Styles/SwitchIdentityPage.style';
+import {createDocuments} from '../helper/firebaseActions';
 
 class SwitchIdentityPage extends React.Component {
   constructor(props) {
     super(props);
+    this.props = props;
     this.state = {
-      photog: true,
-      model: false,
-      normal: false,
-      post: true,
-      tags: false,
-      keep: false,
+      identity: {
+        photog: false,
+        model: false,
+        normal: true,
+      },
+      priority: {
+        post: false,
+        tags: false,
+        keep: true,
+      },
     };
   }
 
   componentDidMount() {
+    const {isNew} = this.props;
+    const registerFirst = isNew
+      ? {
+          right: (
+            <Iconbtn
+              styles={Styles.nextStep}
+              onPress={this.handleAddToFireBase}
+              text={'完成'}
+              textStyle={Styles.nextStepText}
+            />
+          ),
+        }
+      : {};
     this.props.navigation.setParams({
       title: pageData.title,
+      ...registerFirst,
     });
   }
 
+  handleAddToFireBase = async () => {
+    const result = await createDocuments({...this.props, ...this.state});
+    if (result[0] === 'ok' && result[1] === 'ok') {
+      this.props.setUser(true);
+    }
+  };
+
   handleOnToggleSwitch(type) {
-    let step1 = {
+    let identity = {
       photog: false,
       model: false,
       normal: false,
+    };
+    let priority = {
       post: false,
       tags: false,
       keep: false,
     };
-    step1[type] = true;
-    step1.post = step1.photog;
-    step1.tags = step1.model;
-    step1.keep = step1.normal;
-    this.setState(step1);
+    identity[type] = true;
+    priority.post = identity.photog;
+    priority.tags = identity.model;
+    priority.keep = identity.normal;
+    this.setState({identity: identity, priority: priority});
   }
+
   handleChangeToggle(thing) {
-    let step1 = {
-      photog: this.state.photog,
-      model: this.state.model,
-      normal: this.state.normal,
+    let priority = {
       post: false,
       tags: false,
       keep: false,
     };
-    step1[thing] = true;
-    this.setState(step1);
+    priority[thing] = true;
+    this.setState({priority: priority});
   }
 
   render() {
-    const {photog, model, normal, post, tags, keep} = this.state;
+    const {photog, model, normal} = this.state.identity;
+    const {post, tags, keep} = this.state.priority;
     return (
       // 切換身分
       <View style={PageStyles}>

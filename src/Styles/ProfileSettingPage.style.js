@@ -1,49 +1,55 @@
+import DeviceInfo from 'react-native-device-info';
 import {StyleSheet} from 'react-native';
+const isAndroid = DeviceInfo.getSystemName() === 'Android';
 
 export default StyleSheet.create({
+  page: {
+    alignItems: 'center',
+  },
   imageView: {
     alignItems: 'center',
     paddingVertical: 10,
   },
-  photoStiker: {
+  avatar: {
     width: 100,
     height: 100,
     borderRadius: 100,
   },
-  changePhotoStiker: {
+  changeAvatarText: {
     paddingVertical: 10,
     color: 'blue',
     fontWeight: 'bold',
   },
   item: {
-    height: 40,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 5,
-    paddingHorizontal: 10,
+    marginVertical: 10,
+    height: isAndroid ? 60 : 50,
+  },
+  mutiLineItem: {
+    height: '20%',
   },
   textInput: {
+    width: '100%',
+    paddingTop: 10,
     flex: 1,
     borderBottomWidth: 1,
     borderBottomColor: '#C0C0C0',
-    marginLeft: 15,
   },
   label: {
+    fontSize: 15,
     fontWeight: 'bold',
   },
-  //個人簡介得style
-  introductionItem: {
-    height: 100,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 10,
-    paddingHorizontal: 10,
-  },
-  introduction: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: '#C0C0C0',
-    marginLeft: 15,
+  profile: {
     textAlignVertical: 'top',
+    height: 'auto',
+  },
+  inputContainer: {
+    width: '80%',
+    height: '100%',
+  },
+  nextStep: {
+    marginRight: 10,
+  },
+  nextStepText: {
+    color: 'blue',
   },
 });

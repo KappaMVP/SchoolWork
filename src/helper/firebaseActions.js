@@ -4,6 +4,8 @@ import storage from '@react-native-firebase/storage';
 
 const users = firestore().collection('users');
 const posts = firestore().collection('posts');
+export const defaultAvatar =
+  'https://firebasestorage.googleapis.com/v0/b/photogram-bc707.appspot.com/o/default%2FdefaultAvatar.jpg?alt=media&token=63aad5b2-8f5f-4584-b488-c53669f29c73';
 
 //LogIn
 export async function logInByEmail(email, password) {
@@ -34,21 +36,22 @@ export async function registerFirebase(email, password) {
 
 //Create documents for current user
 export async function createDocuments(data) {
-  const {custId, name, profile, avatar, identity, priority} = data;
+  const {custID, name, profile, avatar, identity, priority} = data;
   //identity = {normal: true, model: false, photog: false}
-  //priority = {likes: true,  tags: false, posts: false}
+  //priority = {likes: true, posts: false, tags: false}
   const uid = getUid();
   const result = [
     await users
       .doc(uid)
       .set({
-        custId: custId, //自定義id
+        custID: custID, //自定義id
         name: name, //名稱
         profile: profile, //個人資訊
         avatar: avatar, //頭貼
         notify: [],
         following: [],
         follower: [],
+        keep: [],
         identity: identity,
         priority: priority,
       })
@@ -56,6 +59,7 @@ export async function createDocuments(data) {
       .catch((e) => e),
     await posts
       .doc(uid)
+      .set({})
       .then(() => 'ok')
       .catch((e) => e),
   ];
@@ -67,7 +71,7 @@ export async function getFllower() {
   const result = await users
     .doc(getUid())
     .get()
-    .then((doc) => doc.data.follower)
+    .then((doc) => doc._data.follower)
     .catch((e) => e);
 
   return result;
@@ -78,7 +82,7 @@ export async function getFollowing() {
   const result = await users
     .doc(getUid())
     .get()
-    .then((doc) => doc.data.following)
+    .then((doc) => doc._data.following)
     .catch((e) => e);
 
   return result;
@@ -115,10 +119,48 @@ export async function getUserName(uidList) {
   return result;
 }
 
-export async function upLoadImage(path) {
-  const reference = storage().ref('/default/a.png');
+//Upload Image
+//頭像不用給name
+//post must give uid_time(this is postID)
+export async function upLoadImage(path, name = 'avatar') {
+  const fireStoragePath = `/${getUid()}/${name}.png`;
+  const reference = storage().ref(fireStoragePath);
   const task = reference.putFile(path);
-  const result = await task.then(() => 'ok').error((e) => e);
+  const result = await task.then(() => 'ok').catch(() => 'error');
+  const url = await storage().ref(fireStoragePath).getDownloadURL();
+
+  return {status: result, url: url};
+}
+
+//獲取頭貼
+//是本人的就可以直接不給參數
+//會回傳網址
+export async function getAvatar(uid = getUid()) {
+  const result = await users
+    .doc(uid)
+    .get()
+    .then((doc) => doc._data.avatar)
+    .catch((e) => e);
+
+  return result;
+}
+
+//Post content
+export async function postContent(data) {
+  // content, label, location, model, photo, time
+  const {time} = data;
+  const uid = getUid();
+  const postId = uid + '_' + time;
+  let postData = {};
+  postData[postId] = {...data};
+
+  const result = await posts
+    .doc(getUid())
+    .get()
+    .update({...postData})
+    .then(() => 'ok')
+    .catch((e) => e);
+
   return result;
 }
 

@@ -11,4 +11,10 @@ export default StyleSheet.create({
   title: {
     fontSize: 20,
   },
+  nextStepText: {
+    color: 'blue',
+  },
+  nextStep: {
+    marginRight: 10,
+  },
 });
