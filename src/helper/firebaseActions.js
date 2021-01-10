@@ -36,16 +36,16 @@ export async function registerFirebase(email, password) {
 
 //Create documents for current user
 export async function createDocuments(data) {
-  const {custID, name, profile, avatar, identity, priority} = data;
+  const {custID, userName, profile, avatar, identity, priority} = data;
   //identity = {normal: true, model: false, photog: false}
   //priority = {likes: true, posts: false, tags: false}
   const uid = getUid();
-  const result = [
+  const results = [
     await users
       .doc(uid)
       .set({
         custID: custID, //自定義id
-        name: name, //名稱
+        userName: userName, //名稱
         profile: profile, //個人資訊
         avatar: avatar, //頭貼
         notify: [],
@@ -63,6 +63,21 @@ export async function createDocuments(data) {
       .then(() => 'ok')
       .catch((e) => e),
   ];
+
+  return results;
+}
+
+//更新個人資訊
+export async function updateProfile(data) {
+  // custID, userName, profile, avatar
+  const result = await users
+    .doc(getUid())
+    .update({
+      ...data,
+    })
+    .then(() => 'ok')
+    .catch((e) => e);
+
   return result;
 }
 
@@ -100,7 +115,7 @@ export async function getUserName(uidList) {
 //Upload Image
 //頭像不用給name
 //post must give uid_time(this is postID)
-export async function upLoadImage(path, name = 'avatar') {
+export async function uploadImage(path, name = 'avatar') {
   const fireStoragePath = `/${getUid()}/${name}.png`;
   const reference = storage().ref(fireStoragePath);
   const task = reference.putFile(path);
@@ -130,7 +145,7 @@ export async function addPost(data) {
   const uid = getUid();
   const postId = uid + '_' + time;
   let postData = {};
-  postData[postId] = {...data};
+  postData[postId] = {...data, comment: []};
 
   const result = await posts
     .doc(getUid())
@@ -190,6 +205,7 @@ export async function deletePost(postID) {
 //追蹤人
 export async function addFollowing(followingUid) {
   const currentUid = getUid();
+  //result = [Ａ追蹤Ｂ，Ｂ被Ａ追蹤]
   const result = [
     await users
       .doc(currentUid)
@@ -209,7 +225,7 @@ export async function addFollowing(followingUid) {
       })
       .catch((e) => e),
     await users
-      .doc(currentUid)
+      .doc(followingUid)
       .get()
       .then(async (doc) => {
         let follower = doc._data.follower;
@@ -226,6 +242,66 @@ export async function addFollowing(followingUid) {
       })
       .catch((e) => e),
   ];
+
+  return result;
+}
+
+//取消追蹤人
+export async function removeFollowing(followingUid) {
+  const currentUid = getUid();
+  //result = [Ａ追蹤Ｂ，Ｂ被Ａ追蹤]
+  const result = [
+    await users
+      .doc(currentUid)
+      .get()
+      .then(async (doc) => {
+        let following = doc._data.following;
+        following.remove({uid: followingUid});
+        const followingResult = await users
+          .doc(currentUid)
+          .update({
+            following: following,
+          })
+          .then(() => 'ok')
+          .catch((e) => e);
+
+        return followingResult;
+      })
+      .catch((e) => e),
+    await users
+      .doc(followingUid)
+      .get()
+      .then(async (doc) => {
+        let follower = doc._data.follower;
+        follower.remove({uid: currentUid});
+        const followerResult = await users
+          .doc(followingUid)
+          .update({
+            follower: follower,
+          })
+          .then(() => 'ok')
+          .catch((e) => e);
+
+        return followerResult;
+      })
+      .catch((e) => e),
+  ];
+
+  return result;
+}
+
+//變更身份別
+//priority: {post: bool, tags: bool, keep: bool}
+//identity: {photog: bool, model: bool, normal: bool}
+export async function updateIdentity(identity, priority) {
+  console.log('--------------');
+  console.log(identity, priority);
+  console.log('--------------');
+  const result = await users
+    .doc(getUid())
+    .update({identity: identity, priority: priority})
+    .then(() => 'ok')
+    .catch((e) => e);
 
   return result;
 }

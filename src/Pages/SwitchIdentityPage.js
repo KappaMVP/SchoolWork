@@ -1,12 +1,16 @@
 //設定>切換身份頁
-import ToggleSwitch from 'toggle-switch-react-native'; //你一定會用到的 但不一定是這頁
 import React from 'react';
-import {View, Text} from 'react-native';
+import ToggleSwitch from 'toggle-switch-react-native';
+import {View, Text, Alert} from 'react-native';
 import {switchIdentityPageData as pageData} from '../data.source';
 import PageStyles from '../Styles/Page.style';
 import Iconbtn from '../Views/Elements/IconBtn';
 import Styles from '../Styles/SwitchIdentityPage.style';
-import {createDocuments} from '../helper/firebaseActions';
+import {
+  createDocuments,
+  updateIdentity,
+  getUserData,
+} from '../helper/firebaseActions';
 
 class SwitchIdentityPage extends React.Component {
   constructor(props) {
@@ -30,26 +34,49 @@ class SwitchIdentityPage extends React.Component {
     const {isNew} = this.props;
     const registerFirst = isNew
       ? {
-          right: (
-            <Iconbtn
-              styles={Styles.nextStep}
-              onPress={this.handleAddToFireBase}
-              text={'完成'}
-              textStyle={Styles.nextStepText}
-            />
-          ),
+          styles: Styles.nextStep,
+          textStyle: Styles.nextStepText,
+          onPress: this.handleAddToFireBase,
+          text: '完成',
         }
-      : {};
+      : {
+          styles: Styles.nextStep,
+          textStyle: Styles.nextStepText,
+          onPress: this.handleSave,
+          text: '儲存',
+        };
     this.props.navigation.setParams({
       title: pageData.title,
-      ...registerFirst,
+      right: <Iconbtn {...registerFirst} />,
     });
+    if (!isNew) {
+      this.handleDefaultData();
+    }
   }
+
+  handleDefaultData = async () => {
+    const userData = await getUserData();
+    this.setState({
+      identity: userData.identity,
+      priority: userData.priority,
+    });
+  };
 
   handleAddToFireBase = async () => {
     const result = await createDocuments({...this.props, ...this.state});
     if (result[0] === 'ok' && result[1] === 'ok') {
       this.props.setUser(true);
+    }
+  };
+
+  handleSave = async () => {
+    const {identity, priority} = this.state;
+    const result = await updateIdentity(identity, priority);
+
+    if (result === 'ok') {
+      return;
+    } else {
+      Alert.alert('錯誤，請稍後再試');
     }
   };
 

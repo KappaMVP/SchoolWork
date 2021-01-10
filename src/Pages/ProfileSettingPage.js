@@ -2,16 +2,19 @@
 import React from 'react';
 import {profileSettingPageData as pageData} from '../data.source';
 import Styles from '../Styles/ProfileSettingPage.style';
-import {upLoadImage} from '../helper/firebaseActions';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {defaultAvatar} from '../helper/firebaseActions';
 import {navToSwitchIdentity} from '../helper/routerAction';
 import Iconbtn from '../Views/Elements/IconBtn';
 import Avatar from '../Views/Elements/Avatar';
 import {
+  defaultAvatar,
+  getUserData,
+  updateProfile,
+  uploadImage,
+} from '../helper/firebaseActions';
+import {
   View,
   Text,
-  Image,
   TextInput,
   TouchableOpacity,
   ScrollView,
@@ -24,7 +27,7 @@ class ProfileSettingPage extends React.Component {
     this.props = props;
     this.state = {
       custID: '',
-      name: '',
+      userName: '',
       avatar: defaultAvatar,
       profile: '',
     };
@@ -44,13 +47,45 @@ class ProfileSettingPage extends React.Component {
             />
           ),
         }
-      : {};
+      : {
+          right: (
+            <Iconbtn
+              styles={Styles.nextStep}
+              onPress={this.handleSave}
+              text={'儲存'}
+              textStyle={Styles.nextStepText}
+            />
+          ),
+        };
     this.props.navigation.setParams({
       title: pageData.title,
       hideTabBar: true,
       ...registerFirst,
     });
+    if (!isNew) {
+      this.handleDefaultData();
+    }
   }
+
+  handleSave = async () => {
+    const result = await updateProfile(this.state);
+
+    if (result === 'ok') {
+      return;
+    } else {
+      Alert.alert('錯誤，請稍後再試');
+    }
+  };
+
+  handleDefaultData = async () => {
+    const userData = await getUserData();
+    this.setState({
+      custID: userData.custID,
+      userName: userData.userName,
+      avatar: userData.avatar,
+      profile: userData.profile,
+    });
+  };
 
   handleNextStap = () => {
     const {custID} = this.state;
@@ -67,9 +102,9 @@ class ProfileSettingPage extends React.Component {
 
   handleSelectImage = async (result) => {
     if (!result.didCancel) {
-      const resultlList = await upLoadImage(result.uri);
-      if (resultlList.status === 'ok') {
-        this.setState({avatar: resultlList.url});
+      const resultl = await uploadImage(result.uri);
+      if (resultl.status === 'ok') {
+        this.setState({avatar: resultl.url});
       } else {
         Alert.alert('錯誤');
       }
@@ -84,7 +119,7 @@ class ProfileSettingPage extends React.Component {
   //變更名稱
   handleChangeName = (text) => {
     this.setState({
-      name: text,
+      userName: text,
     });
   };
 
@@ -103,7 +138,7 @@ class ProfileSettingPage extends React.Component {
   };
 
   render() {
-    const {custID, avatar, name, profile} = this.state;
+    const {custID, avatar, userName, profile} = this.state;
     const {changeAvatarText, inputText} = pageData;
 
     return (
@@ -128,7 +163,7 @@ class ProfileSettingPage extends React.Component {
             <View style={Styles.item}>
               <Text style={Styles.label}>{inputText.name.text}</Text>
               <TextInput
-                value={name}
+                value={userName}
                 placeholder={inputText.name.default}
                 onChangeText={(text) => this.handleChangeName(text)}
                 style={Styles.textInput}
