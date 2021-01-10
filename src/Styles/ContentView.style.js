@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, Image} from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -8,15 +8,31 @@ export default StyleSheet.create({
     backgroundColor: '#EFEFF1',
   },
 
+  photoView: {
+    flexDirection: 'row',
+    marginHorizontal: 10,
+  },
   imageView: {
-    padding: 10,
-    margin: 10,
-    height: 300,
+    width: '85%',
+    paddingHorizontal: 10,
   },
   image: {
     resizeMode: 'contain',
     height: '100%',
     width: '100%',
+  },
+
+  iconBtnContainer: {
+    justifyContent: 'center',
+    width: '15%',
+  },
+  iconBtnView: {
+    padding: 10,
+    alignSelf: 'center',
+  },
+  iconBtn: {
+    width: 35,
+    height: 35,
   },
 
   divider: {
@@ -48,6 +64,7 @@ export default StyleSheet.create({
   },
   content: {
     fontSize: 17,
+    color: '#000',
   },
 
   labelContainer: {

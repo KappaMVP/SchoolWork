@@ -3,9 +3,20 @@ import React from 'react';
 import {Image, View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import Styles from '../Styles/ContentView.style';
 import Comment from '../Views/Comment';
+import {iconData as pageData} from '../data.source';
+import Iconbtn from '../Views/Elements/IconBtn';
 
 function ContentView(props) {
-  const {postername, content, photo, time, label, model, location} = props;
+  const {
+    postername,
+    height,
+    content,
+    photo,
+    time,
+    label,
+    model,
+    location,
+  } = props;
   const commentdata = [
     {
       postid: 'kappa_mvp',
@@ -29,10 +40,31 @@ function ContentView(props) {
       time: '2020-12-12 12:12',
     },
   ];
+  const {keep, unkeep, edit, remove} = pageData;
+
   return (
     <ScrollView style={Styles.container}>
-      <View style={Styles.imageView}>
-        <Image style={Styles.image} source={{uri: photo}} />
+      <View style={[Styles.photoView, {height: height}]}>
+        <View style={Styles.imageView}>
+          <Image style={Styles.image} source={{uri: photo}} />
+        </View>
+        <View style={Styles.iconBtnContainer}>
+          <Iconbtn
+            styles={Styles.iconBtnView}
+            imgStyle={Styles.iconBtn}
+            {...unkeep}
+          />
+          <Iconbtn
+            styles={Styles.iconBtnView}
+            imgStyle={Styles.iconBtn}
+            {...edit}
+          />
+          <Iconbtn
+            styles={Styles.iconBtnView}
+            imgStyle={Styles.iconBtn}
+            {...remove}
+          />
+        </View>
       </View>
       <View style={Styles.divider} />
       <View style={Styles.posterNameView}>

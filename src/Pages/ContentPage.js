@@ -19,9 +19,12 @@ class ContentPage extends React.Component {
       label,
       model,
       location,
+      height,
     } = this.props;
+    console.log(height);
     return (
       <ContentView
+        height={height}
         postername={postername}
         photo={photo}
         content={content}

@@ -1,8 +1,9 @@
 //主頁顯示的簡易貼文
 import React from 'react';
-import {Image, View, Text, TouchableOpacity} from 'react-native';
+import {Image, View, Text, TouchableOpacity, Dimensions} from 'react-native';
 import {navToContent} from '../helper/routerAction';
 import Styles from '../Styles/PostCard.style';
+let imgsize = {width: 1, height: 1};
 
 function PostCard(props) {
   const {
@@ -14,10 +15,20 @@ function PostCard(props) {
     model,
     location,
   } = props.item;
+
+  Image.getSize(
+    photo,
+    (width, height) => (imgsize = {width: width, height: height}),
+  );
+  const height = Math.floor(
+    ((Dimensions.get('window').width * imgsize.height) / imgsize.width) * 0.7,
+  );
+  console.log(height);
+
   return (
     <TouchableOpacity
       style={{height: '100%'}}
-      onPress={() => navToContent(props.item)}>
+      onPress={() => navToContent({...props.item, height: height})}>
       <View style={Styles.container}>
         {/* 圖片 */}
         <View style={Styles.cardImage}>

@@ -253,6 +253,10 @@ export const iconData = {
   passwordIcon: iconFormat('Ionicons', 'lock-closed'),
   ckeckPasswordIcon: iconFormat('MaterialCommunityIcons', 'lock-check'),
   seetingIcon: iconFormat('Octicons', 'settings'),
+  keep: imgFormat(require('./assets/keep.png')),
+  unkeep: imgFormat(require('./assets/unkeep.png')),
+  edit: imgFormat(require('./assets/edit.png')),
+  remove: imgFormat(require('./assets/delete.png')),
 };
 
 //utils
