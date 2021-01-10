@@ -39,7 +39,7 @@ function PostCard(props) {
             <Text style={{color: 'black'}}>
               Use
               {label.map((label) => (
-                <Text style={Styles.textLabel}> #{label}</Text>
+                <Text style={Styles.textLabel}> #{label.name}</Text>
               ))}
             </Text>
           </View>
@@ -48,7 +48,7 @@ function PostCard(props) {
             <Text style={{color: 'black'}}>
               At
               {location.map((location) => (
-                <Text style={Styles.textLabel}> #{location}</Text>
+                <Text style={Styles.textLabel}> #{location.name}</Text>
               ))}
             </Text>
           </View>

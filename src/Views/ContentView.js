@@ -96,12 +96,12 @@ function ContentView(props) {
       <View style={Styles.labelContainer}>
         {location.map((location) => (
           <View style={Styles.labelView}>
-            <Text style={Styles.label}>{location}</Text>
+            <Text style={Styles.label}>{location.name}</Text>
           </View>
         ))}
         {label.map((label) => (
           <View style={Styles.labelView}>
-            <Text style={Styles.label}>{label}</Text>
+            <Text style={Styles.label}>{label.name}</Text>
           </View>
         ))}
         {model.map((model) => (
