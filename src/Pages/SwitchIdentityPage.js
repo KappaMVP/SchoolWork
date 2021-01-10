@@ -118,37 +118,41 @@ class SwitchIdentityPage extends React.Component {
     return (
       // 切換身分
       <View style={PageStyles}>
-        <Text style={Styles.title}>{identityTitle}</Text>
-        {identityData.map((data) => (
-          <View style={Styles.item}>
-            <Text>{data.name}</Text>
-            <View style={Styles.toggle}>
-              <ToggleSwitch
-                isOn={identity[data.tag]}
-                onColor="#006284"
-                offColor="#888888"
-                size="large"
-                onToggle={() => this.handleOnToggleSwitch(data.tag)}
-              />
+        <View style={Styles.block}>
+          <Text style={Styles.title}>{identityTitle}</Text>
+          {identityData.map((data) => (
+            <View style={Styles.item}>
+              <Text style={Styles.text}>{data.name}</Text>
+              <View style={Styles.toggle}>
+                <ToggleSwitch
+                  isOn={identity[data.tag]}
+                  onColor="#006284"
+                  offColor="#888888"
+                  size="large"
+                  onToggle={() => this.handleOnToggleSwitch(data.tag)}
+                />
+              </View>
             </View>
-          </View>
-        ))}
+          ))}
+        </View>
         {/* 切換功能 */}
-        <Text style={Styles.title}>{prioritytitle}</Text>
-        {priorityData.map((data) => (
-          <View style={Styles.item}>
-            <Text>{data.name}</Text>
-            <View style={Styles.toggle}>
-              <ToggleSwitch
-                isOn={priority[data.tag]}
-                onColor="#006284"
-                offColor="#888888"
-                size="large"
-                onToggle={() => this.handleChangeToggle(data.tag)}
-              />
+        <View style={Styles.block}>
+          <Text style={Styles.title}>{prioritytitle}</Text>
+          {priorityData.map((data) => (
+            <View style={Styles.item}>
+              <Text style={Styles.text}>{data.name}</Text>
+              <View style={Styles.toggle}>
+                <ToggleSwitch
+                  isOn={priority[data.tag]}
+                  onColor="#006284"
+                  offColor="#888888"
+                  size="large"
+                  onToggle={() => this.handleChangeToggle(data.tag)}
+                />
+              </View>
             </View>
-          </View>
-        ))}
+          ))}
+        </View>
       </View>
     );
   }
