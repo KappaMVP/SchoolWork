@@ -9,6 +9,7 @@ import Avatar from '../Views/Elements/Avatar';
 import Toast from 'react-native-tiny-toast';
 import {
   defaultAvatar,
+  getUid,
   getUserData,
   updateProfile,
   uploadImage,
@@ -69,12 +70,31 @@ class ProfileSettingPage extends React.Component {
   }
 
   handleSave = async () => {
-    const result = await updateProfile(this.state);
-
-    if (result === 'ok') {
-      Toast.showSuccess('修改成功');
-      navPop();
+    const {custID, avatar} = this.state;
+    if (custID.length === 0) {
+      Alert.alert('ID一定要填！');
+      return;
+    }
+    const toast = Toast.showLoading('儲存中...');
+    const uploadResult = avatar.includes(getUid)
+      ? await uploadImage(avatar)
+      : {status: 'ok', url: avatar};
+    if (uploadResult.status === 'ok') {
+      this.setState({avatar: uploadResult.url});
+      const result = await updateProfile({
+        ...this.state,
+        avatar: uploadResult.url,
+      });
+      if (result === 'ok') {
+        Toast.hide(toast);
+        Toast.showSuccess('修改成功');
+        navPop();
+      } else {
+        Toast.hide(toast);
+        Alert.alert('錯誤，請稍後再試');
+      }
     } else {
+      Toast.hide(toast);
       Alert.alert('錯誤，請稍後再試');
     }
   };
@@ -104,12 +124,7 @@ class ProfileSettingPage extends React.Component {
 
   handleSelectImage = async (result) => {
     if (!result.didCancel) {
-      const resultl = await uploadImage(result.uri);
-      if (resultl.status === 'ok') {
-        this.setState({avatar: resultl.url});
-      } else {
-        Alert.alert('錯誤');
-      }
+      this.setState({avatar: result.uri});
     }
   };
 
