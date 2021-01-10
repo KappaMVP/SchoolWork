@@ -14,6 +14,7 @@ class SettingPage extends React.Component {
   componentDidMount() {
     this.props.navigation.setParams({
       title: pageData.title,
+      hideTabBar: true,
     });
   }
 

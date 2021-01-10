@@ -3,9 +3,10 @@ import React from 'react';
 import {profileSettingPageData as pageData} from '../data.source';
 import Styles from '../Styles/ProfileSettingPage.style';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {navToSwitchIdentity} from '../helper/routerAction';
+import {navToSwitchIdentity, navPop} from '../helper/routerAction';
 import Iconbtn from '../Views/Elements/IconBtn';
 import Avatar from '../Views/Elements/Avatar';
+import Toast from 'react-native-tiny-toast';
 import {
   defaultAvatar,
   getUserData,
@@ -71,7 +72,8 @@ class ProfileSettingPage extends React.Component {
     const result = await updateProfile(this.state);
 
     if (result === 'ok') {
-      return;
+      Toast.showSuccess('修改成功');
+      navPop();
     } else {
       Alert.alert('錯誤，請稍後再試');
     }

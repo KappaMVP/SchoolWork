@@ -6,6 +6,8 @@ import {switchIdentityPageData as pageData} from '../data.source';
 import PageStyles from '../Styles/Page.style';
 import Iconbtn from '../Views/Elements/IconBtn';
 import Styles from '../Styles/SwitchIdentityPage.style';
+import {navPop} from '../helper/routerAction';
+import Toast from 'react-native-tiny-toast';
 import {
   createDocuments,
   updateIdentity,
@@ -47,6 +49,7 @@ class SwitchIdentityPage extends React.Component {
         };
     this.props.navigation.setParams({
       title: pageData.title,
+      hideTabBar: true,
       right: <Iconbtn {...registerFirst} />,
     });
     if (!isNew) {
@@ -74,7 +77,8 @@ class SwitchIdentityPage extends React.Component {
     const result = await updateIdentity(identity, priority);
 
     if (result === 'ok') {
-      return;
+      Toast.showSuccess('修改成功');
+      navPop();
     } else {
       Alert.alert('錯誤，請稍後再試');
     }

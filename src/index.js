@@ -38,7 +38,6 @@ function index() {
   if (initializing) return null;
 
   return (
-    // <View style={Styles.page}>{<Area51 />}</View>
     <View style={Styles.page}>{user ? <MainRouter /> : <LoginRouter />}</View>
   );
 }

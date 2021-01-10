@@ -294,9 +294,6 @@ export async function removeFollowing(followingUid) {
 //priority: {post: bool, tags: bool, keep: bool}
 //identity: {photog: bool, model: bool, normal: bool}
 export async function updateIdentity(identity, priority) {
-  console.log('--------------');
-  console.log(identity, priority);
-  console.log('--------------');
   const result = await users
     .doc(getUid())
     .update({identity: identity, priority: priority})
