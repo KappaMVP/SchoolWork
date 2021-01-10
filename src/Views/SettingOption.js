@@ -14,6 +14,7 @@ export default function SettingOption(props) {
         </View>
         <Text style={Styles.lable}>{name}</Text>
       </TouchableOpacity>
+      <View style={Styles.divider} />
     </View>
   );
 }
