@@ -77,7 +77,11 @@ class PostPage extends React.Component {
       const result = await uploadImage(this.state.url, getUid() + '_' + time);
       if (result.status === 'ok') {
         const {url, ...items} = this.state;
-        const postResult = await addPost({photo: url, time: time, ...items});
+        const postResult = await addPost({
+          photo: result.url,
+          time: time,
+          ...items,
+        });
         if (postResult === 'ok') {
           navToHomePage();
           this.setState({
