@@ -106,7 +106,7 @@ function ContentView(props) {
         ))}
         {model.map((model) => (
           <View style={Styles.labelView}>
-            <Text style={Styles.label}>{model}</Text>
+            <Text style={Styles.label}>{model.name}</Text>
           </View>
         ))}
       </View>
