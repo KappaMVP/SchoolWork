@@ -4,8 +4,9 @@ import {View, Text} from 'react-native';
 import {fanFollowPageData as pageData} from '../data.source';
 
 class FanFollowPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.props = props;
   }
 
   componentDidMount() {
@@ -15,11 +16,10 @@ class FanFollowPage extends React.Component {
   }
 
   render() {
-    return (
-      <View>
-        <Text> FanFollowPage </Text>
-      </View>
-    );
+    const {Profiles} = this.props;
+    console.log('........');
+    console.log(Profiles);
+    return <View></View>;
   }
 }
 

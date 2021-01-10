@@ -9,10 +9,9 @@ import {
 } from 'react-native';
 import {profilePageData as pageData, iconData} from '../data.source';
 import styles from '../Styles/ProfilePage.style';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 import PostWall from '../Views/PostWall';
 import HeaderBtn from '../Views/HeaderBtn';
-import {navToSetting} from '../helper/routerAction';
+import {navToSetting, navToFanFollow} from '../helper/routerAction';
 import Avatar from '../Views/Elements/Avatar';
 
 class ProfilePage extends React.Component {
@@ -126,8 +125,8 @@ class ProfilePage extends React.Component {
     });
   }
 
-  fansLike = (id) => {
-    Alert.alert('最近粉絲近況', '昨天有兩個人退了您的粉絲');
+  fansLike = (data) => {
+    Alert.alert('最近貼文進況', '12月25日發過一次文');
   };
 
   FollowLike = (id) => {
@@ -139,6 +138,7 @@ class ProfilePage extends React.Component {
   };
 
   render() {
+    const {Profiles} = this.state;
     return (
       <View style={styles.page}>
         <View style={styles.content2}>
@@ -151,7 +151,8 @@ class ProfilePage extends React.Component {
           <TouchableOpacity onPress={() => this.fansLike()}>
             <Text style={styles.fans}>{this.state.Profiles[0].fans}位粉絲</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.FollowLike()}>
+          <TouchableOpacity
+            onPress={() => navToFanFollow({Profiles: Profiles})}>
             <Text style={styles.follow}>
               {this.state.Profiles[0].follow}個追蹤者
             </Text>
