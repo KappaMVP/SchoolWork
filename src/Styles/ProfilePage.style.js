@@ -32,6 +32,7 @@ export default StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 100,
+    borderWidth: 10,
   },
   content2: {
     flex: 0.6,
@@ -59,7 +60,6 @@ export default StyleSheet.create({
     textAlign: 'right',
     fontSize: 18,
     fontWeight: 'bold',
-    textAlign: 'left',
     marginLeft: 10,
   },
   follow: {

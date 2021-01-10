@@ -13,6 +13,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import PostWall from '../Views/PostWall';
 import HeaderBtn from '../Views/HeaderBtn';
 import {navToSetting} from '../helper/routerAction';
+import Avatar from '../Views/Elements/Avatar';
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -145,10 +146,7 @@ class ProfilePage extends React.Component {
     return (
       <View style={styles.page}>
         <View style={styles.content2}>
-          <Image
-            style={styles.image1}
-            source={{uri: this.state.Profiles[0].url}}
-          />
+          <Avatar size={150} source={{uri: this.state.Profiles[0].url}} />
         </View>
         <View style={styles.content3}>
           <TouchableOpacity onPress={() => this.PostLike()}>

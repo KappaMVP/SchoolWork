@@ -10,11 +10,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
   },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 100,
-  },
   changeAvatarText: {
     paddingVertical: 10,
     color: 'blue',

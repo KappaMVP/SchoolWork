@@ -7,6 +7,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {defaultAvatar} from '../helper/firebaseActions';
 import {navToSwitchIdentity} from '../helper/routerAction';
 import Iconbtn from '../Views/Elements/IconBtn';
+import Avatar from '../Views/Elements/Avatar';
 import {
   View,
   Text,
@@ -109,7 +110,7 @@ class ProfileSettingPage extends React.Component {
       <ScrollView>
         <View style={Styles.page}>
           <View style={Styles.imageView}>
-            <Image source={{uri: avatar}} style={Styles.avatar} />
+            <Avatar source={{uri: avatar}} size={100} />
             <TouchableOpacity onPress={() => this.handleChangeAvatar()}>
               <Text style={Styles.changeAvatarText}>{changeAvatarText}</Text>
             </TouchableOpacity>
