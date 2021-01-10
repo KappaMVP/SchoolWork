@@ -1,8 +1,6 @@
 //搜尋
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {navToProfile} from '../helper/routerAction';
-import SearchView from '../Views/SearchView';
 import Styles from '../Styles/SearchPage.style';
 import ScrollableTabView, {
   DefaultTabBar,
@@ -37,10 +35,6 @@ class SearchPage extends React.Component {
       text: '',
       localtionData: [],
     });
-  };
-
-  handleSubmit = () => {
-    console.log(this.state);
   };
 
   render() {
