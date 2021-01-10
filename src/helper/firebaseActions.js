@@ -7,6 +7,9 @@ const posts = firestore().collection('posts');
 export const defaultAvatar =
   'https://firebasestorage.googleapis.com/v0/b/photogram-bc707.appspot.com/o/default%2FdefaultAvatar.jpg?alt=media&token=63aad5b2-8f5f-4584-b488-c53669f29c73';
 
+///-------------------------///
+///About account
+///-------------------------///
 //LogIn
 export async function logInByEmail(email, password) {
   const result = await auth()
@@ -31,6 +34,17 @@ export async function registerFirebase(email, password) {
     .createUserWithEmailAndPassword(email, password)
     .then(async () => 'ok')
     .catch((error) => error.code);
+  return result;
+}
+
+//Check documant exist
+export async function checkExist() {
+  const result = await users
+    .doc(getUid())
+    .get()
+    .then((doc) => doc.exists)
+    .catch((e) => e);
+
   return result;
 }
 
@@ -67,6 +81,9 @@ export async function createDocuments(data) {
   return results;
 }
 
+///-------------------------///
+///About profile data
+///-------------------------///
 //更新個人資訊
 export async function updateProfile(data) {
   // custID, userName, profile, avatar
@@ -81,12 +98,26 @@ export async function updateProfile(data) {
   return result;
 }
 
-//Check documant exist
-export async function checkExist() {
+//獲取頭貼
+//是本人的就可以直接不給參數
+//會回傳網址
+export async function getAvatar(uid = getUid()) {
   const result = await users
-    .doc(getUid())
+    .doc(uid)
     .get()
-    .then((doc) => doc.exists)
+    .then((doc) => doc._data.avatar)
+    .catch((e) => e);
+
+  return result;
+}
+
+//獲得個人的資料
+//是本人的就可以直接不給參數
+export async function getUserData(uid = getUid()) {
+  const result = await users
+    .doc(uid)
+    .get()
+    .then((doc) => doc.data())
     .catch((e) => e);
 
   return result;
@@ -108,96 +139,6 @@ export async function getUserName(uidList) {
           .catch((e) => e),
     ),
   );
-
-  return result;
-}
-
-//Upload Image
-//頭像不用給name
-//post must give uid_time(this is postID)
-export async function uploadImage(path, name = 'avatar') {
-  const fireStoragePath = `/${getUid()}/${name}.png`;
-  const reference = storage().ref(fireStoragePath);
-  const task = reference.putFile(path);
-  const result = await task.then(() => 'ok').catch(() => 'error');
-  const url = await storage().ref(fireStoragePath).getDownloadURL();
-
-  return {status: result, url: url};
-}
-
-//獲取頭貼
-//是本人的就可以直接不給參數
-//會回傳網址
-export async function getAvatar(uid = getUid()) {
-  const result = await users
-    .doc(uid)
-    .get()
-    .then((doc) => doc._data.avatar)
-    .catch((e) => e);
-
-  return result;
-}
-
-//Post content
-export async function addPost(data) {
-  // content, label, location, model, photo, time
-  const {time} = data;
-  const uid = getUid();
-  const postId = uid + '_' + time;
-  let postData = {};
-  postData[postId] = {...data, comment: []};
-
-  const result = await posts
-    .doc(getUid())
-    .update({...postData})
-    .then(() => 'ok')
-    .catch((e) => e);
-
-  return result;
-}
-
-//獲得個人的資料
-//是本人的就可以直接不給參數
-export async function getUserData(uid = getUid()) {
-  const result = await users
-    .doc(uid)
-    .get()
-    .then((doc) => doc.data())
-    .catch((e) => e);
-
-  return result;
-}
-
-//獲取貼文資料
-export async function getPostContent(postID) {
-  const uid = postID.split('_')[0];
-  const result = await posts
-    .doc(uid)
-    .get()
-    .then((doc) => doc._data[postID])
-    .catch((e) => e);
-
-  return result;
-}
-
-//刪除貼文
-export async function deletePost(postID) {
-  const uid = postID.split('_')[0];
-  const result = await posts
-    .doc(uid)
-    .get()
-    .then(async (doc) => {
-      const postData = doc._data;
-      delete postData[postID];
-      const updateResult = await posts
-        .doc(uid)
-        .update({...postData})
-        .then(() => 'ok')
-        .catch((e) => e);
-
-      return updateResult;
-    })
-    .catch((e) => e);
 
   return result;
 }
@@ -301,6 +242,199 @@ export async function updateIdentity(identity, priority) {
     .catch((e) => e);
 
   return result;
+}
+
+///-------------------------///
+///About Post
+///-------------------------///
+//獲取貼文資料
+export async function getPostContent(postID) {
+  const uid = postID.split('_')[0];
+  const result = await posts
+    .doc(uid)
+    .get()
+    .then((doc) => doc._data[postID])
+    .catch((e) => e);
+
+  return result;
+}
+
+//新增貼文
+export async function addPost(data) {
+  // content, label, location, model, photo, time
+  const {time} = data;
+  const uid = getUid();
+  const postId = uid + '_' + time;
+  let postData = {};
+  postData[postId] = {...data, comment: [], keep: 0};
+
+  const result = await posts
+    .doc(getUid())
+    .update({...postData})
+    .then(() => 'ok')
+    .catch((e) => e);
+
+  return result;
+}
+
+//刪除貼文
+export async function deletePost(postID) {
+  const uid = postID.split('_')[0];
+  const result = await posts
+    .doc(uid)
+    .get()
+    .then(async (doc) => {
+      const postData = doc._data;
+      delete postData[postID];
+      const updateResult = await posts
+        .doc(uid)
+        .update({...postData})
+        .then(() => 'ok')
+        .catch((e) => e);
+
+      return updateResult;
+    })
+    .catch((e) => e);
+
+  return result;
+}
+
+//收藏貼文
+export async function keepPost(postID) {
+  const uid = postID.split('_')[0];
+  //從現在的使用者增加 the keeped post
+  const result = await users
+    .doc(getUid())
+    .get()
+    .then(async (doc) => {
+      let keep = doc._data.keep;
+      keep.push({postID: postID});
+      const updateResult = await users
+        .doc(getUid())
+        .update({...keep})
+        .then(() => 'ok')
+        .catch((e) => e);
+
+      return updateResult;
+    })
+    .catch((e) => e);
+
+  //那個貼文keep數加１
+  posts
+    .doc(uid)
+    .get()
+    .then(async (doc) => {
+      const postData = doc._data[postID];
+      const newData = {...postData, keep: postData.keep + 1};
+      posts
+        .doc(uid)
+        .update({postID: newData})
+        .then(() => 'ok')
+        .catch((e) => e);
+    });
+
+  return result;
+}
+
+//取消收藏貼文
+export async function removeKeepPost(postID) {
+  const uid = postID.split('_')[0];
+  //從現在的使用者移除 the keeped post
+  const result = await users
+    .doc(getUid())
+    .get()
+    .then(async (doc) => {
+      let keep = doc._data.keep;
+      keep.remove({postID: postID});
+      const updateResult = await users
+        .doc(getUid())
+        .update({...keep})
+        .then(() => 'ok')
+        .catch((e) => e);
+
+      return updateResult;
+    })
+    .catch((e) => e);
+
+  //那個貼文keep數減１
+  posts
+    .doc(uid)
+    .get()
+    .then(async (doc) => {
+      const postData = doc._data[postID];
+      const newData = {...postData, keep: postData.keep - 1};
+      posts
+        .doc(uid)
+        .update({postID: newData})
+        .then(() => 'ok')
+        .catch((e) => e);
+    });
+
+  return result;
+}
+
+//編輯貼文
+export async function editPost(postID, editedData) {
+  //content, label, location, model, photo can be edited
+  //editedData include them
+  const result = await posts
+    .doc(getUid())
+    .get()
+    .then(async (doc) => {
+      const postData = doc._data[postID];
+      const newData = {...postData, ...editedData};
+      const updateResult = await posts
+        .doc(getUid())
+        .update({postID: newData})
+        .then(() => 'ok')
+        .catch((e) => e);
+
+      return updateResult;
+    })
+    .catch((e) => e);
+
+  return result;
+}
+
+//新增留言
+export async function addComment(postID, message, time) {
+  const result = await posts
+    .doc(getUid())
+    .get()
+    .then(async (doc) => {
+      const postData = doc._data[postID];
+      const newComment = [
+        ...postData.comment,
+        {uid: getUid(), message: message, time: time},
+      ];
+      const newData = {...postData, comment: newComment};
+      const updateResult = await posts
+        .doc(getUid())
+        .update({postID: newData})
+        .then(() => 'ok')
+        .catch((e) => e);
+
+      return updateResult;
+    })
+    .catch((e) => e);
+
+  return result;
+}
+
+///-------------------------///
+///Uitls
+///-------------------------///
+//Upload Image
+//頭像不用給name
+//post must give uid_time(this is postID)
+export async function uploadImage(path, name = 'avatar') {
+  const fireStoragePath = `/${getUid()}/${name}.png`;
+  const reference = storage().ref(fireStoragePath);
+  const task = reference.putFile(path);
+  const result = await task.then(() => 'ok').catch(() => 'error');
+  const url = await storage().ref(fireStoragePath).getDownloadURL();
+
+  return {status: result, url: url};
 }
 
 //Get current UID
