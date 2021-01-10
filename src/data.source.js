@@ -164,6 +164,18 @@ export const postPageData = {
 
 export const switchIdentityPageData = {
   title: '切換身份',
+  identityTitle: '身份別',
+  identityData: [
+    {name: '攝影師', tag: 'photog'},
+    {name: '模特兒', tag: 'model'},
+    {name: '一般帳號', tag: 'normal'},
+  ],
+  prioritytitle: '優先顯示',
+  priorityData: [
+    {name: '發布的內容', tag: 'post'},
+    {name: '被標註的內容', tag: 'tags'},
+    {name: '收藏的內容', tag: 'keep'},
+  ],
 };
 
 export const searchPageData = {

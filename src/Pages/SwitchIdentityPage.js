@@ -113,86 +113,42 @@ class SwitchIdentityPage extends React.Component {
   }
 
   render() {
-    const {photog, model, normal} = this.state.identity;
-    const {post, tags, keep} = this.state.priority;
+    const {identity, priority} = this.state;
+    const {identityTitle, identityData, prioritytitle, priorityData} = pageData;
     return (
       // 切換身分
       <View style={PageStyles}>
-        <Text style={Styles.title}>身份:</Text>
-        <View style={Styles.item}>
-          <Text>攝影師</Text>
-          <View style={Styles.toggle}>
-            <ToggleSwitch
-              isOn={photog}
-              onColor="#006284"
-              offColor="#888888"
-              size="large"
-              onToggle={() => this.handleOnToggleSwitch('photog')}
-            />
+        <Text style={Styles.title}>{identityTitle}</Text>
+        {identityData.map((data) => (
+          <View style={Styles.item}>
+            <Text>{data.name}</Text>
+            <View style={Styles.toggle}>
+              <ToggleSwitch
+                isOn={identity[data.tag]}
+                onColor="#006284"
+                offColor="#888888"
+                size="large"
+                onToggle={() => this.handleOnToggleSwitch(data.tag)}
+              />
+            </View>
           </View>
-        </View>
-        <View style={Styles.item}>
-          <Text>模特兒</Text>
-          <View style={Styles.toggle}>
-            <ToggleSwitch
-              isOn={model}
-              onColor="#006284"
-              offColor="#888888"
-              size="large"
-              onToggle={() => this.handleOnToggleSwitch('model')}
-            />
-          </View>
-        </View>
-        <View style={Styles.item}>
-          <Text>一般帳號</Text>
-          <View style={Styles.toggle}>
-            <ToggleSwitch
-              isOn={normal}
-              onColor="#006284"
-              offColor="#888888"
-              size="large"
-              onToggle={() => this.handleOnToggleSwitch('normal')}
-            />
-          </View>
-        </View>
+        ))}
         {/* 切換功能 */}
-        <Text style={Styles.title}>功能:</Text>
-        <View style={Styles.item}>
-          <Text>貼文</Text>
-          <View style={Styles.toggle}>
-            <ToggleSwitch
-              isOn={post}
-              onColor="#006284"
-              offColor="#888888"
-              size="large"
-              onToggle={(isOn) => this.handleChangeToggle('post')}
-            />
+        <Text style={Styles.title}>{prioritytitle}</Text>
+        {priorityData.map((data) => (
+          <View style={Styles.item}>
+            <Text>{data.name}</Text>
+            <View style={Styles.toggle}>
+              <ToggleSwitch
+                isOn={priority[data.tag]}
+                onColor="#006284"
+                offColor="#888888"
+                size="large"
+                onToggle={() => this.handleChangeToggle(data.tag)}
+              />
+            </View>
           </View>
-        </View>
-        <View style={Styles.item}>
-          <Text>標註</Text>
-          <View style={Styles.toggle}>
-            <ToggleSwitch
-              isOn={tags}
-              onColor="#006284"
-              offColor="#888888"
-              size="large"
-              onToggle={(isOn) => this.handleChangeToggle('tags')}
-            />
-          </View>
-        </View>
-        <View style={Styles.item}>
-          <Text>收藏</Text>
-          <View style={Styles.toggle}>
-            <ToggleSwitch
-              isOn={keep}
-              onColor="#006284"
-              offColor="#888888"
-              size="large"
-              onToggle={(isOn) => this.handleChangeToggle('keep')}
-            />
-          </View>
-        </View>
+        ))}
       </View>
     );
   }
