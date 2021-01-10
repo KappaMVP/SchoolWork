@@ -1,21 +1,12 @@
-/* eslint-disable no-dupe-class-members */
 //發照片
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput,
-  ScrollView,
-  Alert,
-} from 'react-native';
+import {View, Image, TouchableOpacity, TextInput, Alert} from 'react-native';
 import {postPageData as pageData} from '../data.source';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {Actions} from 'react-native-router-flux';
 import SearchableDropdown from '../helper/SearchableDropDown';
-import {upLoadImage, addPost, getUid} from '../helper/firebaseActions';
+import {uploadImage, addPost, getUid} from '../helper/firebaseActions';
+import Styles from '../Styles/PostPage.style';
+import {navToHomePage} from '../helper/routerAction';
 
 var modeldata = [
   {id: 1, name: '鄭裕翰'},
@@ -62,34 +53,33 @@ class PostPage extends React.Component {
       title: pageData.title,
       rightTitle: '發佈',
       onRight: () => {
-        this.Try();
+        this.handlePost();
       },
     });
   }
 
   //判斷URL&CONTENT是否填寫並加到Server
-  Try = async () => {
+  handlePost = async () => {
     if (this.state.url !== null && this.state.content !== null) {
-      const a = new Date();
+      const now = new Date();
       const time =
-        a.getFullYear() +
+        now.getFullYear() +
         '-' +
-        (a.getMonth() + 1) +
+        (now.getMonth() + 1) +
         '-' +
-        a.getDate() +
+        now.getDate() +
         '-' +
-        a.getHours() +
+        now.getHours() +
         '-' +
-        a.getMinutes() +
+        now.getMinutes() +
         '-' +
-        a.getSeconds();
-      const result = await upLoadImage(this.state.url, getUid() + '_' + time);
+        now.getSeconds();
+      const result = await uploadImage(this.state.url, getUid() + '_' + time);
       if (result.status === 'ok') {
         const {url, ...items} = this.state;
-        const result = await addPost({photo: url, time: time, ...items});
-        console.log(result);
-        if (result === 'ok') {
-          Actions.HomePage();
+        const postResult = await addPost({photo: url, time: time, ...items});
+        if (postResult === 'ok') {
+          navToHomePage();
           this.setState({
             url: null,
             content: null,
@@ -98,10 +88,10 @@ class PostPage extends React.Component {
             location: [],
           });
         } else {
-          Alert.alert(result);
+          Alert.alert(postResult);
         }
       } else {
-        //;
+        Alert.alert('錯誤，請稍後再試');
       }
     } else if (this.state.url === null) {
       Alert.alert('請選取照片');
@@ -131,45 +121,45 @@ class PostPage extends React.Component {
 
   // 變更人物
   modelOnItemSelect = (model) => {
-    const modeldata = this.state.model;
-    modeldata.push(model);
-    this.setState({model: modeldata});
+    const modelData = this.state.model;
+    modelData.push(model);
+    this.setState({model: modelData});
   };
 
   // 變更人物
   modelOnRemoveItem = (model, index) => {
-    const modeldata = this.state.model.filter(
+    const modelData = this.state.model.filter(
       (pmodel) => pmodel.id !== model.id,
     );
-    this.setState({model: modeldata});
+    this.setState({model: modelData});
   };
 
   // 變更標籤
   LableOnItemSelect = (item) => {
-    const labeldata = this.state.label;
-    labeldata.push(item);
-    this.setState({label: labeldata});
+    const labelData = this.state.label;
+    labelData.push(item);
+    this.setState({label: labelData});
   };
 
   // 變更標籤
   LableOnRemoveItem = (item, index) => {
-    const labeldata = this.state.label.filter((sitem) => sitem.id !== item.id);
-    this.setState({label: labeldata});
+    const labelData = this.state.label.filter((sitem) => sitem.id !== item.id);
+    this.setState({label: labelData});
   };
 
   // 變更地點
   locationOnItemSelect = (location) => {
-    const locationdata = this.state.location;
-    locationdata.push(location);
-    this.setState({location: locationdata});
+    const locationData = this.state.location;
+    locationData.push(location);
+    this.setState({location: locationData});
   };
 
   // 變更地點
   locationOnRemoveItem = (location, index) => {
-    const locationdata = this.state.location.filter(
+    const locationData = this.state.location.filter(
       (slocation) => slocation.id !== location.id,
     );
-    this.setState({location: locationdata});
+    this.setState({location: locationData});
   };
 
   render() {
@@ -178,7 +168,7 @@ class PostPage extends React.Component {
     return (
       <View>
         {/* 照片、內文 */}
-        <View style={styles.topview}>
+        <View style={Styles.topview}>
           <TouchableOpacity onPress={this.handleOpenImageLibrary}>
             <View>
               <Image
@@ -187,13 +177,13 @@ class PostPage extends React.Component {
                     ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFGuIVc1OPCV-TmLSiDcJf2h_-7Grpdxni1A&usqp=CAU'
                     : url,
                 }}
-                style={styles.image}
+                style={Styles.image}
               />
             </View>
           </TouchableOpacity>
           <View>
             <TextInput
-              style={styles.contenttextInput}
+              style={Styles.contenttextInput}
               placeholder="加上解說..."
               value={content}
               onChangeText={this.handleContent}
@@ -201,21 +191,20 @@ class PostPage extends React.Component {
             />
           </View>
         </View>
-
         {/* 人物 */}
         <View>
           <SearchableDropdown
             multi={true}
             selectedItems={this.state.model}
             onItemSelect={this.modelOnItemSelect}
-            containerStyle={{padding: 8}}
+            containerStyle={Styles.containerStyle}
             onRemoveItem={this.modelOnRemoveItem}
-            // 下拉式選單的選項
-            itemStyle={styles.itemStyle}
-            itemTextStyle={{color: 'black'}}
+            //下拉式選單的選項
+            itemStyle={Styles.itemStyle}
+            itemTextStyle={Styles.itemTextStyle}
             //下拉式選單的高度
-            itemsContainerStyle={{maxHeight: 88}}
             items={modeldata}
+            ContainerStyle={Styles.itemsContainerStyle}
             chip={true}
             resetValue={false}
             textInputProps={{
@@ -231,20 +220,19 @@ class PostPage extends React.Component {
             }}
           />
         </View>
-
         {/* 標籤 */}
         <View>
           <SearchableDropdown
             multi={true}
             selectedItems={this.state.label}
             onItemSelect={this.LableOnItemSelect}
-            containerStyle={{padding: 8}}
+            containerStyle={Styles.containerStyle}
             onRemoveItem={this.LableOnRemoveItem}
             // 下拉式選單的選項
-            itemStyle={styles.itemStyle}
-            itemTextStyle={{color: 'black'}}
+            itemStyle={Styles.itemStyle}
+            itemTextStyle={Styles.itemTextStyle}
             //下拉式選單的高度
-            itemsContainerStyle={{maxHeight: 88}}
+            itemsContainerStyle={Styles.itemsContainerStyle}
             items={labeldata}
             chip={true}
             resetValue={false}
@@ -268,13 +256,13 @@ class PostPage extends React.Component {
             multi={true}
             selectedItems={this.state.location}
             onItemSelect={this.locationOnItemSelect}
-            containerStyle={{padding: 8}}
+            containerStyle={Styles.containerStyle}
             onRemoveItem={this.locationOnRemoveItem}
             // 下拉式選單的選項
-            itemStyle={styles.itemStyle}
-            itemTextStyle={{color: 'black'}}
+            itemStyle={Styles.itemStyle}
+            itemTextStyle={Styles.itemTextStyle}
             //下拉式選單的高度
-            itemsContainerStyle={{maxHeight: 88}}
+            itemsContainerStyle={Styles.itemsContainerStyle}
             items={locationdata}
             defaultIndex={1}
             chip={true}
@@ -296,32 +284,5 @@ class PostPage extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  topview: {
-    flexDirection: 'row',
-    borderBottomColor: '#DDD',
-    borderBottomWidth: 1,
-  },
-  image: {width: 150, height: 150, marginLeft: 10, marginVertical: 8},
-  content: {
-    flexDirection: 'row',
-  },
-  contenttextInput: {
-    height: 170,
-    width: 250,
-    color: '#000',
-    paddingHorizontal: 15,
-  },
-  //下拉式選單的選項
-  itemStyle: {
-    padding: 3,
-    marginTop: 2,
-    backgroundColor: '#ddd',
-    borderColor: '#bbb',
-    borderWidth: 1,
-    borderRadius: 5,
-  },
-});
 
 export default PostPage;
