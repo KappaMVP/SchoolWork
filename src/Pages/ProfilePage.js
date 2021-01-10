@@ -139,10 +139,6 @@ class ProfilePage extends React.Component {
   };
 
   render() {
-    const unlikePosts = this.state.Posts.filter((Post) => Post.like === '1');
-    const likePosts = this.state.Posts.filter((Post) => Post.like === '2');
-    const verylikePosts = this.state.Posts.filter((Post) => Post.like === '3');
-
     return (
       <View style={styles.page}>
         <View style={styles.content2}>
@@ -161,30 +157,11 @@ class ProfilePage extends React.Component {
             </Text>
           </TouchableOpacity>
         </View>
-
         <View style={styles.content3}>
           <Text style={styles.name}>{this.state.Profiles[0].name}</Text>
           <Text style={styles.Postcontent}>{this.state.Profiles.content}</Text>
         </View>
-
-        <ScrollableTabView>
-          <View style={styles.content} tabLabel="發布貼文">
-            {unlikePosts.map((Post) => (
-              <PostWall key={Post.id} Post={Post} />
-            ))}
-          </View>
-
-          <View style={styles.content} tabLabel="收藏貼文">
-            {likePosts.map((Post) => (
-              <PostWall key={Post.id} Post={Post} />
-            ))}
-          </View>
-          <View style={styles.content} tabLabel="標記貼文">
-            {verylikePosts.map((Post) => (
-              <PostWall key={Post.id} Post={Post} />
-            ))}
-          </View>
-        </ScrollableTabView>
+        <PostWall Posts={this.state.Posts} />
       </View>
     );
   }
