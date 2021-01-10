@@ -3,6 +3,7 @@ export default StyleSheet.create({
   item: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical: 6,
   },
   toggle: {
     flex: 1,
@@ -16,5 +17,8 @@ export default StyleSheet.create({
   },
   nextStep: {
     marginRight: 10,
+  },
+  Text: {
+    fontSize: 10,
   },
 });
