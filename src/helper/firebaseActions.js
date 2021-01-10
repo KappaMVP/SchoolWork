@@ -247,7 +247,7 @@ export async function updateIdentity(identity, priority) {
 ///-------------------------///
 ///About Post
 ///-------------------------///
-//獲取貼文資料
+//獲取特定貼文資料
 export async function getPostContent(postID) {
   const uid = postID.split('_')[0];
   const result = await posts
@@ -428,7 +428,7 @@ export async function getPostList() {
   let result = [];
   for (
     let i = 0, data = followingList[i];
-    i < followingList.length || i < 30;
+    i < followingList.length && result.length < 30;
     i++
   ) {
     result.push(
@@ -438,6 +438,19 @@ export async function getPostList() {
         .then((doc) => doc._data),
     );
   }
+
+  return result;
+}
+
+//獲取貼文id跟圖片
+export async function getCurrentPost(uid = getUid()) {
+  const postData = await posts
+    .doc(uid)
+    .get()
+    .then((doc) => doc._data);
+  const result = Object.keys(postData).map((postID) => {
+    return {postID: postID, photo: postData[postID].photo};
+  });
 
   return result;
 }

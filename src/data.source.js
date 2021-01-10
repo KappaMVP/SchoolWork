@@ -98,8 +98,12 @@ export const fanFollowPageData = {
 
 export const profilePageData = {
   title: '個人頁面（這邊可以討論是否改那個人的名稱）',
-  fan: '粉絲',
-  follow: '追蹤中',
+  fanText: '粉絲',
+  followText: '追蹤中',
+  postTitle: '貼文',
+  tagTitle: '被標註',
+  keepTitle: '收藏',
+  avatarSize: 100,
 };
 
 export const profileSettingPageData = {

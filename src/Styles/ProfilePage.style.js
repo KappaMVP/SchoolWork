@@ -2,86 +2,39 @@
 import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-  page: {
-    height: '100%',
-  },
   container: {
+    marginHorizontal: 20,
+    marginTop: 10,
+  },
+  profileContainer: {
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    marginBottom: 10,
   },
-  List: {
+  avatarContainer: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  id: {
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  content: {
-    flex: 1,
-    width: '100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignContent: 'flex-start',
-  },
-  image1: {
     alignItems: 'center',
+    marginRight: 10,
+  },
+  infoContainer: {
+    flex: 2,
     flexDirection: 'row',
-    width: 150,
-    height: 150,
-    borderRadius: 100,
-    borderWidth: 10,
-  },
-  content2: {
-    flex: 0.6,
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  content3: {
-    flex: 0.3,
     alignSelf: 'center',
-    flexDirection: 'row',
   },
-  PostContent: {
-    marginLeft: 10,
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#F00',
+  infoView: {
+    flex: 1,
   },
-  Postcontent: {
-    marginLeft: 10,
+  profileData: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: '#F00',
+  },
+  infoText: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '500',
+    marginBottom: 5,
   },
   name: {
-    textAlign: 'right',
     fontSize: 18,
     fontWeight: 'bold',
-    marginLeft: 10,
-  },
-  follow: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'black',
-    marginLeft: 10,
-    alignItems: 'center',
-    paddingVertical: 25, // 文字上下留白
-  },
-  fans: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'black',
-    marginLeft: 10,
-    paddingVertical: 25, // 文字上下留白
-  },
-  post: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    paddingVertical: 25, // 文字上下留白
-    marginLeft: 10,
   },
 });
