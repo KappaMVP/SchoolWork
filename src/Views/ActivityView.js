@@ -10,7 +10,7 @@ export default function ActivityView(props) {
     navToActivityDetailPage,
   } = props;
   return (
-    <View style={ActStyles.zone}>
+    <View style={ActStyles.page}>
       <TouchableOpacity
         onPress={() => navToActivityDetailPage()}
         style={ActStyles.content}>
@@ -22,7 +22,10 @@ export default function ActivityView(props) {
             <View style={ActStyles.littleCon}>
               <Text style={ActStyles.actName}>{props.fake.actName}</Text>
             </View>
-            <Text style={ActStyles.subtitle}>{props.fake.subtitle}</Text>
+            <View style={ActStyles.subtitle}>
+              <Text>{props.fake.date}-</Text>
+              <Text>{props.fake.time}</Text>
+            </View>
           </View>
         </View>
         <View>

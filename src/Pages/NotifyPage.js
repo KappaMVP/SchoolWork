@@ -151,35 +151,14 @@ class NotifyPage extends React.Component {
     //const beforeMonth = this.state.fakes.filter();
 
     return (
-      <View style={NPStyles.container}>
-        <ScrollView style={NPStyles.items}>
-          <Text style={NPStyles.title}>本周</Text>
-          <View>
-            {week.map((fake) => (
-              <NotifyView
-                key={fake.id}
-                fake={fake}
-                selectAvatar={this.selectAvatar()}
-                selectPost={this.selectPost()}
-                countTime={this.countTime()}
-              />
-            ))}
-          </View>
-          <Text style={NPStyles.title}>本月</Text>
-          <View>
-            {month.map((fake) => (
-              <NotifyView
-                key={fake.id}
-                fake={fake}
-                selectAvatar={this.selectAvatar()}
-                selectPost={this.selectPost()}
-                countTime={this.countTime()}
-              />
-            ))}
-          </View>
-          <Text style={NPStyles.title}>更早之前</Text>
-        </ScrollView>
-      </View>
+      <ScrollView style={NPStyles.items}>
+        <Text style={NPStyles.title}>本周</Text>
+        <NotifyView datas={week} />
+        <Text style={NPStyles.title}>本月</Text>
+        <NotifyView datas={month} />
+        <Text style={NPStyles.title}>更早之前</Text>
+        <NotifyView datas={beforeMonth} />
+      </ScrollView>
     );
   }
 }

@@ -1,10 +1,6 @@
 import {StyleSheet} from 'react-native';
 
 const NPStyles = StyleSheet.create({
-  container: {
-    flex: 1, // 分割畫面區塊
-    backgroundColor: '#FFF', // 版面背景顏色
-  },
   title: {
     color: 'black',
     backgroundColor: '#E0E0E0',

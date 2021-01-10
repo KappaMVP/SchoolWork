@@ -1,7 +1,10 @@
 import {StyleSheet} from 'react-native';
 
 const ActStyles = StyleSheet.create({
-  zone: {
+  //全部活動頁面
+
+  //頁面
+  page: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -83,9 +86,12 @@ const ActStyles = StyleSheet.create({
     fontSize: 18,
     color: '#ADADAD',
   },
+
+  //全部活動副標
   subtitle: {
     fontSize: 18,
     color: '#ADADAD',
+    flexDirection: 'row',
   },
   arrow: {flexDirection: 'row'},
   myact: {

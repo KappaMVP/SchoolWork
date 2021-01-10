@@ -23,8 +23,6 @@ function PostCard(props) {
   const height = Math.floor(
     ((Dimensions.get('window').width * imgsize.height) / imgsize.width) * 0.7,
   );
-  console.log(height);
-
   return (
     <TouchableOpacity
       style={{height: '100%'}}
