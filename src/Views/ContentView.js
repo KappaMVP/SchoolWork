@@ -1,10 +1,18 @@
 //貼文內容（圖片、內文、引用elements/awatar）
 import React from 'react';
-import {Image, View, Text, TouchableOpacity, ScrollView} from 'react-native';
+import {
+  Image,
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Dimensions,
+} from 'react-native';
 import Styles from '../Styles/ContentView.style';
 import Comment from '../Views/Comment';
 import {iconData as pageData} from '../data.source';
 import Iconbtn from '../Views/Elements/IconBtn';
+let imgsize = {width: 1, height: 1};
 
 function ContentView(props) {
   const {
@@ -42,9 +50,20 @@ function ContentView(props) {
   ];
   const {keep, unkeep, edit, remove} = pageData;
 
+  // 獲取圖片高度去做View高度的變換
+  // 此方法會延遲但暫時只能先這樣
+  Image.getSize(
+    photo,
+    (width, height) => (imgsize = {width: width, height: height}),
+  );
+  const imgheight = Math.floor(
+    ((Dimensions.get('window').width * imgsize.height) / imgsize.width) * 0.9,
+  );
+  // console.log(imgheight); 確認資料用
+
   return (
     <ScrollView style={Styles.container}>
-      <View style={[Styles.photoView, {height: height}]}>
+      <View style={[Styles.photoView, {height: imgheight}]}>
         <View style={Styles.imageView}>
           <Image style={Styles.image} source={{uri: photo}} />
         </View>
