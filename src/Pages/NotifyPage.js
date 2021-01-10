@@ -100,13 +100,46 @@ class NotifyPage extends React.Component {
     };
   }
 
-  countTime = () => {};
-
   componentDidMount() {
     this.props.navigation.setParams({
       title: pageData.title,
     });
   }
+
+  countTime = (time) => {
+    console.log(time);
+    const sendTime = time;
+    const nowTime = new Date().valueOf();
+    const space = nowTime - sendTime;
+
+    const days = Math.floor(space / (24 * 3600 * 1000));
+
+    const no1 = space % (24 * 3600 * 1000);
+    const hours = Math.floor(no1 / (3600 * 1000));
+
+    const no2 = no1 % (3600 * 1000);
+    const min = Math.floor(no2 / (60 * 1000));
+
+    const no3 = no2 % (60 * 1000);
+    const sec = Math.floor(no3 / 1000);
+
+    if (days < 0) {
+      const myText = days + '天前';
+      return <Text>{myText}</Text>;
+    }
+    if (days === 0 && hours > 0) {
+      const myText = hours + '小時前';
+      return <Text>{myText}</Text>;
+    }
+    if (days === 0 && hours === 0 && min > 0) {
+      const myText = min + '分前';
+      return <Text>{myText}</Text>;
+    }
+    if (days === 0 && hours === 0 && min === 0 && sec > 0) {
+      const myText = sec + '剛剛';
+      return <Text>{myText}</Text>;
+    }
+  };
 
   selectAvatar = () => {};
   selectPost = () => {};
@@ -114,6 +147,7 @@ class NotifyPage extends React.Component {
   render() {
     const week = this.state.fakes.filter((fake) => fake.week === 1);
     const month = this.state.fakes.filter((fake) => fake.week === 2);
+    const beforeMonth = this.state.fakes.filter((fake) => fake.week === 3);
     //const beforeMonth = this.state.fakes.filter();
 
     return (
@@ -121,16 +155,28 @@ class NotifyPage extends React.Component {
         <ScrollView style={NPStyles.items}>
           <Text style={NPStyles.title}>本周</Text>
           <View>
-            {this.state.fakes.map((fake) => (
+            {week.map((fake) => (
               <NotifyView
                 key={fake.id}
                 fake={fake}
                 selectAvatar={this.selectAvatar()}
                 selectPost={this.selectPost()}
+                countTime={this.countTime()}
               />
             ))}
           </View>
           <Text style={NPStyles.title}>本月</Text>
+          <View>
+            {month.map((fake) => (
+              <NotifyView
+                key={fake.id}
+                fake={fake}
+                selectAvatar={this.selectAvatar()}
+                selectPost={this.selectPost()}
+                countTime={this.countTime()}
+              />
+            ))}
+          </View>
           <Text style={NPStyles.title}>更早之前</Text>
         </ScrollView>
       </View>

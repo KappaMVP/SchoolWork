@@ -4,6 +4,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import NVStyles from '../Styles/NotifyView.style';
 
 export default function NotifyView(props) {
+  const myText = props.myText;
   return (
     <TouchableOpacity>
       <View style={NVStyles.zone}>
@@ -21,7 +22,7 @@ export default function NotifyView(props) {
               <Text style={NVStyles.name}>{props.fake.userName}</Text>
             </TouchableOpacity>
             <Text style={NVStyles.status}>{props.fake.status}</Text>
-            <Text style={NVStyles.time}>{props.fake.time}</Text>
+            <Text style={NVStyles.time}>{myText}</Text>
           </View>
         </View>
         <Image style={NVStyles.postImage} source={{uri: props.fake.url}} />
