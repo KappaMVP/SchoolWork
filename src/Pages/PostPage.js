@@ -9,14 +9,15 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
-  Button,
+  Alert,
 } from 'react-native';
 import {postPageData as pageData} from '../data.source';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {Actions} from 'react-native-router-flux';
 import SearchableDropdown from '../helper/SearchableDropDown';
+import {upLoadImage, addPost, getUid} from '../helper/firebaseActions';
 
-var persondata = [
+var modeldata = [
   {id: 1, name: '鄭裕翰'},
   {id: 2, name: '蘇靖雅'},
   {id: 3, name: '劉聖龍'},
@@ -34,7 +35,7 @@ var labeldata = [
   {id: 5, name: '遊戲'},
 ];
 
-var localdata = [
+var locationdata = [
   {id: 1, name: '高雄科技大學'},
   {id: 2, name: '期末地獄'},
   {id: 3, name: '410'},
@@ -49,9 +50,9 @@ class PostPage extends React.Component {
     this.state = {
       url: null,
       content: null,
-      person: [],
+      model: [],
       label: [],
-      local: [],
+      location: [],
     };
   }
 
@@ -61,23 +62,51 @@ class PostPage extends React.Component {
       title: pageData.title,
       rightTitle: '發佈',
       onRight: () => {
-        this.try();
+        this.Try();
       },
     });
   }
 
-  try = () => {
+  //判斷URL&CONTENT是否填寫並加到Server
+  Try = async () => {
     if (this.state.url !== null && this.state.content !== null) {
-      Actions.HomePage();
-      this.setState({
-        url: null,
-        content: null,
-        person: [],
-        label: [],
-        local: [],
-      });
-    } else if (this.state.url === null || this.state.content === null) {
-      console('123');
+      const a = new Date();
+      const time =
+        a.getFullYear() +
+        '-' +
+        (a.getMonth() + 1) +
+        '-' +
+        a.getDate() +
+        '-' +
+        a.getHours() +
+        '-' +
+        a.getMinutes() +
+        '-' +
+        a.getSeconds();
+      const result = await upLoadImage(this.state.url, getUid() + '_' + time);
+      if (result.status === 'ok') {
+        const {url, ...items} = this.state;
+        const result = await addPost({photo: url, time: time, ...items});
+        console.log(result);
+        if (result === 'ok') {
+          Actions.HomePage();
+          this.setState({
+            url: null,
+            content: null,
+            model: [],
+            label: [],
+            location: [],
+          });
+        } else {
+          Alert.alert(result);
+        }
+      } else {
+        //;
+      }
+    } else if (this.state.url === null) {
+      Alert.alert('請選取照片');
+    } else if (this.state.content === null) {
+      Alert.alert('請輸入內文');
     }
   };
 
@@ -101,18 +130,18 @@ class PostPage extends React.Component {
   };
 
   // 變更人物
-  PersonOnItemSelect = (person) => {
-    const persondata = this.state.person;
-    persondata.push(person);
-    this.setState({person: persondata});
+  modelOnItemSelect = (model) => {
+    const modeldata = this.state.model;
+    modeldata.push(model);
+    this.setState({model: modeldata});
   };
 
   // 變更人物
-  PersonOnRemoveItem = (person, index) => {
-    const persondata = this.state.person.filter(
-      (pperson) => pperson.id !== person.id,
+  modelOnRemoveItem = (model, index) => {
+    const modeldata = this.state.model.filter(
+      (pmodel) => pmodel.id !== model.id,
     );
-    this.setState({person: persondata});
+    this.setState({model: modeldata});
   };
 
   // 變更標籤
@@ -129,18 +158,18 @@ class PostPage extends React.Component {
   };
 
   // 變更地點
-  LocalOnItemSelect = (local) => {
-    const localdata = this.state.local;
-    localdata.push(local);
-    this.setState({local: localdata});
+  locationOnItemSelect = (location) => {
+    const locationdata = this.state.location;
+    locationdata.push(location);
+    this.setState({location: locationdata});
   };
 
   // 變更地點
-  LocalOnRemoveItem = (local, index) => {
-    const localdata = this.state.local.filter(
-      (slocal) => slocal.id !== local.id,
+  locationOnRemoveItem = (location, index) => {
+    const locationdata = this.state.location.filter(
+      (slocation) => slocation.id !== location.id,
     );
-    this.setState({local: localdata});
+    this.setState({location: locationdata});
   };
 
   render() {
@@ -177,16 +206,16 @@ class PostPage extends React.Component {
         <View>
           <SearchableDropdown
             multi={true}
-            selectedItems={this.state.person}
-            onItemSelect={this.PersonOnItemSelect}
+            selectedItems={this.state.model}
+            onItemSelect={this.modelOnItemSelect}
             containerStyle={{padding: 8}}
-            onRemoveItem={this.PersonOnRemoveItem}
+            onRemoveItem={this.modelOnRemoveItem}
             // 下拉式選單的選項
             itemStyle={styles.itemStyle}
             itemTextStyle={{color: 'black'}}
             //下拉式選單的高度
             itemsContainerStyle={{maxHeight: 88}}
-            items={persondata}
+            items={modeldata}
             chip={true}
             resetValue={false}
             textInputProps={{
@@ -236,18 +265,18 @@ class PostPage extends React.Component {
         {/* 地點 */}
         <View>
           <SearchableDropdown
-            multi={false}
-            selectedItems={this.state.local}
-            onItemSelect={this.LocalOnItemSelect}
+            multi={true}
+            selectedItems={this.state.location}
+            onItemSelect={this.locationOnItemSelect}
             containerStyle={{padding: 8}}
-            onRemoveItem={this.LocalOnRemoveItem}
+            onRemoveItem={this.locationOnRemoveItem}
             // 下拉式選單的選項
             itemStyle={styles.itemStyle}
             itemTextStyle={{color: 'black'}}
             //下拉式選單的高度
             itemsContainerStyle={{maxHeight: 88}}
-            items={localdata}
-            defaultIndex={2}
+            items={locationdata}
+            defaultIndex={1}
             chip={true}
             resetValue={false}
             textInputProps={{
