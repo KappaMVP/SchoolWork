@@ -7,13 +7,18 @@ import Carousel from 'react-native-snap-carousel';
 import Styles from '../Styles/HomePage.style';
 import HeaderBtn from '../Views/HeaderBtn';
 import {navToSearch, navToChat} from '../helper/routerAction';
+import {getPostList} from '../helper/firebaseActions';
 
 class HomePage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+    };
   }
 
   componentDidMount() {
+    this.loadData();
     const data = [
       {
         btn: iconData.search,
@@ -30,41 +35,12 @@ class HomePage extends React.Component {
     });
   }
 
-  render() {
-    const fakedata = [
-      {
-        postername: 'mei.qq',
-        content:
-          '我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！',
-        photo:
-          'https://www.pandasecurity.com/en/mediacenter/src/uploads/2013/11/pandasecurity-facebook-photo-privacy.jpg',
-        time: '2020-12-12 12:12',
-        label: ['Canon2D', '18-55mmf2'],
-        model: ['kappa_map'],
-        location: ['高雄'],
-      },
-      {
-        postername: 'post2',
-        content: '55688',
-        photo:
-          'https://www.pandasecurity.com/en/mediacenter/src/uploads/2013/11/pandasecurity-facebook-photo-privacy.jpg',
-        time: '2020-12-12 12:12',
-        label: ['label1', 'label2'],
-        model: ['model1', 'model2'],
-        location: ['高雄'],
-      },
-      {
-        postername: 'post2',
-        content: '55688',
-        photo:
-          'https://www.pandasecurity.com/en/mediacenter/src/uploads/2013/11/pandasecurity-facebook-photo-privacy.jpg',
-        time: '2020-12-12 12:12',
-        label: ['label1', 'label2'],
-        model: ['model1', 'model2'],
-        location: ['高雄'],
-      },
-    ];
+  loadData = async () => {
+    const postList = await getPostList();
+    this.setState({data: postList});
+  };
 
+  render() {
     return (
       <View style={Styles.page}>
         <Carousel
@@ -72,7 +48,7 @@ class HomePage extends React.Component {
             this._carousel = c;
           }}
           layout={'tinder'}
-          data={fakedata}
+          data={this.state.data}
           renderItem={(props) => <PostCard {...props} />}
           sliderWidth={Styles.slide.width}
           itemWidth={Styles.slide.width}
