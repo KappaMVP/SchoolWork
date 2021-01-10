@@ -13,7 +13,20 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      data: [
+        {
+          key: {
+            comment: [],
+            content: '',
+            keep: 0,
+            label: [],
+            location: [],
+            model: [],
+            photo: '',
+            time: '',
+          },
+        },
+      ],
     };
   }
 

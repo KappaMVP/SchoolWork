@@ -7,6 +7,7 @@ import SearchableDropdown from '../helper/SearchableDropDown';
 import {uploadImage, addPost, getUid} from '../helper/firebaseActions';
 import Styles from '../Styles/PostPage.style';
 import {navToHomePage} from '../helper/routerAction';
+import Toast from 'react-native-tiny-toast';
 
 var modeldata = [
   {id: 1, name: '鄭裕翰'},
@@ -74,6 +75,7 @@ class PostPage extends React.Component {
         now.getMinutes() +
         '-' +
         now.getSeconds();
+      const toast = Toast.showLoading('發布中...');
       const result = await uploadImage(this.state.url, getUid() + '_' + time);
       if (result.status === 'ok') {
         const {url, ...items} = this.state;
@@ -91,10 +93,13 @@ class PostPage extends React.Component {
             label: [],
             location: [],
           });
+          Toast.hide(toast);
         } else {
+          Toast.hide(toast);
           Alert.alert(postResult);
         }
       } else {
+        Toast.hide(toast);
         Alert.alert('錯誤，請稍後再試');
       }
     } else if (this.state.url === null) {
