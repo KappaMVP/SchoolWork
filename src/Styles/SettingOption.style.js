@@ -2,13 +2,18 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   View: {
-    paddingVertical: 5,
-    margin: 5,
+    // marginVertical: 10,
+    marginHorizontal: 10,
     justifyContent: 'center',
+  },
+  divider: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#DDD',
   },
   item: {
     alignItems: 'center',
     flexDirection: 'row',
+    marginVertical: 5,
   },
   iconView: {
     paddingTop: 5,
