@@ -421,6 +421,27 @@ export async function addComment(postID, message, time) {
   return result;
 }
 
+//獲取可瀏覽貼文
+export async function getPostList() {
+  const userData = await getUserData();
+  const followingList = userData.following;
+  let result = [];
+  for (
+    let i = 0, data = followingList[i];
+    i < followingList.length || i < 30;
+    i++
+  ) {
+    result.push(
+      await posts
+        .doc(data)
+        .get()
+        .then((doc) => doc._data),
+    );
+  }
+
+  return result;
+}
+
 ///-------------------------///
 ///Uitls
 ///-------------------------///
