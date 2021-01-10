@@ -43,7 +43,7 @@ class SearchPage extends React.Component {
 
     return (
       <View style={Styles.page}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={Styles.searchBox}>
           <View style={Styles.arrow}>
             <HeaderBtn data={[{btn: iconData.back, onPress: () => navPop()}]} />
           </View>

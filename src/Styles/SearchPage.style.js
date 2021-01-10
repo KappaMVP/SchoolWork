@@ -43,4 +43,7 @@ export default StyleSheet.create({
     marginTop: 0,
     marginLeft: 15,
   },
+  searchBox: {
+    flexDirection: 'row',
+  },
 });
