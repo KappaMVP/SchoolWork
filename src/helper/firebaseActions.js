@@ -66,28 +66,6 @@ export async function createDocuments(data) {
   return result;
 }
 
-//Get follower
-export async function getFllower() {
-  const result = await users
-    .doc(getUid())
-    .get()
-    .then((doc) => doc._data.follower)
-    .catch((e) => e);
-
-  return result;
-}
-
-//Get following
-export async function getFollowing() {
-  const result = await users
-    .doc(getUid())
-    .get()
-    .then((doc) => doc._data.following)
-    .catch((e) => e);
-
-  return result;
-}
-
 //Check documant exist
 export async function checkExist() {
   const result = await users
@@ -146,7 +124,7 @@ export async function getAvatar(uid = getUid()) {
 }
 
 //Post content
-export async function postContent(data) {
+export async function addPost(data) {
   // content, label, location, model, photo, time
   const {time} = data;
   const uid = getUid();
@@ -164,7 +142,31 @@ export async function postContent(data) {
   return result;
 }
 
+//獲得個人的資料
+//是本人的就可以直接不給參數
+export async function getUserData(uid = getUid()) {
+  const result = await users
+    .doc(uid)
+    .get()
+    .then((doc) => doc.data())
+    .catch((e) => e);
+
+  return result;
+}
+
+//獲取貼文資料
+export async function getPostContent(postID) {
+  const uid = postID.split('_')[0];
+  const result = posts
+    .doc(uid)
+    .get()
+    .then((doc) => doc._data[postID])
+    .catch((e) => e);
+
+  return result;
+}
+
 //Get current UID
-function getUid() {
+export function getUid() {
   return auth().currentUser.uid;
 }
