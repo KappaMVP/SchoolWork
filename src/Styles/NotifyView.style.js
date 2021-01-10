@@ -5,6 +5,7 @@ const NVStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    borderBottomWidth: 1,
   },
   content: {
     paddingLeft: 5, // 區塊四周內距大小
