@@ -157,10 +157,32 @@ export async function getUserData(uid = getUid()) {
 //獲取貼文資料
 export async function getPostContent(postID) {
   const uid = postID.split('_')[0];
-  const result = posts
+  const result = await posts
     .doc(uid)
     .get()
     .then((doc) => doc._data[postID])
+    .catch((e) => e);
+
+  return result;
+}
+
+//刪除貼文
+export async function deletePost(postID) {
+  const uid = postID.split('_')[0];
+  const result = await posts
+    .doc(uid)
+    .get()
+    .then(async (doc) => {
+      const postData = doc._data;
+      delete postData[postID];
+      const updateResult = await posts
+        .doc(uid)
+        .update({...postData})
+        .then(() => 'ok')
+        .catch((e) => e);
+
+      return updateResult;
+    })
     .catch((e) => e);
 
   return result;
