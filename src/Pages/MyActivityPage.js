@@ -1,14 +1,15 @@
-//希望可以做到這
 import React from 'react';
-import {View, Image} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import {myActivityPage as pageData} from '../data.source';
-import Styles from '../Styles/WorkInProgress.style';
+import {navToActivityDetailPage} from '../helper/routerAction';
+import ActivityView from '../Views/ActivityView';
+import ActStyles from '../Styles/ActivityView.style';
 
-class MyActivityPage extends React.Component {
-  constructor() {
-    super();
+export default class MyActivityPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
   }
-
   componentDidMount() {
     this.props.navigation.setParams({
       title: pageData.title,
@@ -16,16 +17,19 @@ class MyActivityPage extends React.Component {
   }
 
   render() {
+    const {data} = this.props;
     return (
-      <View style={Styles.container}>
-        <Image
-          source={require('../assets/work_in_progress.gif')}
-          resizeMode={'contain'}
-          style={Styles.image}
-        />
-      </View>
+      <ScrollView style={ActStyles.items}>
+        <View style={ActStyles.page}>
+          {data.map((fake) => (
+            <ActivityView
+              key={fake.id}
+              fake={fake}
+              navToActivityDetailPage={() => navToActivityDetailPage({fake})}
+            />
+          ))}
+        </View>
+      </ScrollView>
     );
   }
 }
-
-export default MyActivityPage;

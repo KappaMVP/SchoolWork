@@ -134,7 +134,6 @@ export async function addPost(data) {
 
   const result = await posts
     .doc(getUid())
-    .get()
     .update({...postData})
     .then(() => 'ok')
     .catch((e) => e);
@@ -157,11 +156,76 @@ export async function getUserData(uid = getUid()) {
 //獲取貼文資料
 export async function getPostContent(postID) {
   const uid = postID.split('_')[0];
-  const result = posts
+  const result = await posts
     .doc(uid)
     .get()
     .then((doc) => doc._data[postID])
     .catch((e) => e);
+
+  return result;
+}
+
+//刪除貼文
+export async function deletePost(postID) {
+  const uid = postID.split('_')[0];
+  const result = await posts
+    .doc(uid)
+    .get()
+    .then(async (doc) => {
+      const postData = doc._data;
+      delete postData[postID];
+      const updateResult = await posts
+        .doc(uid)
+        .update({...postData})
+        .then(() => 'ok')
+        .catch((e) => e);
+
+      return updateResult;
+    })
+    .catch((e) => e);
+
+  return result;
+}
+
+//追蹤人
+export async function addFollowing(followingUid) {
+  const currentUid = getUid();
+  const result = [
+    await users
+      .doc(currentUid)
+      .get()
+      .then(async (doc) => {
+        let following = doc._data.following;
+        following.push({uid: followingUid});
+        const followingResult = await users
+          .doc(currentUid)
+          .update({
+            following: following,
+          })
+          .then(() => 'ok')
+          .catch((e) => e);
+
+        return followingResult;
+      })
+      .catch((e) => e),
+    await users
+      .doc(currentUid)
+      .get()
+      .then(async (doc) => {
+        let follower = doc._data.follower;
+        follower.push({uid: currentUid});
+        const followerResult = await users
+          .doc(followingUid)
+          .update({
+            follower: follower,
+          })
+          .then(() => 'ok')
+          .catch((e) => e);
+
+        return followerResult;
+      })
+      .catch((e) => e),
+  ];
 
   return result;
 }

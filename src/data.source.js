@@ -76,7 +76,15 @@ export const myActivityPage = {
 };
 
 export const activityDetailPageData = {
-  title: '活動',
+  title: '活動資訊',
+  joinBtn: {
+    text: '參加',
+    color: '#006284',
+  },
+  likeBtn: {
+    text: '有興趣',
+    color: '#888888',
+  },
 };
 
 export const chatPageData = {

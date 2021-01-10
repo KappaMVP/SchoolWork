@@ -1,8 +1,6 @@
 //搜尋
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {navToProfile} from '../helper/routerAction';
-import SearchView from '../Views/SearchView';
 import Styles from '../Styles/SearchPage.style';
 import ScrollableTabView, {
   DefaultTabBar,
@@ -39,17 +37,13 @@ class SearchPage extends React.Component {
     });
   };
 
-  handleSubmit = () => {
-    console.log(this.state);
-  };
-
   render() {
     const {localtionData, text} = this.state;
     console.log(localtionData);
 
     return (
       <View style={Styles.page}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={Styles.searchBox}>
           <View style={Styles.arrow}>
             <HeaderBtn data={[{btn: iconData.back, onPress: () => navPop()}]} />
           </View>
