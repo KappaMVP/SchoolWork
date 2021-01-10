@@ -134,7 +134,6 @@ export async function addPost(data) {
 
   const result = await posts
     .doc(getUid())
-    .get()
     .update({...postData})
     .then(() => 'ok')
     .catch((e) => e);
