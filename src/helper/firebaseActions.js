@@ -188,6 +188,49 @@ export async function deletePost(postID) {
   return result;
 }
 
+//追蹤人
+export async function addFollowing(followingUid) {
+  const currentUid = getUid();
+  const result = [
+    await users
+      .doc(currentUid)
+      .get()
+      .then(async (doc) => {
+        let following = doc._data.following;
+        following.push({uid: followingUid});
+        const followingResult = await users
+          .doc(currentUid)
+          .update({
+            following: following,
+          })
+          .then(() => 'ok')
+          .catch((e) => e);
+
+        return followingResult;
+      })
+      .catch((e) => e),
+    await users
+      .doc(currentUid)
+      .get()
+      .then(async (doc) => {
+        let follower = doc._data.follower;
+        follower.push({uid: currentUid});
+        const followerResult = await users
+          .doc(followingUid)
+          .update({
+            follower: follower,
+          })
+          .then(() => 'ok')
+          .catch((e) => e);
+
+        return followerResult;
+      })
+      .catch((e) => e),
+  ];
+
+  return result;
+}
+
 //Get current UID
 export function getUid() {
   return auth().currentUser.uid;
