@@ -9,7 +9,7 @@ import Styles from './Styles/Page.style';
 import MainRouter from './routers/MainRouter';
 import LoginRouter from './routers/LoginRouter';
 import auth from '@react-native-firebase/auth';
-import {checkExist} from './helper/firebaseActions';
+import {checkExist, logOut} from './helper/firebaseActions';
 import {navToProfileSetting} from './helper/routerAction';
 
 //隱藏WARN的log
@@ -35,6 +35,7 @@ function index() {
     return subscriber; // unsubscribe on unmount
   }, []);
 
+  // logOut();
   if (initializing) return null;
 
   return (

@@ -13,10 +13,7 @@ class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      post: [],
-      tag: [],
-      keep: [],
-      profileData: [
+      post: [
         {
           id: 1,
           name: '吳天天',
@@ -48,6 +45,64 @@ class ProfilePage extends React.Component {
           photo: 'https://i.imgur.com/Yg1t5sW.jpg',
         },
       ],
+      tag: [
+        {
+          id: 5,
+          name: '123',
+          content: 120,
+          photo:
+            'https://live.staticflickr.com/65535/49983613426_29e5108012_b.jpg',
+          like: '1',
+        },
+        {
+          id: 6,
+          name: '457',
+          content: 120,
+          photo:
+            'https://live.staticflickr.com/65535/49983090718_71cfa75cfe_b.jpg',
+          like: '2',
+        },
+        {
+          id: 7,
+          name: '789',
+          content: 120,
+          photo:
+            'https://live.staticflickr.com/65535/49983612971_a103f0385e_b.jpg',
+          like: '3',
+        },
+        {
+          id: 8,
+          name: '123',
+          content: 120,
+          photo:
+            'https://live.staticflickr.com/65535/49983612971_a103f0385e_b.jpg',
+          like: '1',
+        },
+      ],
+      keep: [
+        {
+          id: 9,
+          name: '457',
+          content: 120,
+          photo:
+            'https://live.staticflickr.com/65535/49983090718_71cfa75cfe_b.jpg',
+          like: '2',
+        },
+        {
+          id: 10,
+          name: '789',
+          content: 120,
+          photo:
+            'https://live.staticflickr.com/65535/49983612971_a103f0385e_b.jpg',
+          like: '3',
+        },
+      ],
+      profileData: {
+        follower: [],
+        following: [],
+        userName: '',
+        custID: '',
+      },
       defaultView: 0,
     };
   }
@@ -77,7 +132,7 @@ class ProfilePage extends React.Component {
 
     this.setState({
       post: postResult,
-      // profileData: profileResult,
+      profileData: profileResult,
       defaultView: Object.values(profileResult.priority).findIndex(
         (data) => data,
       ),

@@ -8,6 +8,13 @@ export default StyleSheet.create({
     maxHeight: '90%',
     borderRadius: 10,
     elevation: 5,
+    shadowRadius: 3,
+    shadowColor: 'black',
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      height: 1,
+      width: 0,
+    },
     padding: 20,
     margin: 25,
     backgroundColor: '#f8f9fa',

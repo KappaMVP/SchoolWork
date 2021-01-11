@@ -2,12 +2,13 @@
 import React from 'react';
 import {View, Image, TouchableOpacity} from 'react-native';
 import styles from '../../Styles/SquareElement.style';
+import {navToContent} from '../../helper/routerAction';
 
 export default function SquareElement(props) {
   const {id, url} = props;
   return (
     <View style={styles.postWall}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navToContent({postId: id})}>
         <Image style={styles.image} source={{uri: url}} />
       </TouchableOpacity>
     </View>

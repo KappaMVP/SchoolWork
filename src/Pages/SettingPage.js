@@ -1,6 +1,6 @@
 //設定
 import React from 'react';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import {settingPageData as pageData} from '../data.source';
 import {navToProfileSetting, navToSwitchIdentity} from '../helper/routerAction';
 import {logOut} from '../helper/firebaseActions';
@@ -20,6 +20,7 @@ class SettingPage extends React.Component {
 
   onPress(id) {
     if (id === 1) {
+      Alert.alert('開發中');
     } else if (id === 2) {
       navToProfileSetting();
     } else if (id === 3) {

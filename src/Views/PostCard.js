@@ -5,11 +5,11 @@ import {navToContent} from '../helper/routerAction';
 import Styles from '../Styles/PostCard.style';
 
 function PostCard(props) {
-  const {photo, time, label, model, location, posterID} = props.item;
+  const {photo, time, label, model, location, userName} = props.item;
   return (
     <TouchableOpacity
       style={{height: '100%'}}
-      onPress={() => navToContent({...props.item[posterID]})}>
+      onPress={() => navToContent({...props.item, userName: 'LuLuSaBee'})}>
       <View style={Styles.container}>
         {/* 圖片 */}
         <View style={Styles.cardImage}>
@@ -21,7 +21,7 @@ function PostCard(props) {
         <View sytle={Styles.cardContent}>
           {/* 貼文者姓名 */}
           <View style={Styles.cardName}>
-            <Text style={Styles.textName}>{'000'}</Text>
+            <Text style={Styles.textName}>{'LuLuSaBee'}</Text>
           </View>
           {/* 貼文標記麻豆 map */}
           <View style={Styles.cardLabel}>
