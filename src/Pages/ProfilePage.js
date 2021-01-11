@@ -16,12 +16,38 @@ class ProfilePage extends React.Component {
       post: [],
       tag: [],
       keep: [],
-      profileData: {
-        follower: [],
-        following: [],
-        userName: '',
-        custID: '',
-      },
+      profileData: [
+        {
+          id: 1,
+          name: '吳天天',
+          content: 350,
+          photo:
+            'https://live.staticflickr.com/65535/49983611666_f329a3c368_b.jpg',
+          like: '1',
+        },
+        {
+          id: 2,
+          name: '張和合',
+          content: 280,
+          photo:
+            'https://live.staticflickr.com/65535/49997526092_91d7cf0963_b.jpg',
+          like: '3',
+        },
+        {
+          id: 3,
+          name: '陳踢踢',
+          content: 180,
+          photo:
+            'https://live.staticflickr.com/65535/49983091473_e09c8bb326_b.jpg',
+          like: '2',
+        },
+        {
+          id: 4,
+          name: '王呵呵',
+          content: 120,
+          photo: 'https://i.imgur.com/Yg1t5sW.jpg',
+        },
+      ],
       defaultView: 0,
     };
   }
@@ -51,7 +77,7 @@ class ProfilePage extends React.Component {
 
     this.setState({
       post: postResult,
-      profileData: profileResult,
+      // profileData: profileResult,
       defaultView: Object.values(profileResult.priority).findIndex(
         (data) => data,
       ),

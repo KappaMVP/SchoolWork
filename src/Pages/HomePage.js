@@ -15,28 +15,14 @@ class HomePage extends React.Component {
     this.state = {
       data: [
         {
-          1: {
-            comment: [],
-            content: '',
-            keep: 0,
-            label: [],
-            location: [],
-            model: [],
-            photo: '',
-            time: '',
-          },
-        },
-        {
-          2: {
-            comment: [],
-            content: '',
-            keep: 0,
-            label: [],
-            location: [],
-            model: [],
-            photo: '',
-            time: '',
-          },
+          comment: [],
+          content: '',
+          keep: 0,
+          label: [],
+          location: [],
+          model: [],
+          photo: '',
+          time: '',
         },
       ],
     };
