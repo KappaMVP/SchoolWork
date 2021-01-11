@@ -76,7 +76,7 @@ class ProfileSettingPage extends React.Component {
       return;
     }
     const toast = Toast.showLoading('儲存中...');
-    const uploadResult = avatar.includes(getUid)
+    const uploadResult = !avatar.includes(getUid())
       ? await uploadImage(avatar)
       : {status: 'ok', url: avatar};
     if (uploadResult.status === 'ok') {

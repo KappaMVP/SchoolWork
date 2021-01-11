@@ -15,7 +15,19 @@ class HomePage extends React.Component {
     this.state = {
       data: [
         {
-          key: {
+          1: {
+            comment: [],
+            content: '',
+            keep: 0,
+            label: [],
+            location: [],
+            model: [],
+            photo: '',
+            time: '',
+          },
+        },
+        {
+          2: {
             comment: [],
             content: '',
             keep: 0,
@@ -50,10 +62,48 @@ class HomePage extends React.Component {
 
   loadData = async () => {
     const postList = await getPostList();
-    this.setState({data: postList});
+    let data = [];
+    Object.keys(postList[0]).map((id) =>
+      data.push({...postList[0][id], postID: id}),
+    );
+
+    this.setState({data: data});
   };
 
   render() {
+    const fakedata = [
+      {
+        postername: 'mei.qq',
+        content:
+          '我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！我是一個好可愛的人！',
+        photo:
+          'https://www.pandasecurity.com/en/mediacenter/src/uploads/2013/11/pandasecurity-facebook-photo-privacy.jpg',
+        time: '2020-12-12 12:12',
+        label: ['Canon2D', '18-55mmf2'],
+        model: ['kappa_map'],
+        location: ['高雄'],
+      },
+      {
+        postername: 'post2',
+        content: '55688',
+        photo:
+          'https://www.pandasecurity.com/en/mediacenter/src/uploads/2013/11/pandasecurity-facebook-photo-privacy.jpg',
+        time: '2020-12-12 12:12',
+        label: ['label1', 'label2'],
+        model: ['model1', 'model2'],
+        location: ['高雄'],
+      },
+      {
+        postername: 'post2',
+        content: '55688',
+        photo:
+          'https://www.pandasecurity.com/en/mediacenter/src/uploads/2013/11/pandasecurity-facebook-photo-privacy.jpg',
+        time: '2020-12-12 12:12',
+        label: ['label1', 'label2'],
+        model: ['model1', 'model2'],
+        location: ['高雄'],
+      },
+    ];
     return (
       <View style={Styles.page}>
         <Carousel

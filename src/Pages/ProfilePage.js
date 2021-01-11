@@ -34,15 +34,20 @@ class ProfilePage extends React.Component {
         />
       ),
     });
+    this.loadData();
     this._subscribe = this.props.navigation.addListener('didFocus', () => {
-      this.refresh();
+      this.loadData();
     });
   }
 
-  refresh = async () => {
+  loadData = async () => {
     const profileResult = await getUserData();
     const postResult = await getCurrentPost();
     this.props.navigation.setParams({title: profileResult.custID});
+
+    // console.log('--------------');
+    // console.log(profileResult);
+    // console.log('--------------');
 
     this.setState({
       post: postResult,

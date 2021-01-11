@@ -433,7 +433,7 @@ export async function getPostList() {
   ) {
     result.push(
       await posts
-        .doc(data)
+        .doc('kWXuqBF6MHee877VXdADGwMCIzo2')
         .get()
         .then((doc) => doc._data),
     );
